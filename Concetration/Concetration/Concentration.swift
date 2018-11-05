@@ -9,8 +9,15 @@
 import Foundation
 
 class Concentration {
-    var cards: [Card]
+    var cards = [Card]()
     
+    init(numberOfParisOfCards: Int){
+        for _ in 1...numberOfParisOfCards{
+            let card = Card()
+            cards += [card,card]
+        }
+    }
+    // TODO: Shuffle the cards
     func chooseCard(at index:Int){
         
     }
