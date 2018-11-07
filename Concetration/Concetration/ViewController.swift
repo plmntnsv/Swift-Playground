@@ -39,12 +39,14 @@ class ViewController: UIViewController {
     @IBAction private func startNewGame(_ sender: UIButton) {
         game = Concentration(numberOfParisOfCards: numberOfPairOfCards)
         flipCount = 0
-        emojiChoices = ["👽","🤟","🎃","👻","⛄️","🐷","💪🏻","👀","🐸"]
+        randomThemeIndex = emojiChoices.count.arc4random
+        currentGameEmojies = emojiChoices[randomThemeIndex]
         emoji = [Int:String]()
         updateViewFromModel()
     }
     
     private func updateViewFromModel(){
+        
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
@@ -59,13 +61,21 @@ class ViewController: UIViewController {
         }
     }
     
-    private var emojiChoices = ["👽","🤟","🎃","👻","⛄️","🐷","💪🏻","👀","🐸"]
+    private lazy var randomThemeIndex = emojiChoices.count.arc4random
+    private lazy var currentGameEmojies = emojiChoices[randomThemeIndex]
+    
+    private var emojiChoices = [["✌️","🤟","✋","👍","👌","👊","💪","🙏","🤝"],
+                                ["🤡","🧛🏻‍♂️","🎃","👻","😈","👹","🧙‍♀️","😸","👽"],
+                                ["🎅🏻","🎄","🎁","❄️","⛄️","🌨","🦌","🛷","☃️"],
+                                ["😀","🤓","😎","😱","😯","😵","😐","🥴","🤬"],
+                                ["🐭","🙊","🐷","🐮","🐘","🦢","🐕","🐑","🐸"],
+                                ["🍏","🍑","🥓","🥐","🍩","🥦","🍌","🌭","🍔"]]
     
     private var emoji = [Int:String]()
     
     private func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+            emoji[card.identifier] = currentGameEmojies.remove(at: currentGameEmojies.count.arc4random)
         }
         
         return emoji[card.identifier] ?? "?"
