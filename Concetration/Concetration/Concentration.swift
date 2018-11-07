@@ -10,6 +10,8 @@ import Foundation
 
 class Concentration {
     private(set) var cards = [Card]()
+    private(set) var points = 0
+    private(set) var flipCount = 0
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
@@ -47,11 +49,26 @@ class Concentration {
                 if cards[matchIndex].identifier == cards[index].identifier {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    points += 2
+                } else {
+                    if cards[matchIndex].isSeen{
+                        points -= 1
+                    }else{
+                        cards[matchIndex].isSeen = true
+                    }
+                    
+                    if cards[index].isSeen{
+                        points -= 1
+                    } else {
+                        cards[index].isSeen = true
+                    }
                 }
                 cards[index].isFaceUp = true
             } else {
                 indexOfOneAndOnlyFaceUpCard = index
             }
+            
+            flipCount += 1
         }
     }
 }
