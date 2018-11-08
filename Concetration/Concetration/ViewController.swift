@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         game = Concentration(numberOfParisOfCards: numberOfPairOfCards)
         randomThemeIndex = emojiChoices.count.arc4random
         currentGameEmojies = emojiChoices[randomThemeIndex]
-        emoji = [Int:String]()
+        emoji = [Card:String]()
         updateViewFromModel()
     }
     
@@ -64,14 +64,14 @@ class ViewController: UIViewController {
                                 ["🐭","🙊","🐷","🐮","🐘","🦢","🐕","🐑","🐸"],
                                 ["🍏","🍑","🥓","🥐","🍩","🥦","🍌","🌭","🍔"]]
     
-    private var emoji = [Int:String]()
+    private var emoji = [Card:String]()
     
     private func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            emoji[card.identifier] = currentGameEmojies.remove(at: currentGameEmojies.count.arc4random)
+        if emoji[card] == nil, emojiChoices.count > 0 {
+            emoji[card] = currentGameEmojies.remove(at: currentGameEmojies.count.arc4random)
         }
         
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
 }
 
