@@ -58,8 +58,8 @@ struct SetGame
         currentlySelectedCards.removeAll()
     }
     
-    func checkIfCardsMatch() -> Bool {
-        var isMatch = false
+    func checkIfItIsASet() -> Bool { // TODO: make prop
+        var isMatch = true
         return isMatch
     }
 }

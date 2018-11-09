@@ -30,4 +30,8 @@ extension Array {
         self.insert(element, at: index)
         self.remove(at: index+1)
     }
+    
+    var any: Bool {
+        return self.count == 0 ? false : true
+    }
 }
