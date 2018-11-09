@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		321B51F121958E5200DF674E /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B51F021958E5200DF674E /* ArrayExtensions.swift */; };
 		32B9C2E52193484E0069EB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B9C2E42193484E0069EB8F /* AppDelegate.swift */; };
 		32B9C2E72193484E0069EB8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B9C2E62193484E0069EB8F /* ViewController.swift */; };
 		32B9C2EA2193484E0069EB8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32B9C2E82193484E0069EB8F /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		321B51F021958E5200DF674E /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		32B9C2E12193484E0069EB8F /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32B9C2E42193484E0069EB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32B9C2E62193484E0069EB8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				32B9C2F0219348500069EB8F /* Info.plist */,
 				32B9C2F6219348730069EB8F /* SetGame.swift */,
 				32B9C2F82193487D0069EB8F /* Card.swift */,
+				321B51F021958E5200DF674E /* ArrayExtensions.swift */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32B9C2E72193484E0069EB8F /* ViewController.swift in Sources */,
+				321B51F121958E5200DF674E /* ArrayExtensions.swift in Sources */,
 				32B9C2F7219348730069EB8F /* SetGame.swift in Sources */,
 				32B9C2E52193484E0069EB8F /* AppDelegate.swift in Sources */,
 				32B9C2F92193487D0069EB8F /* Card.swift in Sources */,

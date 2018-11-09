@@ -12,12 +12,16 @@ struct SetGame
 {
     
     private(set) var allCards = [Card]()
-    private(set) var gameCards = [Card]()
+    
+    private(set) var activeCards = [Card]()
+    
     private(set) var currentlySelectedCards = [Card]()
     private(set) var matchedCards = [Card]()
     
-    init() {
+    init(numberOfCards: Int) {
         generateCards()
+        activeCards.append(contentsOf: allCards.takeFromStart(numberOfElementsToTake: numberOfCards))
+        allCards.removeFromStart(numberOfElementsToRemove: numberOfCards)
     }
     
     mutating private func generateCards(){
@@ -31,7 +35,18 @@ struct SetGame
             }
         }
     }
+
+    mutating func replaceCards(indicesOfCardsToReplace array: [Int]) {
+        for index in array {
+            let newCard = allCards.removeFirst()
+            activeCards.replace(newElement: newCard, at: index)
+        }
+    }
     
+    mutating func addThreeMoreCards(){
+        activeCards.append(contentsOf: allCards.takeFromStart(numberOfElementsToTake: 3))
+        allCards.removeFromStart(numberOfElementsToRemove: 3)
+    }
 }
 
 protocol SetGameProtocol {
