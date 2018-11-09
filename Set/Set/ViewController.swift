@@ -25,16 +25,12 @@ class ViewController: UIViewController {
         if currentlySelectedCardButtons.count < 3 {
             if sender.layer.borderWidth == 0 {
                 select(sender)
-                currentlySelectedCardButtons.append(sender)
             } else {
                 deselect(sender)
-                currentlySelectedCardButtons.remove(at: currentlySelectedCardButtons.firstIndex(of: sender)!)
             }
         } else {
-            currentlySelectedCardButtons.forEach() { deselect($0) }
-            currentlySelectedCardButtons.removeAll()
+            deselectAll()
             select(sender)
-            currentlySelectedCardButtons.append(sender)
         }
     }
     
@@ -49,20 +45,23 @@ class ViewController: UIViewController {
                 // TODO: check if they are a match, if they are, do:
                 var indices = [Int]()
                 for index in currentlySelectedCardButtons.indices {
-                    indices.append(activeCardButtons.firstIndex(of: currentlySel iectedCardButtons[index])!)
+                    indices.append(activeCardButtons.firstIndex(of: currentlySelectedCardButtons[index])!)
                 }
-                
+//                for index in game.activeCards.indices {
+//                    print("\(index) \(game.activeCards[index])")
+//                }
+//                print("---")
                 game.replaceCards(indicesOfCardsToReplace: indices)
 //                currentlySelectedCardButtons.forEach {
 //                    let cardBtn = inactiveCardButtons.removeFirst()
 //                    activeCardButtons.replace(newElement: cardBtn, at: activeCardButtons.firstIndex(of: $0)!)
 //                }
             } else {
-                let res = inactiveCardButtons.takeFromStart(numberOfElementsToTake: 3)
+                let newActiveButtons = inactiveCardButtons.takeFromStart(numberOfElementsToTake: 3)
                 inactiveCardButtons.removeFromStart(numberOfElementsToRemove: 3)
-                res.forEach { $0.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) }
+                newActiveButtons.forEach { $0.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0); $0.isEnabled = true }
                 
-                activeCardButtons.append(contentsOf: res)
+                activeCardButtons.append(contentsOf: newActiveButtons)
                 game.addThreeMoreCards()
             }
             
@@ -91,6 +90,8 @@ class ViewController: UIViewController {
     private func select(_ btn: UIButton){
         btn.layer.borderWidth = 3.0
         btn.layer.borderColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        currentlySelectedCardButtons.append(btn)
+        game.selectCard(indexOfCard: activeCardButtons.firstIndex(of: btn)!)
     }
     
     private func selectMatch(_ btn: UIButton){
@@ -106,5 +107,14 @@ class ViewController: UIViewController {
     private func deselect(_ btn: UIButton) {
         btn.layer.borderWidth = 0
         btn.layer.borderColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 0)
+        game.deselectCard(indexOfCard: currentlySelectedCardButtons.firstIndex(of: btn)!)
+        
+        currentlySelectedCardButtons.remove(at: currentlySelectedCardButtons.firstIndex(of: btn)!)
+    }
+    
+    private func deselectAll(){
+        currentlySelectedCardButtons.forEach() { deselect($0) }
+        currentlySelectedCardButtons.removeAll()
+        //game.deselectAllCards()
     }
 }

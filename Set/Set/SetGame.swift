@@ -10,13 +10,11 @@ import Foundation
 
 struct SetGame
 {
-    
     private(set) var allCards = [Card]()
-    
     private(set) var activeCards = [Card]()
-    
-    private(set) var currentlySelectedCards = [Card]()
     private(set) var matchedCards = [Card]()
+    var currentlySelectedCards = [Card]()
+    private(set) var points = 0
     
     init(numberOfCards: Int) {
         generateCards()
@@ -46,6 +44,23 @@ struct SetGame
     mutating func addThreeMoreCards(){
         activeCards.append(contentsOf: allCards.takeFromStart(numberOfElementsToTake: 3))
         allCards.removeFromStart(numberOfElementsToRemove: 3)
+    }
+    
+    mutating func selectCard(indexOfCard: Int){
+        currentlySelectedCards.append(activeCards[indexOfCard])
+    }
+    
+    mutating func deselectCard(indexOfCard: Int) {
+        currentlySelectedCards.remove(at: indexOfCard)
+    }
+    
+    mutating func deselectAllCards(){
+        currentlySelectedCards.removeAll()
+    }
+    
+    func checkIfCardsMatch() -> Bool {
+        var isMatch = false
+        return isMatch
     }
 }
 

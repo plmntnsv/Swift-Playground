@@ -27,8 +27,7 @@ extension Array {
     }
     
     mutating func replace(newElement element: Element, at index: Int) {
-        self.remove(at: index)
-        let end = index+1 > self.count ? index : index+1
-        self.insert(element, at: end)
+        self.insert(element, at: index)
+        self.remove(at: index+1)
     }
 }

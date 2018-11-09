@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Card : CustomStringConvertible
+struct Card : CustomStringConvertible, Equatable
 {
     var description: String {
         return "\(number) \(color) \(shape) \(fill)"
@@ -18,6 +18,14 @@ struct Card : CustomStringConvertible
     let color: SetColor
     let shape: SetShape
     let fill: SetFill
+    
+    static func == (lhs: Card, rhs: Card) -> Bool {
+        return
+                lhs.number == rhs.number &&
+                lhs.color == rhs.color &&
+                lhs.shape == rhs.shape &&
+                lhs.fill == rhs.fill
+    }
 }
 
 enum SetColor : CaseIterable {
