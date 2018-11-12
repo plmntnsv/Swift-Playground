@@ -29,7 +29,10 @@ class ViewController: UIViewController {
             }
         } else {
             replaceCardsOfSet()
-            select(sender)
+            
+            if sender.isEnabled == true {
+                select(sender)
+            }
         }
         
         if currentlySelectedCardButtons.count == 3 {
@@ -37,11 +40,15 @@ class ViewController: UIViewController {
                 currentlySelectedCardButtons.forEach {
                     selectMatch($0)
                 }
+                dealCardsBtn.isEnabled = true
+                dealCardsBtn.backgroundColor = #colorLiteral(red: 0, green: 0.9801092744, blue: 0.5720278621, alpha: 1)
             } else {
                 currentlySelectedCardButtons.forEach {
                     selectMissmatch($0)
                 }
             }
+            game.scoreGame()
+            pointsLabel.text = "Points: \(game.points)"
         }
     }
     
@@ -64,7 +71,7 @@ class ViewController: UIViewController {
         if activeCardButtons.count == maxActiveCards || !game.allCards.any {
             dealCardsBtn.isEnabled = false
             dealCardsBtn.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
-            dealCardsBtn.setTitle("Max cards displayed", for: UIControl.State.disabled)
+            dealCardsBtn.setTitle("No space for new cards", for: UIControl.State.disabled)
         }
     }
     
@@ -96,13 +103,27 @@ class ViewController: UIViewController {
     
     @IBAction func newGameClicked(_ sender: UIButton) {
         // TODO: other start up game stuff
+        deselectAll()
+        let newActiveButtons = activeCardButtons.takeFromStart(numberOfElementsToTake: 12)
+        activeCardButtons.removeFromStart(numberOfElementsToRemove: 12)
+        inactiveCardButtons.insert(contentsOf: activeCardButtons, at: 0)
+        activeCardButtons = newActiveButtons
         dealCardsBtn.isEnabled = true
         dealCardsBtn.backgroundColor = #colorLiteral(red: 0, green: 0.9801092744, blue: 0.5720278621, alpha: 1)
+        game = SetGame(numberOfCards: activeCardButtons.count)
+        pointsLabel.text = "Points: \(game.points)"
         drawCards()
     }
     
     private func drawCards() {
+        inactiveCardButtons.forEach {
+            $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+            $0.isEnabled = false
+            $0.setAttributedTitle(NSAttributedString(string: ""), for: UIControl.State.disabled)
+        }
+        
         for index in activeCardButtons.indices{
+            activeCardButtons[index].isEnabled = true
             activeCardButtons[index].backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             
             let card = game.activeCards[index]
