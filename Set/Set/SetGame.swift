@@ -159,12 +159,12 @@ struct SetGame
     }
 }
 
-protocol SetGameProtocol {
-    var allCards: [Card] {get}
-    var gameCards: [Card] {get}
-    var currentlySelectedCards: [Card] {get}
-    var matchedCards: [Card] {get}
-    
-    mutating func selectCard(card: Card) -> Card
-}
+//protocol SetGameProtocol {
+//    var allCards: [Card] {get}
+//    var gameCards: [Card] {get}
+//    var currentlySelectedCards: [Card] {get}
+//    var matchedCards: [Card] {get}
+//
+//    mutating func selectCard(card: Card) -> Card
+//}
 
