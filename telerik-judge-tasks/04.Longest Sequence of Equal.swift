@@ -11,7 +11,7 @@ import Foundation
 class Task
 {
     // Write a program that finds the length of the maximal sequence of equal elements in an array of N integers.
-    func MaxSumOfKElements() {
+    func LongestSequenceOfEquals() {
         let n = Int(readLine()!)!
         
         var number: Int?
