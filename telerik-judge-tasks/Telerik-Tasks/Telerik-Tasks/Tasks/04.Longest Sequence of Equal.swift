@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Task
+class Task4
 {
     // Write a program that finds the length of the maximal sequence of equal elements in an array of N integers.
     func LongestSequenceOfEquals() {

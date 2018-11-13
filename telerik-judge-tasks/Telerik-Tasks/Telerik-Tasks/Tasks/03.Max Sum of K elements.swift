@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Task
+class Task3
 {
     // Write a program that reads two integer numbers N and K and an array of N elements from the console.
     // Find the maximal sum of K elements in the array.
