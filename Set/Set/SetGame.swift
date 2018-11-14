@@ -10,10 +10,10 @@ import Foundation
 
 struct SetGame
 {
-    private(set) var allCards = [Card]()
-    private(set) var activeCards = [Card]()
-    private(set) var matchedCards = [Card]()
-    var currentlySelectedCards = [Card]()
+    private(set) var allCards = [SetCard]()
+    private(set) var activeCards = [SetCard]()
+    private(set) var matchedCards = [SetCard]()
+    var currentlySelectedCards = [SetCard]()
     private(set) var points = 0
     private var removedPointsForDifficulty = 0
     
@@ -28,7 +28,7 @@ struct SetGame
             for shape in SetShape.allCases {
                 for color in SetColor.allCases {
                     for fill in SetFill.allCases {
-                        allCards.append(Card(number: number, color: color, shape: shape, fill: fill))
+                        allCards.append(SetCard(number: number, color: color, shape: shape, fill: fill))
                     }
                 }
             }
@@ -102,7 +102,7 @@ struct SetGame
         return isMatch
     }
     
-    private func checkNumbers(of cardOne: Card, of cardTwo: Card, of cardThree: Card) -> Bool {
+    private func checkNumbers(of cardOne: SetCard, of cardTwo: SetCard, of cardThree: SetCard) -> Bool {
         if cardOne.number == cardTwo.number && cardTwo.number == cardThree.number {
             return true
         }
@@ -116,7 +116,7 @@ struct SetGame
         return false
     }
     
-    private func checkShapes(of cardOne: Card, of cardTwo: Card, of cardThree: Card) -> Bool {
+    private func checkShapes(of cardOne: SetCard, of cardTwo: SetCard, of cardThree: SetCard) -> Bool {
         if cardOne.shape == cardTwo.shape && cardTwo.shape == cardThree.shape {
             return true
         }
@@ -130,7 +130,7 @@ struct SetGame
         return false
     }
     
-    private func checkColors(of cardOne: Card, of cardTwo: Card, of cardThree: Card) -> Bool {
+    private func checkColors(of cardOne: SetCard, of cardTwo: SetCard, of cardThree: SetCard) -> Bool {
         if cardOne.color == cardTwo.color && cardTwo.color == cardThree.color {
             return true
         }
@@ -144,7 +144,7 @@ struct SetGame
         return false
     }
     
-    private func checkFills(of cardOne: Card, of cardTwo: Card, of cardThree: Card) -> Bool {
+    private func checkFills(of cardOne: SetCard, of cardTwo: SetCard, of cardThree: SetCard) -> Bool {
         if cardOne.fill == cardTwo.fill && cardTwo.fill == cardThree.fill {
             return true
         }

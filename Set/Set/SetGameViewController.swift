@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SetGameViewController: UIViewController {
     lazy private(set) var game = SetGame(numberOfCards: activeCardButtons.count)
     
     private var currentlySelectedCardButtons = [UIButton]()
