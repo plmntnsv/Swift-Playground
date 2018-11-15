@@ -19,6 +19,7 @@
 		3215E775219C7AAE00A87DC5 /* SetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3215E771219C7AAD00A87DC5 /* SetCard.swift */; };
 		3215E776219C7AAE00A87DC5 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3215E772219C7AAE00A87DC5 /* SetGame.swift */; };
 		3215E777219C7AAE00A87DC5 /* SetGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3215E773219C7AAE00A87DC5 /* SetGameViewController.swift */; };
+		32FF0EBA219D5E4200C7421D /* StartScreenSetGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF0EB9219D5E4200C7421D /* StartScreenSetGameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3215E771219C7AAD00A87DC5 /* SetCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetCard.swift; path = ../../../Set/Set/SetCard.swift; sourceTree = "<group>"; };
 		3215E772219C7AAE00A87DC5 /* SetGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetGame.swift; path = ../../../Set/Set/SetGame.swift; sourceTree = "<group>"; };
 		3215E773219C7AAE00A87DC5 /* SetGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetGameViewController.swift; path = ../../../Set/Set/SetGameViewController.swift; sourceTree = "<group>"; };
+		32FF0EB9219D5E4200C7421D /* StartScreenSetGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenSetGameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		3215E76F219C7A9300A87DC5 /* SetGame */ = {
 			isa = PBXGroup;
 			children = (
+				32FF0EB9219D5E4200C7421D /* StartScreenSetGameViewController.swift */,
 				3215E770219C7AAD00A87DC5 /* ArrayExtensions.swift */,
 				3215E771219C7AAD00A87DC5 /* SetCard.swift */,
 				3215E772219C7AAE00A87DC5 /* SetGame.swift */,
@@ -182,6 +185,7 @@
 			files = (
 				3215E775219C7AAE00A87DC5 /* SetCard.swift in Sources */,
 				3215E764219C731600A87DC5 /* ConcentrationViewController.swift in Sources */,
+				32FF0EBA219D5E4200C7421D /* StartScreenSetGameViewController.swift in Sources */,
 				3215E774219C7AAE00A87DC5 /* ArrayExtensions.swift in Sources */,
 				3215E777219C7AAE00A87DC5 /* SetGameViewController.swift in Sources */,
 				3215E763219C731600A87DC5 /* Concentration.swift in Sources */,
