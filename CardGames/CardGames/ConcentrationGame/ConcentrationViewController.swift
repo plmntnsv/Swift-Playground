@@ -29,6 +29,14 @@ class ConcentrationViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        flipCountLabel.adjustsFontSizeToFitWidth = true
+        pointsLabel.adjustsFontSizeToFitWidth = true
+        print(pointsLabel.font!.pointSize)
+    }
+    
     @IBAction private func startNewGame(_ sender: UIButton) {
         game = Concentration(numberOfParisOfCards: numberOfPairOfCards)
         //randomThemeIndex = emojiChoices.count.arc4random
