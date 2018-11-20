@@ -15,6 +15,7 @@
 		3203D48C21A324FB0020DB99 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3203D48B21A324FB0020DB99 /* ImageGalleryViewController.swift */; };
 		3203D48E21A325D50020DB99 /* ImageGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3203D48D21A325D50020DB99 /* ImageGalleryView.swift */; };
 		3203D49021A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3203D48F21A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift */; };
+		3212572021A44A7200BF9FAF /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3212571F21A44A7100BF9FAF /* ImageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3203D48B21A324FB0020DB99 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
 		3203D48D21A325D50020DB99 /* ImageGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryView.swift; sourceTree = "<group>"; };
 		3203D48F21A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryCategoriesTableViewController.swift; sourceTree = "<group>"; };
+		3212571F21A44A7100BF9FAF /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				3203D48B21A324FB0020DB99 /* ImageGalleryViewController.swift */,
+				3212571F21A44A7100BF9FAF /* ImageCollectionViewCell.swift */,
 				3203D48D21A325D50020DB99 /* ImageGalleryView.swift */,
 				3203D48921A314F90020DB99 /* Utilities.swift */,
 				3203D48F21A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift */,
@@ -152,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3212572021A44A7200BF9FAF /* ImageCollectionViewCell.swift in Sources */,
 				3203D48A21A314F90020DB99 /* Utilities.swift in Sources */,
 				3203D47421A3146C0020DB99 /* AppDelegate.swift in Sources */,
 				3203D48C21A324FB0020DB99 /* ImageGalleryViewController.swift in Sources */,

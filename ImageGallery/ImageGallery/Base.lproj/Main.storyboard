@@ -21,17 +21,48 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkQ-TU-SK2">
                                 <rect key="frame" x="0.0" y="24" width="990.5" height="980"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1c-o0-DTE" customClass="ImageGalleryView" customModule="ImageGallery" customModuleProvider="target">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bko-SQ-6xd">
                                         <rect key="frame" x="0.0" y="0.0" width="990.5" height="980"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EZ9-8r-SAE">
+                                            <size key="itemSize" width="100" height="160"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="wSv-1J-6Vy" customClass="ImageCollectionViewCell" customModule="ImageGallery" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t3o-bV-0SO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </view>
+                                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="t3o-bV-0SO" firstAttribute="top" secondItem="wSv-1J-6Vy" secondAttribute="top" id="aAc-L0-JLC"/>
+                                                    <constraint firstAttribute="bottom" secondItem="t3o-bV-0SO" secondAttribute="bottom" id="bkk-L0-5OH"/>
+                                                    <constraint firstItem="t3o-bV-0SO" firstAttribute="leading" secondItem="wSv-1J-6Vy" secondAttribute="leading" id="cbz-Vb-Tnq"/>
+                                                    <constraint firstAttribute="trailing" secondItem="t3o-bV-0SO" secondAttribute="trailing" id="rgM-aK-6qp"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="imageView" destination="t3o-bV-0SO" id="C0P-Vb-pxu"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="H1c-o0-DTE" secondAttribute="bottom" id="6En-IR-BCf"/>
-                                    <constraint firstItem="H1c-o0-DTE" firstAttribute="leading" secondItem="gkQ-TU-SK2" secondAttribute="leading" id="LEK-63-bD5"/>
-                                    <constraint firstAttribute="trailing" secondItem="H1c-o0-DTE" secondAttribute="trailing" id="SKm-GV-vai"/>
-                                    <constraint firstItem="H1c-o0-DTE" firstAttribute="top" secondItem="gkQ-TU-SK2" secondAttribute="top" id="X4V-p4-oii"/>
+                                    <constraint firstItem="Bko-SQ-6xd" firstAttribute="leading" secondItem="gkQ-TU-SK2" secondAttribute="leading" id="FDg-J7-Giu"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bko-SQ-6xd" secondAttribute="trailing" id="PwV-cd-16F"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bko-SQ-6xd" secondAttribute="bottom" id="yBW-VK-1wU"/>
+                                    <constraint firstItem="Bko-SQ-6xd" firstAttribute="top" secondItem="gkQ-TU-SK2" secondAttribute="top" id="zBS-xc-caJ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -46,17 +77,18 @@
                     </view>
                     <connections>
                         <outlet property="dropZone" destination="gkQ-TU-SK2" id="lzJ-mT-ZUa"/>
-                        <outlet property="imageGalleryView" destination="H1c-o0-DTE" id="3ao-DQ-nvR"/>
+                        <outlet property="imageGalleryView" destination="Bko-SQ-6xd" id="m4a-4h-afq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-728.25768667642751" y="-46.2890625"/>
         </scene>
         <!--Image Gallery Categories Table View Controller-->
         <scene sceneID="UoL-uo-G6R">
             <objects>
                 <tableViewController id="LV0-Sx-s5S" customClass="ImageGalleryCategoriesTableViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="a8r-VF-sul">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="a8r-VF-sul">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -101,7 +133,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AGC-SM-TTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-728" y="18"/>
+            <point key="canvasLocation" x="-1473" y="-363"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Ec-uc-DtS">
