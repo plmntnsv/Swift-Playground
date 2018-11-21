@@ -65,7 +65,6 @@
 				3203D48B21A324FB0020DB99 /* ImageGalleryViewController.swift */,
 				3212571F21A44A7100BF9FAF /* ImageCollectionViewCell.swift */,
 				3203D48D21A325D50020DB99 /* ImageGalleryView.swift */,
-				3203D48921A314F90020DB99 /* Utilities.swift */,
 				3203D48F21A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift */,
 				3203D47721A3146C0020DB99 /* Main.storyboard */,
 				3203D48521A314810020DB99 /* Supporting Items */,
@@ -77,6 +76,7 @@
 		3203D48521A314810020DB99 /* Supporting Items */ = {
 			isa = PBXGroup;
 			children = (
+				3203D48921A314F90020DB99 /* Utilities.swift */,
 				3203D47321A3146C0020DB99 /* AppDelegate.swift */,
 				3203D47A21A3146E0020DB99 /* Assets.xcassets */,
 				3203D47C21A3146E0020DB99 /* LaunchScreen.storyboard */,

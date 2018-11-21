@@ -54,6 +54,29 @@
                                                     <outlet property="imageView" destination="t3o-bV-0SO" id="C0P-Vb-pxu"/>
                                                 </connections>
                                             </collectionViewCell>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DropPlaceholderCell" id="QgQ-Ky-L1W" customClass="ImageCollectionViewCell" customModule="ImageGallery" customModuleProvider="target">
+                                                <rect key="frame" x="111.5" y="0.0" width="100" height="160"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rsZ-zn-Puy">
+                                                            <rect key="frame" x="30" y="60" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="d9y-35-JcG"/>
+                                                                <constraint firstAttribute="height" constant="40" id="pTL-lh-61j"/>
+                                                            </constraints>
+                                                            <color key="color" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                </view>
+                                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="rsZ-zn-Puy" firstAttribute="centerX" secondItem="QgQ-Ky-L1W" secondAttribute="centerX" id="3Zo-Az-HHR"/>
+                                                    <constraint firstItem="rsZ-zn-Puy" firstAttribute="centerY" secondItem="QgQ-Ky-L1W" secondAttribute="centerY" id="DfW-G6-0e6"/>
+                                                </constraints>
+                                            </collectionViewCell>
                                         </cells>
                                     </collectionView>
                                 </subviews>
