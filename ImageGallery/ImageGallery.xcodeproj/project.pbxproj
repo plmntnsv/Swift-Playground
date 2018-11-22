@@ -16,6 +16,7 @@
 		3203D48E21A325D50020DB99 /* ImageGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3203D48D21A325D50020DB99 /* ImageGalleryView.swift */; };
 		3203D49021A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3203D48F21A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift */; };
 		3212572021A44A7200BF9FAF /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3212571F21A44A7100BF9FAF /* ImageCollectionViewCell.swift */; };
+		3278B69321A5BE970053A69C /* ImageGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3278B69221A5BE970053A69C /* ImageGallery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3203D48D21A325D50020DB99 /* ImageGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryView.swift; sourceTree = "<group>"; };
 		3203D48F21A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryCategoriesTableViewController.swift; sourceTree = "<group>"; };
 		3212571F21A44A7100BF9FAF /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		3278B69221A5BE970053A69C /* ImageGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGallery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,13 +64,11 @@
 		3203D47221A3146C0020DB99 /* ImageGallery */ = {
 			isa = PBXGroup;
 			children = (
-				3203D48B21A324FB0020DB99 /* ImageGalleryViewController.swift */,
-				3212571F21A44A7100BF9FAF /* ImageCollectionViewCell.swift */,
-				3203D48D21A325D50020DB99 /* ImageGalleryView.swift */,
-				3203D48F21A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift */,
 				3203D47721A3146C0020DB99 /* Main.storyboard */,
+				3217E29321A69D920025A73F /* Models */,
+				3217E29221A69D8B0025A73F /* Views */,
+				3217E29121A69D830025A73F /* Controllers */,
 				3203D48521A314810020DB99 /* Supporting Items */,
-				3203D47F21A3146E0020DB99 /* Info.plist */,
 			);
 			path = ImageGallery;
 			sourceTree = "<group>";
@@ -76,12 +76,39 @@
 		3203D48521A314810020DB99 /* Supporting Items */ = {
 			isa = PBXGroup;
 			children = (
+				3203D47F21A3146E0020DB99 /* Info.plist */,
 				3203D48921A314F90020DB99 /* Utilities.swift */,
 				3203D47321A3146C0020DB99 /* AppDelegate.swift */,
 				3203D47A21A3146E0020DB99 /* Assets.xcassets */,
 				3203D47C21A3146E0020DB99 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Items";
+			sourceTree = "<group>";
+		};
+		3217E29121A69D830025A73F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3203D48B21A324FB0020DB99 /* ImageGalleryViewController.swift */,
+				3203D48F21A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3217E29221A69D8B0025A73F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3203D48D21A325D50020DB99 /* ImageGalleryView.swift */,
+				3212571F21A44A7100BF9FAF /* ImageCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3217E29321A69D920025A73F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3278B69221A5BE970053A69C /* ImageGallery.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +185,7 @@
 				3212572021A44A7200BF9FAF /* ImageCollectionViewCell.swift in Sources */,
 				3203D48A21A314F90020DB99 /* Utilities.swift in Sources */,
 				3203D47421A3146C0020DB99 /* AppDelegate.swift in Sources */,
+				3278B69321A5BE970053A69C /* ImageGallery.swift in Sources */,
 				3203D48C21A324FB0020DB99 /* ImageGalleryViewController.swift in Sources */,
 				3203D48E21A325D50020DB99 /* ImageGalleryView.swift in Sources */,
 				3203D49021A336300020DB99 /* ImageGalleryCategoriesTableViewController.swift in Sources */,

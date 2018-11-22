@@ -59,29 +59,56 @@ class ImageGalleryCategoriesTableViewController: UITableViewController {
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        if indexPath.section == 1 {
-            return false
-        }
+//        if indexPath.section == 1 {
+//            return false
+//        }
         
         return true
     }
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+        if indexPath.section == 0, editingStyle == .delete {
             // Delete the row from the data source
             removedCategories.append(categories.remove(at: indexPath.row))
             
-            
             tableView.beginUpdates()
             let indexPathToInsert = IndexPath(row: removedCategories.count-1, section: 1)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            tableView.insertRows(at: [indexToInsert], with: .left)
             tableView.moveRow(at: indexPath, to: indexPathToInsert)
             tableView.endUpdates()
-        } else if editingStyle == .insert {
+        } else if indexPath.section == 1, editingStyle == .delete {
+            removedCategories.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+        } else if indexPath.section == 1, editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.section == 1 {
+            let action = UIContextualAction(style: .normal, title: "Restore") { (action, view, handler) in
+                
+                self.categories.append(self.removedCategories.remove(at: indexPath.row))
+                
+                tableView.beginUpdates()
+                let indexPathToInsert = IndexPath(row: self.categories.count-1, section: 0)
+                tableView.moveRow(at: indexPath, to: indexPathToInsert)
+                tableView.endUpdates()
+                
+                handler(true)
+            }
+            
+            action.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            
+            let configuration = UISwipeActionsConfiguration(actions: [action])
+            
+            return configuration
+        }
+        
+        return nil
     }
 
     /*

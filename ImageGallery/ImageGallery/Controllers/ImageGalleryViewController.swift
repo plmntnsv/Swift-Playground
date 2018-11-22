@@ -37,41 +37,36 @@ class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, U
         fetchImage()
     }
     
-    // Generic view drop stuff
-    // what type of files are permitted to be dropped
-//    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
-//        return session.canLoadObjects(ofClass: NSURL.self) && session.canLoadObjects(ofClass: UIImage.self)
-//    }
-//
-//    var imageFetcher: ImageFetcher!
-//
-//    // copy or move
-//    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
-//        return UIDropProposal(operation: .copy)
-//    }
-//
-//    // after drop
-//    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-//        imageFetcher = ImageFetcher() { (url, image) in
-//            DispatchQueue.main.async {
-//                //self.imageGalleryView.backgroundImage = image
-//            }
-//        }
-//
-//        session.loadObjects(ofClass: NSURL.self) { nsurls in
-//            if let url = nsurls.first as? URL {
-//                //self.imageFetcher.fetch(url)
-//                self.picUrls.append(url)
-//            }
-//        }
-//
-////        session.loadObjects(ofClass: UIImage.self) { images in
-////            if let image = images.first as? UIImage {
-////                self.imageFetcher.backup = image
-////            }
-////        }
-//    }
+    // Private
+    private func fetchImage(){
+        for url in picUrls {
+            let urlContents = try? Data(contentsOf: url!)
+            if let imgData = urlContents {
+                self.pics.append(UIImage(data: imgData)!)
+            } else {
+                // if no image append default img or something
+            }
+        }
+    }
     
+    private func fetchImageAsync(){
+        for url in picUrls {
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                let urlContents = try? Data(contentsOf: url!)
+                DispatchQueue.main.async {
+                    if let imgData = urlContents {
+                        self?.pics.append(UIImage(data: imgData)!)
+                    } else {
+                        // if no image append default img or something
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+extension ImageGalleryViewController {
     // Collection view stuff
     // creation
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -101,7 +96,6 @@ class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, U
     // what the drag is accepting
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
         let isSelf = (session.localDragSession?.localContext as? UICollectionView) == collectionView
-        
         return isSelf ? session.canLoadObjects(ofClass: UIImage.self) : session.canLoadObjects(ofClass: UIImage.self) && session.canLoadObjects(ofClass: URL.self)
     }
     
@@ -114,27 +108,25 @@ class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, U
         let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
         
         for item in coordinator.items {
-            if let sourceIndexPath = item.sourceIndexPath {
-                if let img = item.dragItem.localObject as? UIImage {
-                    collectionView.performBatchUpdates({
-                        pics.remove(at: sourceIndexPath.item)
-                        pics.insert(img, at: destinationIndexPath.item)
-                        collectionView.deleteItems(at: [sourceIndexPath])
-                        collectionView.insertItems(at: [destinationIndexPath])
-                    })
-                    
-                    coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
-                }
+            if let sourceIndexPath = item.sourceIndexPath, let img = item.dragItem.localObject as? UIImage {
+                collectionView.performBatchUpdates({
+                    pics.remove(at: sourceIndexPath.item)
+                    pics.insert(img, at: destinationIndexPath.item)
+                    collectionView.deleteItems(at: [sourceIndexPath])
+                    collectionView.insertItems(at: [destinationIndexPath])
+                })
+                
+                coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
             } else {
-                let placeholderContext = coordinator.drop(
-                    item.dragItem,
-                    to: UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, reuseIdentifier: "DropPlaceholderCell"))
+                let placeholderContext = coordinator.drop(item.dragItem,
+                                                          to: UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, reuseIdentifier: "DropPlaceholderCell"))
+                
                 item.dragItem.itemProvider.loadObject(ofClass: UIImage.self) { (provider, error) in
                     DispatchQueue.main.async {
                         if let img = provider as? UIImage {
-                                placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
-                                    self.pics.insert(img, at: insertionIndexPath.item)
-                                })
+                            placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
+                                self.pics.insert(img, at: insertionIndexPath.item)
+                            })
                         } else {
                             placeholderContext.deletePlaceholder()
                         }
@@ -144,7 +136,6 @@ class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, U
         }
     }
     
-    // Private
     private func dragItems(at indexPath: IndexPath) -> [UIDragItem] {
         if let img = (imageGalleryView.cellForItem(at: indexPath) as? ImageCollectionViewCell)?.imageView.image {
             let dragItem = UIDragItem(itemProvider: NSItemProvider(object: img))
@@ -154,32 +145,4 @@ class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, U
             return []
         }
     }
-    
-    // make async
-    private func fetchImage(){
-        for url in picUrls {
-            let urlContents = try? Data(contentsOf: url!)
-            if let imgData = urlContents {
-                self.pics.append(UIImage(data: imgData)!)
-            } else {
-                // if no image append default img or something
-            }
-        }
-    }
-    
-//    private func fetchImage(){
-//        for url in picUrls {
-//            DispatchQueue.global(qos: .background).async { [weak self] in
-//                let urlContents = try? Data(contentsOf: url!)
-//                DispatchQueue.main.async {
-//                    if let imgData = urlContents {
-//                        self?.pics.append(UIImage(data: imgData)!)
-//                    } else {
-//                        // if no image append default img or something
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
 }
