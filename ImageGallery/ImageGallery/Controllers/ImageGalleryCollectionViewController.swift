@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+class ImageGalleryCollectionViewController: UIViewController, UIDropInteractionDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
     var picUrls = [URL(string: "https://cdn2.vectorstock.com/i/1000x1000/35/16/cartoon-nature-landscape-background-with-green-mea-vector-2603516.jpg"),
                    URL(string: "https://i.graphicmama.com/blog/wp-content/uploads/2016/12/02102626/cartoon-landscape-vector.png"),
@@ -16,12 +16,6 @@ class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, U
                    URL(string: "https://images.all-free-download.com/images/graphicthumb/cartoon_natural_landscapes_beautiful_vector_585947.jpg")]
     
     var pics = [UIImage]()
-    
-    @IBOutlet weak var dropZone: UIView! {
-        didSet {
-            dropZone.addInteraction(UIDropInteraction(delegate: self))
-        }
-    }
     
     @IBOutlet weak var imageGalleryView: UICollectionView!{
         didSet {
@@ -34,13 +28,13 @@ class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchImage()
     }
     
     // Private
-    private func fetchImage(){
+    private func fetchImagesSync(){
         for url in picUrls {
             let urlContents = try? Data(contentsOf: url!)
+            print("sync download \(self.pics.count)")
             if let imgData = urlContents {
                 self.pics.append(UIImage(data: imgData)!)
             } else {
@@ -49,13 +43,15 @@ class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, U
         }
     }
     
-    private func fetchImageAsync(){
-        for url in picUrls {
+    private func fetchImagesAsync(){
+        for index in picUrls.indices {
             DispatchQueue.global(qos: .background).async { [weak self] in
-                let urlContents = try? Data(contentsOf: url!)
+                let urlContents = try? Data(contentsOf: (self?.picUrls[index])!)
+                print("async download \(index)")
                 DispatchQueue.main.async {
                     if let imgData = urlContents {
-                        self?.pics.append(UIImage(data: imgData)!)
+                        //self?.pics.append(UIImage(data: imgData)!)
+                        
                     } else {
                         // if no image append default img or something
                     }
@@ -66,18 +62,28 @@ class ImageGalleryViewController: UIViewController, UIDropInteractionDelegate, U
     }
 }
 
-extension ImageGalleryViewController {
+extension ImageGalleryCollectionViewController {
     // Collection view stuff
     // creation
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pics.count
+        return picUrls.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
         
         if let imageCell = cell as? ImageCollectionViewCell {
-            imageCell.imageView.image = pics[indexPath.item]
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                let urlContents = try? Data(contentsOf: (self?.picUrls[indexPath.item])!)
+                DispatchQueue.main.async {
+                    if let imgData = urlContents {
+                        imageCell.imageView.image = UIImage(data: imgData)
+                        imageCell.activitySpinner.isHidden = true
+                    } else {
+                        // if no image append default placeholder or something
+                    }
+                }
+            }
         }
         
         return cell
@@ -108,10 +114,10 @@ extension ImageGalleryViewController {
         let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
         
         for item in coordinator.items {
-            if let sourceIndexPath = item.sourceIndexPath, let img = item.dragItem.localObject as? UIImage {
+            if let sourceIndexPath = item.sourceIndexPath, let imgUrl = item.dragItem.localObject as? URL {
                 collectionView.performBatchUpdates({
-                    pics.remove(at: sourceIndexPath.item)
-                    pics.insert(img, at: destinationIndexPath.item)
+                    picUrls.remove(at: sourceIndexPath.item)
+                    picUrls.insert(imgUrl, at: destinationIndexPath.item)
                     collectionView.deleteItems(at: [sourceIndexPath])
                     collectionView.insertItems(at: [destinationIndexPath])
                 })
@@ -121,11 +127,11 @@ extension ImageGalleryViewController {
                 let placeholderContext = coordinator.drop(item.dragItem,
                                                           to: UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, reuseIdentifier: "DropPlaceholderCell"))
                 
-                item.dragItem.itemProvider.loadObject(ofClass: UIImage.self) { (provider, error) in
+                item.dragItem.itemProvider.loadObject(ofClass: URL.self) { (provider, error) in
                     DispatchQueue.main.async {
-                        if let img = provider as? UIImage {
+                        if let imgUrl = provider?.imageURL {
                             placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
-                                self.pics.insert(img, at: insertionIndexPath.item)
+                                self.picUrls.insert(imgUrl, at: insertionIndexPath.item)
                             })
                         } else {
                             placeholderContext.deletePlaceholder()

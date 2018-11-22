@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Image Gallery View Controller-->
+        <!--Image Gallery Collection View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ImageGalleryViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ImageGalleryCollectionViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="990.5" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkQ-TU-SK2">
                                 <rect key="frame" x="0.0" y="24" width="990.5" height="980"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bko-SQ-6xd">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bko-SQ-6xd" userLabel="Image Gallery Collection View">
                                         <rect key="frame" x="0.0" y="0.0" width="990.5" height="980"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EZ9-8r-SAE">
@@ -41,16 +41,27 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t3o-bV-0SO">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
                                                         </imageView>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MJ7-mo-fit">
+                                                            <rect key="frame" x="30" y="60" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="6fF-WI-VXL"/>
+                                                                <constraint firstAttribute="width" constant="40" id="No2-Ku-AN4"/>
+                                                            </constraints>
+                                                            <color key="color" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </activityIndicatorView>
                                                     </subviews>
                                                 </view>
                                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
+                                                    <constraint firstItem="MJ7-mo-fit" firstAttribute="centerX" secondItem="wSv-1J-6Vy" secondAttribute="centerX" id="XpM-VX-HWe"/>
                                                     <constraint firstItem="t3o-bV-0SO" firstAttribute="top" secondItem="wSv-1J-6Vy" secondAttribute="top" id="aAc-L0-JLC"/>
                                                     <constraint firstAttribute="bottom" secondItem="t3o-bV-0SO" secondAttribute="bottom" id="bkk-L0-5OH"/>
                                                     <constraint firstItem="t3o-bV-0SO" firstAttribute="leading" secondItem="wSv-1J-6Vy" secondAttribute="leading" id="cbz-Vb-Tnq"/>
+                                                    <constraint firstItem="MJ7-mo-fit" firstAttribute="centerY" secondItem="wSv-1J-6Vy" secondAttribute="centerY" id="gTv-7b-jZ3"/>
                                                     <constraint firstAttribute="trailing" secondItem="t3o-bV-0SO" secondAttribute="trailing" id="rgM-aK-6qp"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="activitySpinner" destination="MJ7-mo-fit" id="qwx-XH-BlX"/>
                                                     <outlet property="imageView" destination="t3o-bV-0SO" id="C0P-Vb-pxu"/>
                                                 </connections>
                                             </collectionViewCell>
@@ -99,7 +110,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="dropZone" destination="gkQ-TU-SK2" id="lzJ-mT-ZUa"/>
                         <outlet property="imageGalleryView" destination="Bko-SQ-6xd" id="m4a-4h-afq"/>
                     </connections>
                 </viewController>
