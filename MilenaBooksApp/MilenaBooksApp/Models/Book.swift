@@ -10,20 +10,22 @@ import Foundation
 
 class Book {
     let id: Int = 0
-    let name: String
+    let title: String
     let price: Double
     let author: String
     let rating: Int
+    let coverImageUrl: String?
     
-    init?(name: String, price: Double, author: String, rating: Int) {
+    init?(name: String, price: Double, author: String, rating: Int, coverImageUrl: String?) {
         
         if name.isEmpty || price < 0 || author.isEmpty || rating < 0 {
             return nil
         }
         
-        self.name = name
+        self.title = name
         self.price = price
         self.author = author
         self.rating = rating
+        self.coverImageUrl = coverImageUrl
     }
 }

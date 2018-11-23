@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3209B95F21A833C600DD5D84 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209B95E21A833C600DD5D84 /* HomeViewController.swift */; };
+		3209B96321A8367D00DD5D84 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */; };
+		327DD2B921A86074002F68A6 /* BookMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DD2B821A86074002F68A6 /* BookMockData.swift */; };
 		32A0099121A81D780077F007 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A0099021A81D780077F007 /* AppDelegate.swift */; };
 		32A0099621A81D780077F007 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A0099421A81D780077F007 /* Main.storyboard */; };
 		32A0099821A81D790077F007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32A0099721A81D790077F007 /* Assets.xcassets */; };
 		32A0099B21A81D790077F007 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A0099921A81D790077F007 /* LaunchScreen.storyboard */; };
 		32A009A921A81EDD0077F007 /* AllBooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A009A821A81EDD0077F007 /* AllBooksTableViewController.swift */; };
 		32A009AB21A824F50077F007 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A009AA21A824F50077F007 /* Book.swift */; };
+		8991B56A59498CCD9114C9B7 /* Pods_MilenaBooksApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3579FB3CF998FD5991437F9D /* Pods_MilenaBooksApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3209B95E21A833C600DD5D84 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		327DD2B821A86074002F68A6 /* BookMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMockData.swift; sourceTree = "<group>"; };
 		32A0098D21A81D780077F007 /* MilenaBooksApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilenaBooksApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A0099021A81D780077F007 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32A0099521A81D780077F007 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -24,6 +31,9 @@
 		32A0099C21A81D790077F007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32A009A821A81EDD0077F007 /* AllBooksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBooksTableViewController.swift; sourceTree = "<group>"; };
 		32A009AA21A824F50077F007 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		3579FB3CF998FD5991437F9D /* Pods_MilenaBooksApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MilenaBooksApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87045D3D75E72CBA8DF7C845 /* Pods-MilenaBooksApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilenaBooksApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MilenaBooksApp/Pods-MilenaBooksApp.release.xcconfig"; sourceTree = "<group>"; };
+		D6FC5F35123409E65E83F1DA /* Pods-MilenaBooksApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilenaBooksApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MilenaBooksApp/Pods-MilenaBooksApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +41,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8991B56A59498CCD9114C9B7 /* Pods_MilenaBooksApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		327DD2B721A86060002F68A6 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		32A0098421A81D780077F007 = {
 			isa = PBXGroup;
 			children = (
 				32A0098F21A81D780077F007 /* MilenaBooksApp */,
 				32A0098E21A81D780077F007 /* Products */,
+				BBDFE9401C607AA951745B9A /* Pods */,
+				8563A242937E8B781A86BC86 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,10 +76,11 @@
 		32A0098F21A81D780077F007 /* MilenaBooksApp */ = {
 			isa = PBXGroup;
 			children = (
+				327DD2B721A86060002F68A6 /* New Group */,
+				32A0099421A81D780077F007 /* Main.storyboard */,
 				32A009A721A81E920077F007 /* Models */,
 				32A009A621A81E8C0077F007 /* Views */,
 				32A009A521A81E650077F007 /* Controllers */,
-				32A0099421A81D780077F007 /* Main.storyboard */,
 				32A009A221A81D8B0077F007 /* Supporting Files */,
 				32A0099C21A81D790077F007 /* Info.plist */,
 			);
@@ -72,6 +93,7 @@
 				32A0099021A81D780077F007 /* AppDelegate.swift */,
 				32A0099721A81D790077F007 /* Assets.xcassets */,
 				32A0099921A81D790077F007 /* LaunchScreen.storyboard */,
+				327DD2B821A86074002F68A6 /* BookMockData.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -80,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				32A009A821A81EDD0077F007 /* AllBooksTableViewController.swift */,
+				3209B95E21A833C600DD5D84 /* HomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -87,6 +110,7 @@
 		32A009A621A81E8C0077F007 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -99,6 +123,23 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		8563A242937E8B781A86BC86 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3579FB3CF998FD5991437F9D /* Pods_MilenaBooksApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BBDFE9401C607AA951745B9A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D6FC5F35123409E65E83F1DA /* Pods-MilenaBooksApp.debug.xcconfig */,
+				87045D3D75E72CBA8DF7C845 /* Pods-MilenaBooksApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +147,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 32A0099F21A81D790077F007 /* Build configuration list for PBXNativeTarget "MilenaBooksApp" */;
 			buildPhases = (
+				B1EE263B173992B044B5B097 /* [CP] Check Pods Manifest.lock */,
 				32A0098921A81D780077F007 /* Sources */,
 				32A0098A21A81D780077F007 /* Frameworks */,
 				32A0098B21A81D780077F007 /* Resources */,
+				F67B933BD81B811B16687EE2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -165,6 +208,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B1EE263B173992B044B5B097 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MilenaBooksApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F67B933BD81B811B16687EE2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MilenaBooksApp/Pods-MilenaBooksApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MilenaBooksApp/Pods-MilenaBooksApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		32A0098921A81D780077F007 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -172,7 +262,10 @@
 			files = (
 				32A009A921A81EDD0077F007 /* AllBooksTableViewController.swift in Sources */,
 				32A0099121A81D780077F007 /* AppDelegate.swift in Sources */,
+				327DD2B921A86074002F68A6 /* BookMockData.swift in Sources */,
 				32A009AB21A824F50077F007 /* Book.swift in Sources */,
+				3209B96321A8367D00DD5D84 /* BookTableViewCell.swift in Sources */,
+				3209B95F21A833C600DD5D84 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +409,7 @@
 		};
 		32A009A021A81D790077F007 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6FC5F35123409E65E83F1DA /* Pods-MilenaBooksApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -334,6 +428,7 @@
 		};
 		32A009A121A81D790077F007 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87045D3D75E72CBA8DF7C845 /* Pods-MilenaBooksApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
