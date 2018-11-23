@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SetGameViewController: UIViewController {
     lazy private(set) var game = SetGame(numberOfCards: activeCardButtons.count)
     
     private var currentlySelectedCardButtons = [UIButton]()
@@ -19,6 +19,12 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var dealCardsBtn: UIButton!
     @IBOutlet weak var pointsLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        prepareNewGame()
+    }
     
     @IBAction func selectCard(_ sender: UIButton) {
         if currentlySelectedCardButtons.count < 3 {
@@ -101,8 +107,7 @@ class ViewController: UIViewController {
         deselectAll()
     }
     
-    @IBAction func newGameClicked(_ sender: UIButton) {
-        // TODO: other start up game stuff
+    func prepareNewGame() {
         deselectAll()
         let newActiveButtons = activeCardButtons.takeFromStart(numberOfElementsToTake: 12)
         activeCardButtons.removeFromStart(numberOfElementsToRemove: 12)
@@ -114,6 +119,19 @@ class ViewController: UIViewController {
         pointsLabel.text = "Points: \(game.points)"
         drawCards()
     }
+    
+//    @IBAction func newGameClicked(_ sender: UIButton) {
+//        deselectAll()
+//        let newActiveButtons = activeCardButtons.takeFromStart(numberOfElementsToTake: 12)
+//        activeCardButtons.removeFromStart(numberOfElementsToRemove: 12)
+//        inactiveCardButtons.insert(contentsOf: activeCardButtons, at: 0)
+//        activeCardButtons = newActiveButtons
+//        dealCardsBtn.isEnabled = true
+//        dealCardsBtn.backgroundColor = #colorLiteral(red: 0, green: 0.9801092744, blue: 0.5720278621, alpha: 1)
+//        game = SetGame(numberOfCards: activeCardButtons.count)
+//        pointsLabel.text = "Points: \(game.points)"
+//        drawCards()
+//    }
     
     private func drawCards() {
         inactiveCardButtons.forEach {
