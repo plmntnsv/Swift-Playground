@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3217E29921A6F1860025A73F /* 08.Larges Area in Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3217E29821A6F1860025A73F /* 08.Larges Area in Matrix.swift */; };
 		32FC8353219AFBC9005B7A50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FC8352219AFBC9005B7A50 /* AppDelegate.swift */; };
 		32FC8355219AFBC9005B7A50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FC8354219AFBC9005B7A50 /* ViewController.swift */; };
 		32FC8358219AFBC9005B7A50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32FC8356219AFBC9005B7A50 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3217E29821A6F1860025A73F /* 08.Larges Area in Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "08.Larges Area in Matrix.swift"; sourceTree = "<group>"; };
 		32FC834F219AFBC9005B7A50 /* Telerik-Tasks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Telerik-Tasks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32FC8352219AFBC9005B7A50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32FC8354219AFBC9005B7A50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				32FC836B219AFC94005B7A50 /* 05.Longest Increasing Sequence.swift */,
 				32FF0EBB219D9A3500C7421D /* 06.Max Sum of Subsequence.swift */,
 				32FF0EBD219DC92800C7421D /* 07.Most Frequent.swift */,
+				3217E29821A6F1860025A73F /* 08.Larges Area in Matrix.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			files = (
 				32FC8370219B01A4005B7A50 /* 03.Max Sum of K elements.swift in Sources */,
 				32FC8355219AFBC9005B7A50 /* ViewController.swift in Sources */,
+				3217E29921A6F1860025A73F /* 08.Larges Area in Matrix.swift in Sources */,
 				32FC836F219B01A4005B7A50 /* 04.Longest Sequence of Equal.swift in Sources */,
 				32FF0EBC219D9A3500C7421D /* 06.Max Sum of Subsequence.swift in Sources */,
 				32FC8353219AFBC9005B7A50 /* AppDelegate.swift in Sources */,
