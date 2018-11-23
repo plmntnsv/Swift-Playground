@@ -15,6 +15,8 @@
 		32FC836C219AFC94005B7A50 /* 05.Longest Increasing Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FC836B219AFC94005B7A50 /* 05.Longest Increasing Sequence.swift */; };
 		32FC836F219B01A4005B7A50 /* 04.Longest Sequence of Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FC836D219B01A4005B7A50 /* 04.Longest Sequence of Equal.swift */; };
 		32FC8370219B01A4005B7A50 /* 03.Max Sum of K elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FC836E219B01A4005B7A50 /* 03.Max Sum of K elements.swift */; };
+		32FF0EBC219D9A3500C7421D /* 06.Max Sum of Subsequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF0EBB219D9A3500C7421D /* 06.Max Sum of Subsequence.swift */; };
+		32FF0EBE219DC92800C7421D /* 07.Most Frequent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF0EBD219DC92800C7421D /* 07.Most Frequent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		32FC836B219AFC94005B7A50 /* 05.Longest Increasing Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "05.Longest Increasing Sequence.swift"; sourceTree = "<group>"; };
 		32FC836D219B01A4005B7A50 /* 04.Longest Sequence of Equal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "04.Longest Sequence of Equal.swift"; sourceTree = "<group>"; };
 		32FC836E219B01A4005B7A50 /* 03.Max Sum of K elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "03.Max Sum of K elements.swift"; sourceTree = "<group>"; };
+		32FF0EBB219D9A3500C7421D /* 06.Max Sum of Subsequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "06.Max Sum of Subsequence.swift"; sourceTree = "<group>"; };
+		32FF0EBD219DC92800C7421D /* 07.Most Frequent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "07.Most Frequent.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 				32FC836E219B01A4005B7A50 /* 03.Max Sum of K elements.swift */,
 				32FC836D219B01A4005B7A50 /* 04.Longest Sequence of Equal.swift */,
 				32FC836B219AFC94005B7A50 /* 05.Longest Increasing Sequence.swift */,
+				32FF0EBB219D9A3500C7421D /* 06.Max Sum of Subsequence.swift */,
+				32FF0EBD219DC92800C7421D /* 07.Most Frequent.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -155,8 +161,10 @@
 				32FC8370219B01A4005B7A50 /* 03.Max Sum of K elements.swift in Sources */,
 				32FC8355219AFBC9005B7A50 /* ViewController.swift in Sources */,
 				32FC836F219B01A4005B7A50 /* 04.Longest Sequence of Equal.swift in Sources */,
+				32FF0EBC219D9A3500C7421D /* 06.Max Sum of Subsequence.swift in Sources */,
 				32FC8353219AFBC9005B7A50 /* AppDelegate.swift in Sources */,
 				32FC836C219AFC94005B7A50 /* 05.Longest Increasing Sequence.swift in Sources */,
+				32FF0EBE219DC92800C7421D /* 07.Most Frequent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
