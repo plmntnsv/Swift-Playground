@@ -50,7 +50,7 @@ class ImageGalleryCollectionViewController: UIViewController, UIDropInteractionD
                 print("async download \(index)")
                 DispatchQueue.main.async {
                     if let imgData = urlContents {
-                        //self?.pics.append(UIImage(data: imgData)!)
+                        self?.pics.append(UIImage(data: imgData)!)
                         
                     } else {
                         // if no image append default img or something
