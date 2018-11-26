@@ -45,13 +45,12 @@ class AllBooksTableViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if booksFetched {
+        if booksFetched || allBooks.count > 0 {
             if segue.identifier == "BookSelectSegue", let indexPath = self.tableView.indexPathForSelectedRow {
                 let selectedBook = allBooks[indexPath.row]
-                
+                //self.tableView.deselectRow(at: indexPath, animated: true)
                 if let destination = segue.destination as? BookDetailsViewController {
-                    destination.bookDetails = selectedBook
+                    destination.bookId = selectedBook.id
                 }
             }
         }
@@ -112,7 +111,6 @@ extension AllBooksTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "BookSelectSegue", sender: cell)
     }
 }

@@ -7,16 +7,36 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireObjectMapper
 
 class BookDetailsViewController: UIViewController {
-    var bookDetails: Book?
+    var bookId: Int? {
+        didSet {
+        }
+    }
+    @IBOutlet weak var bookDetailsView: BookDetailsView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+       getBook()
     }
     
-
+    private func getBook() {
+        let url = "http://milenabooks.azurewebsites.net/api/books/\(bookId!)"
+        
+        Alamofire.request(url)
+            .responseObject {(response: DataResponse<Book>) in
+                let bookResponse = response.result.value
+                self.bookDetailsView.titleLabel.text = bookResponse?.title
+                self.bookDetailsView.authorNameLabel.text = bookResponse?.author
+                self.bookDetailsView.priceLabel.text = "Price: $\(Double((bookResponse?.price)!))"
+                self.bookDetailsView.ratingLabel.text = "Rating: \(Int((bookResponse?.rating)!))"
+                self.bookDetailsView.descriptionLabel.text = bookResponse?.description ?? "No description."
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
