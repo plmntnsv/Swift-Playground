@@ -8,8 +8,12 @@
 
 import UIKit
 import Alamofire
+import AlamofireObjectMapper
 
 class AllBooksTableViewController: UITableViewController {
+    private var allBooks = [Book]()
+    private var booksFetched = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
@@ -17,24 +21,26 @@ class AllBooksTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        loadData()
+        getData()
     }
 
-    func loadData() {
-        print("loading")
-        Alamofire.request("http://milenabooks.azurewebsites.net/api/books").responseJSON { response in
-            print("Request: \(String(describing: response.request))")   // original url request
-            print("Response: \(String(describing: response.response))") // http url response
-            print("Result: \(response.result)")                         // response serialization result
-            
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
+    private func getData() {
+        let url = "http://milenabooks.azurewebsites.net/api/books"
+        Alamofire.request(url)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseArray { (response: DataResponse<[Book]>) in
+                let booksArray = response.result.value
+                
+                if let booksArray = booksArray {
+                    for book in booksArray {
+                        self.allBooks.append(book)
+                    }
+                }
+                
+                self.booksFetched = true;
+                self.tableView.reloadData()
             }
-            
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)") // original server data as UTF8 string
-            }
-        }
     }
 
     /*
@@ -55,30 +61,47 @@ extension AllBooksTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return BookMockData.books.count
+        return booksFetched ? allBooks.count : 20
+        //return BookMockData.books.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BookTableCell", for: indexPath)
-        
-        if let bookCell = cell as? BookTableViewCell {
-            bookCell.bookTitleLabel.text = BookMockData.books[indexPath.row]?.title
-            bookCell.bookAuthorLabel.text = BookMockData.books[indexPath.row]?.author
+        let cell: UITableViewCell
+        if booksFetched {
+            cell = tableView.dequeueReusableCell(withIdentifier: "BookTableCell", for: indexPath)
             
-            DispatchQueue.global(qos: .background).async {
-                if let url = BookMockData.books[indexPath.row]?.coverImageUrl {
-                    let urlContents = try? Data(contentsOf: (URL(string: url))!)
-                    DispatchQueue.main.async {
-                        if let imgData = urlContents {
-                            bookCell.bookCoverImageView.image = UIImage(data: imgData)
+            if let bookCell = cell as? BookTableViewCell {
+                bookCell.bookTitleLabel.text = allBooks[indexPath.row].title
+                bookCell.bookAuthorLabel.text = allBooks[indexPath.row].author
+                
+                if let img = allBooks[indexPath.row].coverImage {
+                    bookCell.bookCoverImageView.image = UIImage(data: img)
+                } else {
+                    DispatchQueue.global(qos: .background).async {
+                        if let url = self.allBooks[indexPath.row].coverImageUrl {
+                            let urlContents = try? Data(contentsOf: (URL(string: url))!)
+                            DispatchQueue.main.async {
+                                if let imgData = urlContents {
+                                    bookCell.bookCoverImageView.image = UIImage(data: imgData)
+                                    self.allBooks[indexPath.row].coverImage = imgData
+                                } else {
+                                    bookCell.bookCoverImageView.image = UIImage(named: "noimage")
+                                    self.allBooks[indexPath.row].coverImage = UIImage(named: "noimage")?.pngData()
+                                    print("failed to load cover image")
+                                }
+                                bookCell.activitySpinner.isHidden = true
+                            }
                         } else {
-                            print("failed to load book cover image")
+                            DispatchQueue.main.async {
+                                print("failed to parse cover image url")
+                                bookCell.activitySpinner.isHidden = true
+                            }
                         }
-                        bookCell.activitySpinner.isHidden = true
                     }
                 }
             }
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "LoadingBookCell", for: indexPath)
         }
         
         return cell

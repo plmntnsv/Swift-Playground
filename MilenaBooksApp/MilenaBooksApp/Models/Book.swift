@@ -7,25 +7,27 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class Book {
-    let id: Int = 0
-    let title: String
-    let price: Double
-    let author: String
-    let rating: Int
-    let coverImageUrl: String?
+class Book: Mappable {
+    var id: Int?
+    var title: String?
+    var price: Double?
+    var author: String?
+    var rating: Int?
+    var coverImageUrl: String?
+    var coverImage: Data?
     
-    init?(name: String, price: Double, author: String, rating: Int, coverImageUrl: String?) {
+    required init?(map: Map) {
         
-        if name.isEmpty || price < 0 || author.isEmpty || rating < 0 {
-            return nil
-        }
-        
-        self.title = name
-        self.price = price
-        self.author = author
-        self.rating = rating
-        self.coverImageUrl = coverImageUrl
+    }
+    
+    func mapping(map: Map) {
+        id <- map["Id"]
+        title <- map["Name"]
+        price <- map["Price"]
+        author <- map["Author"]
+        rating <- map["Rating"]
+        coverImageUrl <- map["PictureURL"]
     }
 }

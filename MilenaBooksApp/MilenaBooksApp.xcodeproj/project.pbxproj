@@ -48,13 +48,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		327DD2B721A86060002F68A6 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		32A0098421A81D780077F007 = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +69,6 @@
 		32A0098F21A81D780077F007 /* MilenaBooksApp */ = {
 			isa = PBXGroup;
 			children = (
-				327DD2B721A86060002F68A6 /* New Group */,
 				32A0099421A81D780077F007 /* Main.storyboard */,
 				32A009A721A81E920077F007 /* Models */,
 				32A009A621A81E8C0077F007 /* Views */,
@@ -241,12 +233,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MilenaBooksApp/Pods-MilenaBooksApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
