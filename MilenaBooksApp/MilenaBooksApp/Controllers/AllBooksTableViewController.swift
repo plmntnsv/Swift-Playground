@@ -50,7 +50,7 @@ class AllBooksTableViewController: UITableViewController {
                 let selectedBook = allBooks[indexPath.row]
                 //self.tableView.deselectRow(at: indexPath, animated: true)
                 if let destination = segue.destination as? BookDetailsViewController {
-                    destination.bookId = selectedBook.id
+                    destination.book = selectedBook
                 }
             }
         }
