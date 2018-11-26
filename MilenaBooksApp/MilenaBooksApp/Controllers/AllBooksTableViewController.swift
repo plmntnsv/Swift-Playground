@@ -26,6 +26,7 @@ class AllBooksTableViewController: UITableViewController {
 
     private func getData() {
         let url = "http://milenabooks.azurewebsites.net/api/books"
+        
         Alamofire.request(url)
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
@@ -43,16 +44,18 @@ class AllBooksTableViewController: UITableViewController {
             }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        if booksFetched {
+            if segue.identifier == "BookSelectSegue", let indexPath = self.tableView.indexPathForSelectedRow {
+                let selectedBook = allBooks[indexPath.row]
+                
+                if let destination = segue.destination as? BookDetailsViewController {
+                    destination.bookDetails = selectedBook
+                }
+            }
+        }
     }
-    */
-
 }
 
 extension AllBooksTableViewController {
@@ -105,5 +108,11 @@ extension AllBooksTableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "BookSelectSegue", sender: cell)
     }
 }

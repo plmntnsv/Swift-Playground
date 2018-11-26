@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3209B95F21A833C600DD5D84 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209B95E21A833C600DD5D84 /* HomeViewController.swift */; };
 		3209B96321A8367D00DD5D84 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */; };
+		321FF37021AC2BE600407C54 /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321FF36F21AC2BE600407C54 /* BookDetailsViewController.swift */; };
 		327DD2B921A86074002F68A6 /* BookMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DD2B821A86074002F68A6 /* BookMockData.swift */; };
 		32A0099121A81D780077F007 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A0099021A81D780077F007 /* AppDelegate.swift */; };
 		32A0099621A81D780077F007 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A0099421A81D780077F007 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		3209B95E21A833C600DD5D84 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		321FF36F21AC2BE600407C54 /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
 		327DD2B821A86074002F68A6 /* BookMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMockData.swift; sourceTree = "<group>"; };
 		32A0098D21A81D780077F007 /* MilenaBooksApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilenaBooksApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A0099021A81D780077F007 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				32A009A821A81EDD0077F007 /* AllBooksTableViewController.swift */,
 				3209B95E21A833C600DD5D84 /* HomeViewController.swift */,
+				321FF36F21AC2BE600407C54 /* BookDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32A009A921A81EDD0077F007 /* AllBooksTableViewController.swift in Sources */,
+				321FF37021AC2BE600407C54 /* BookDetailsViewController.swift in Sources */,
 				32A0099121A81D780077F007 /* AppDelegate.swift in Sources */,
 				327DD2B921A86074002F68A6 /* BookMockData.swift in Sources */,
 				32A009AB21A824F50077F007 /* Book.swift in Sources */,

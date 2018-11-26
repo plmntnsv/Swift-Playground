@@ -16,6 +16,7 @@ class Book: Mappable {
     var author: String?
     var rating: Int?
     var coverImageUrl: String?
+    var description: String?
     var coverImage: Data?
     
     required init?(map: Map) {
@@ -29,5 +30,6 @@ class Book: Mappable {
         author <- map["Author"]
         rating <- map["Rating"]
         coverImageUrl <- map["PictureURL"]
+        description <- map["Description"]
     }
 }
