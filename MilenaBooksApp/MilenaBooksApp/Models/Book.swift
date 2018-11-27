@@ -19,6 +19,10 @@ class Book: Mappable {
     var description: String?
     var coverImage: Data?
     
+    init(id: Int, title: String, price: Double, author: String, rating: Int, coverImageUrl: String){
+        
+    }
+    
     required init?(map: Map) {
         
     }
