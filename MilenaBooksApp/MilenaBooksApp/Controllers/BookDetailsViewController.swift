@@ -34,7 +34,7 @@ class BookDetailsViewController: UIViewController {
                 self.bookDetailsView.priceLabel.text = "Price: $\(Double((self.book?.price)!))"
                 self.bookDetailsView.ratingLabel.text = "Rating: \(Int((self.book?.rating)!))"
                 
-                self.bookDetailsView.descriptionLabel.text = bookResponse?.description ?? "No description."
+                self.bookDetailsView.descriptionTextView.text = bookResponse?.description ?? "No description."
                 
                 self.bookDetailsView.bookCoverImageView.image = UIImage(data: Data((self.book?.coverImage)!))
         }

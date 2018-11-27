@@ -14,6 +14,11 @@ class BookDetailsView: UIView {
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var bookCoverImageView: UIImageView!
+    @IBOutlet weak var descriptionTextView: UITextView!
+        {
+        didSet {
+            descriptionTextView.isEditable = false
+        }
+    }
 }
