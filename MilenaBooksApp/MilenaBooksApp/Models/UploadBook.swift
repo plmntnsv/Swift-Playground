@@ -7,14 +7,15 @@
 //
 
 import Foundation
+import ObjectMapper
 
-struct UploadBook {
-    let title: String?
-    let price: Double
-    let author: String
-    let rating: Int
-    let coverImageUrl: String?
-    let description: String?
+struct UploadBook: Mappable {
+    var title: String?
+    var price: Double?
+    var author: String?
+    var rating: Int?
+    var coverImageUrl: String?
+    var description: String?
     
     init(title: String, price: Double, author: String, rating: Int, coverImageUrl: String?, description: String?){
         // TODO: validate
@@ -24,5 +25,18 @@ struct UploadBook {
         self.rating = rating
         self.coverImageUrl = coverImageUrl
         self.description = description
+    }
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map) {
+        title <- map["Name"]
+        price <- map["Price"]
+        author <- map["Author"]
+        rating <- map["Rating"]
+        coverImageUrl <- map["PictureURL"]
+        description <- map["Description"]
     }
 }

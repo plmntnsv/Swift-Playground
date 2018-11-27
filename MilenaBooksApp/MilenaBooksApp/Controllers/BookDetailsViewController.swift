@@ -20,10 +20,10 @@ class BookDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       getBook()
+       getBookDetails()
     }
     
-    private func getBook() {
+    private func getBookDetails() {
         let url = "http://milenabooks.azurewebsites.net/api/books/\(Int((book?.id)!))"
         
         Alamofire.request(url)

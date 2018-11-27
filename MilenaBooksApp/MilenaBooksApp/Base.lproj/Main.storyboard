@@ -357,7 +357,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="uploadBook:" destination="3UC-3O-HfH" eventType="touchUpInside" id="evG-BL-Sl6"/>
+                                    <action selector="uploadBookBtnClicked:" destination="3UC-3O-HfH" eventType="touchUpInside" id="evG-BL-Sl6"/>
                                 </connections>
                             </button>
                         </subviews>

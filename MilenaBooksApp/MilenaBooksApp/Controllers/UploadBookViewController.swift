@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireObjectMapper
 
 class UploadBookViewController: UIViewController {
     @IBOutlet var uploadBookView: UploadBookView!
@@ -16,32 +17,46 @@ class UploadBookViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func uploadBook(_ sender: Any) {
+    @IBAction func uploadBookBtnClicked(_ sender: Any) {
         if let btn = sender as? ActivityButtonView {
             if !btn.isUploading {
                 btn.showLoading()
-                
-                let urlString = "http://milenabooks.azurewebsites.net/api/upload"
-                
-                Alamofire.request(urlString, method: .post, parameters: ["foo": "bar"], encoding: JSONEncoding.default, headers: nil).responseJSON {
-                    response in
-                    switch response.result {
-                    case .success:
-                        print(response)
-                        
-                        break
-                    case .failure(let error):
-                        
-                        print(error)
-                    }
-                }
+                uploadBook()
             } else {
-                btn.hideLoading()
+                print("currently uploading")
             }
         }
     }
     
-    
+    private func uploadBook() {
+        let urlString = "http://milenabooks.azurewebsites.net/api/books"
+        //                let headers: HTTPHeaders = [
+        //                    "Content-Type": "application/x-www-form-urlencoded",
+        //                    "cache-control": "no-cache"
+        //                ]
+        //
+        //                Alamofire.request(urlString,
+        //                                  method: .post,
+        //                                  parameters: BookMockData.book,
+        //                                  encoding: URLEncoding.default,
+        //                                  headers: headers)
+        //                    .response { response in
+        //                            print(response)
+        //                        }
+        
+        Alamofire.request(urlString,
+                          method: .post,
+                          parameters: BookMockData.uploadBook.toJSON(),
+                          encoding: JSONEncoding.default)
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    print(response)
+                case .failure(let error):
+                    print(error)
+                }
+        }
+    }
 
     /*
     // MARK: - Navigation

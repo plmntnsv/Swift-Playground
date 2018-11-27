@@ -39,4 +39,13 @@ struct BookMockData {
     private static let description = "The Art of Unit Testing is a 2009 book by Roy Osherove which covers unit test writing for software. It's written with .NET Framework examples, but the fundamentals can be applied by any developer. The second edition was published in 2013."
     
     static let uploadBook = UploadBook(title: title, price: price, author: author, rating: rating, coverImageUrl: coverUrl, description: description)
+    
+    static let book: [String: Any] = [
+        "Name": "zz Test",
+        "Price": 6,
+        "Author": "xx test",
+        "PictureURL": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/book-cover-flyer-template-6bd8f9188465e443a5e161a7d0b3cf33.jpg?ts=1456287935",
+        "Rating": 5,
+        "Description": ""
+    ]
 }
