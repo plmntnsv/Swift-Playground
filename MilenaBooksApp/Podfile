@@ -1,3 +1,4 @@
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 target 'MilenaBooksApp' do
@@ -5,4 +6,5 @@ target 'MilenaBooksApp' do
     pod 'Alamofire', '~> 4.7'
     pod 'AlamofireObjectMapper', '~> 5.2'
     pod 'ObjectMapper', '~> 3.4'
+    pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
 end
