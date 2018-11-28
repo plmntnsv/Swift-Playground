@@ -11,8 +11,10 @@ import Alamofire
 import AlamofireObjectMapper
 
 class UploadBookViewController: UIViewController {
+    
     @IBOutlet var uploadBookView: UploadBookView!
     
+    private var receivedBook: Book?
     // TODO: use SwiftValidator lib
     private var validBook: Bool {
         get {
@@ -40,6 +42,20 @@ class UploadBookViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if receivedBook?.id != nil {
+            uploadBookView.uploadButton.setTitle("Edit", for: .normal)
+            uploadBookView.titleTextField.text = receivedBook?.title
+            uploadBookView.authorTextField.text = receivedBook?.author
+            uploadBookView.priceTextField.text = String((receivedBook?.price)!)
+            uploadBookView.ratingTextField.text = String((receivedBook?.rating)!)
+            uploadBookView.coverImageUrlTextField.text = receivedBook?.coverImageUrl
+            uploadBookView.descriptionTextView.text = receivedBook?.description
+        }
+    }
+    
     @IBAction func uploadBookBtnClicked(_ sender: Any) {
         if let btn = sender as? ActivityButtonView {
             if !btn.isUploading {
@@ -51,7 +67,7 @@ class UploadBookViewController: UIViewController {
                     let rating = Int(uploadBookView.ratingTextField.text!)!
                     let url = uploadBookView.coverImageUrlTextField.text
                     let desc = uploadBookView.descriptionTextView.text
-                    let book = UploadBook(title: title, price: price, author: author, rating: rating, coverImageUrl: url, description: desc)
+                    let book = Book(id: nil, title: title, price: price, author: author, rating: rating, coverImageUrl: url, description: desc)
                     
                     upload(bookToUpload: book)
                 }
@@ -61,47 +77,32 @@ class UploadBookViewController: UIViewController {
         }
     }
     
-    private func upload(bookToUpload book: UploadBook) {
+    private func upload(bookToUpload book: Book) {
         let urlString = "http://milenabooks.azurewebsites.net/api/books"
-        //                let headers: HTTPHeaders = [
-        //                    "Content-Type": "application/x-www-form-urlencoded",
-        //                    "cache-control": "no-cache"
-        //                ]
-        //
-        //                Alamofire.request(urlString,
-        //                                  method: .post,
-        //                                  parameters: BookMockData.book,
-        //                                  encoding: URLEncoding.default,
-        //                                  headers: headers)
-        //                    .response { response in
-        //                            print(response)
-        //                        }
         
         Alamofire.request(urlString,
                           method: .post,
                           parameters: book.toJSON(),
                           encoding: JSONEncoding.default)
-            .responseJSON { response in
+            .responseObject { (response: DataResponse<Book>) in
                 switch response.result {
                 case .success:
-                    print(response)
                     (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
+                    self.receivedBook = response.result.value
+                    self.performSegue(withIdentifier: "UploadToDetailsSegue", sender: self.uploadBookView.uploadButton)
                 case .failure(let error):
                     print(error)
                 }
-                
-                
         }
     }
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "UploadToDetailsSegue" {
+            if let destination = segue.destination as? BookDetailsViewController {
+                destination.book = receivedBook
+                destination.bookId = receivedBook?.id!
+            }
+        }
     }
-    */
-
 }

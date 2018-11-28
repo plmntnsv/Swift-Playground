@@ -51,6 +51,7 @@ class AllBooksTableViewController: UITableViewController {
                 //self.tableView.deselectRow(at: indexPath, animated: true)
                 if let destination = segue.destination as? BookDetailsViewController {
                     destination.book = selectedBook
+                    destination.bookId = selectedBook.id
                 }
             }
         }
@@ -73,15 +74,23 @@ extension AllBooksTableViewController {
             cell = tableView.dequeueReusableCell(withIdentifier: "BookTableCell", for: indexPath)
             
             if let bookCell = cell as? BookTableViewCell {
-                bookCell.bookTitleLabel.text = allBooks[indexPath.row].title
-                bookCell.bookAuthorLabel.text = allBooks[indexPath.row].author
+                bookCell.bookTitleLabel.text = allBooks[indexPath.row].title ?? "No title."
+                bookCell.bookAuthorLabel.text = allBooks[indexPath.row].author ?? "No author."
                 
                 if let img = allBooks[indexPath.row].coverImage {
                     bookCell.bookCoverImageView.image = UIImage(data: img)
                 } else {
                     DispatchQueue.global(qos: .background).async {
                         if let url = self.allBooks[indexPath.row].coverImageUrl {
-                            let urlContents = try? Data(contentsOf: (URL(string: url))!)
+                            
+                            let urlContents: Data?
+                            
+                            if url.isEmpty {
+                                urlContents = UIImage(named: "noimage")?.pngData()
+                            } else {
+                                urlContents = try? Data(contentsOf: (URL(string: url))!)
+                            }
+                            
                             DispatchQueue.main.async {
                                 if let imgData = urlContents {
                                     bookCell.bookCoverImageView.image = UIImage(data: imgData)
@@ -95,6 +104,8 @@ extension AllBooksTableViewController {
                             }
                         } else {
                             DispatchQueue.main.async {
+                                bookCell.bookCoverImageView.image = UIImage(named: "noimage")
+                                self.allBooks[indexPath.row].coverImage = UIImage(named: "noimage")?.pngData()
                                 print("failed to parse cover image url")
                                 bookCell.activitySpinner.isHidden = true
                             }

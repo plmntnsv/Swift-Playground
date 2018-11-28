@@ -9,7 +9,8 @@
 import UIKit
 
 class BookDetailsView: UIView {
-
+    
+    @IBOutlet weak var bookCoverImageIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!

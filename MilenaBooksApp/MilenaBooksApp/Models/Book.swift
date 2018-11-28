@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class Book: Mappable {
+struct Book: Mappable {
     var id: Int?
     var title: String?
     var price: Double?
@@ -19,15 +19,21 @@ class Book: Mappable {
     var description: String?
     var coverImage: Data?
     
-    init(id: Int, title: String, price: Double, author: String, rating: Int, coverImageUrl: String){
+    init(id: Int?, title: String?, price: Double?, author: String?, rating: Int?, coverImageUrl: String?, description: String?){
+        self.id = id
+        self.title = title
+        self.price = price
+        self.author = author
+        self.rating = rating
+        self.coverImageUrl = coverImageUrl
+        self.description = description
+    }
+    
+    init?(map: Map) {
         
     }
     
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
+    mutating func mapping(map: Map) {
         id <- map["Id"]
         title <- map["Name"]
         price <- map["Price"]
