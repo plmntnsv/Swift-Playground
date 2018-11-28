@@ -13,6 +13,8 @@
 		321160CD21AD714400A7D25A /* UploadBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321160CC21AD714400A7D25A /* UploadBookView.swift */; };
 		321160CF21AD786300A7D25A /* ActivityButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321160CE21AD786300A7D25A /* ActivityButtonView.swift */; };
 		321A891921AECB9B00B462BC /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A891821AECB9B00B462BC /* ImageFetcher.swift */; };
+		321A891B21AEF5F800B462BC /* EditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A891A21AEF5F800B462BC /* EditBookView.swift */; };
+		321A891D21AEFB5500B462BC /* EditBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A891C21AEFB5500B462BC /* EditBookViewController.swift */; };
 		321FF37021AC2BE600407C54 /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321FF36F21AC2BE600407C54 /* BookDetailsViewController.swift */; };
 		321FF37221AC380900407C54 /* BookDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321FF37121AC380900407C54 /* BookDetailsView.swift */; };
 		327DD2B921A86074002F68A6 /* BookMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DD2B821A86074002F68A6 /* BookMockData.swift */; };
@@ -32,6 +34,8 @@
 		321160CC21AD714400A7D25A /* UploadBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadBookView.swift; sourceTree = "<group>"; };
 		321160CE21AD786300A7D25A /* ActivityButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityButtonView.swift; sourceTree = "<group>"; };
 		321A891821AECB9B00B462BC /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
+		321A891A21AEF5F800B462BC /* EditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookView.swift; sourceTree = "<group>"; };
+		321A891C21AEFB5500B462BC /* EditBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookViewController.swift; sourceTree = "<group>"; };
 		321FF36F21AC2BE600407C54 /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
 		321FF37121AC380900407C54 /* BookDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsView.swift; sourceTree = "<group>"; };
 		327DD2B821A86074002F68A6 /* BookMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMockData.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 				3209B95E21A833C600DD5D84 /* HomeViewController.swift */,
 				321FF36F21AC2BE600407C54 /* BookDetailsViewController.swift */,
 				321160C821AD402500A7D25A /* UploadBookViewController.swift */,
+				321A891C21AEFB5500B462BC /* EditBookViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 				321FF37121AC380900407C54 /* BookDetailsView.swift */,
 				321160CC21AD714400A7D25A /* UploadBookView.swift */,
 				321160CE21AD786300A7D25A /* ActivityButtonView.swift */,
+				321A891A21AEF5F800B462BC /* EditBookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -284,8 +290,10 @@
 				321A891921AECB9B00B462BC /* ImageFetcher.swift in Sources */,
 				32A009AB21A824F50077F007 /* Book.swift in Sources */,
 				3209B96321A8367D00DD5D84 /* BookTableViewCell.swift in Sources */,
+				321A891B21AEF5F800B462BC /* EditBookView.swift in Sources */,
 				3209B95F21A833C600DD5D84 /* HomeViewController.swift in Sources */,
 				321160CF21AD786300A7D25A /* ActivityButtonView.swift in Sources */,
+				321A891D21AEFB5500B462BC /* EditBookViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

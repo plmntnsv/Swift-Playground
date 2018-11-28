@@ -35,6 +35,7 @@ class AllBooksTableViewController: UITableViewController {
                 
                 if let booksArray = booksArray {
                     for book in booksArray {
+                        // arr += arr
                         self.allBooks.append(book)
                     }
                 }

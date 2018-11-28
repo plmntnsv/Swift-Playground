@@ -48,23 +48,9 @@ class BookDetailsViewController: UIViewController {
             self.bookDetailsView.bookCoverImageView.image = UIImage(data: Data(coverImage))
         } else {
             DispatchQueue.global(qos: .background).async {
-                if let url = self.book?.coverImageUrl {
-                    
-                    let urlContents: Data?
-                    
-                    if url.isEmpty {
-                        urlContents = UIImage(named: "noimage")?.pngData()
-                    } else {
-                        urlContents = try? Data(contentsOf: (URL(string: url))!)
-                    }
-                    
+                if let url = URL(string: url), let urlContents = try? Data(contentsOf: url) {
                     DispatchQueue.main.async {
-                        if let imgData = urlContents {
-                            self.bookDetailsView.bookCoverImageView.image = UIImage(data: imgData)
-                        } else {
-                            self.bookDetailsView.bookCoverImageView.image = UIImage(named: "noimage")
-                        }
-                        self.bookDetailsView.bookCoverImageIndicator.isHidden = true
+                        self.bookDetailsView.bookCoverImageView.image = UIImage(data: urlContents)
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -124,8 +110,8 @@ class BookDetailsViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditBookDetailsSegue" {
-            if let destination = segue.destination as? UploadBookViewController {
-                
+            if let destination = segue.destination as? EditBookViewController {
+                destination.bookToEdit = book
             }
         }
     }

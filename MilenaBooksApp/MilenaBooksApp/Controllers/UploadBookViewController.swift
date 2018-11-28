@@ -42,20 +42,6 @@ class UploadBookViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if receivedBook?.id != nil {
-            uploadBookView.uploadButton.setTitle("Edit", for: .normal)
-            uploadBookView.titleTextField.text = receivedBook?.title
-            uploadBookView.authorTextField.text = receivedBook?.author
-            uploadBookView.priceTextField.text = String((receivedBook?.price)!)
-            uploadBookView.ratingTextField.text = String((receivedBook?.rating)!)
-            uploadBookView.coverImageUrlTextField.text = receivedBook?.coverImageUrl
-            uploadBookView.descriptionTextView.text = receivedBook?.description
-        }
-    }
-    
     @IBAction func uploadBookBtnClicked(_ sender: Any) {
         if let btn = sender as? ActivityButtonView {
             if !btn.isUploading {
