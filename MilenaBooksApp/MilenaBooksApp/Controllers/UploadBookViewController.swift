@@ -14,7 +14,10 @@ class UploadBookViewController: UIViewController {
     
     @IBOutlet var uploadBookView: UploadBookView!
     
-    private var receivedBook: Book?
+    var book: Book?
+    private var editVerb: HTTPMethod?
+    private var urlString: String?
+    
     // TODO: use SwiftValidator lib
     private var validBook: Bool {
         get {
@@ -33,12 +36,30 @@ class UploadBookViewController: UIViewController {
                 return false
             }
             
-            if (uploadBookView.ratingTextField.text?.isEmpty)! || Int((uploadBookView.priceTextField.text)!) == nil {
+            if (uploadBookView.ratingTextField.text?.isEmpty)! || Int((uploadBookView.ratingTextField.text)!) == nil {
                 (uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
                 return false
             }
             
             return true
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let bookToEdit = book {
+            editVerb = .put
+            urlString = ApiEndPoints.BookEndPoint.edit(book: book!).fullUrl
+            
+            uploadBookView.uploadButton.setTitle("Edit", for: .normal)
+            uploadBookView.uploadButton.backgroundColor = #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1)
+            uploadBookView.titleTextField.text = bookToEdit.title ?? "No title"
+            uploadBookView.authorTextField.text = bookToEdit.author ?? "No author"
+            uploadBookView.priceTextField.text = String((bookToEdit.price ?? 0.0)!)
+            uploadBookView.ratingTextField.text = String((bookToEdit.rating ?? 0)!)
+            uploadBookView.coverImageUrlTextField.text = bookToEdit.coverImageUrl
+            uploadBookView.descriptionTextView.text = bookToEdit.description
         }
     }
     
@@ -53,9 +74,17 @@ class UploadBookViewController: UIViewController {
                     let rating = Int(uploadBookView.ratingTextField.text!)!
                     let url = uploadBookView.coverImageUrlTextField.text
                     let desc = uploadBookView.descriptionTextView.text
-                    let book = Book(id: nil, title: title, price: price, author: author, rating: rating, coverImageUrl: url, description: desc)
                     
-                    upload(bookToUpload: book)
+                    book = Book(id: nil, title: title, price: price, author: author, rating: rating, coverImageUrl: url, description: desc)
+                    
+                    if let editUrl = urlString {
+                        post(bookToPost: book!, to: editUrl)
+                    } else {
+                        post(bookToPost: book!, to: ApiEndPoints.BookEndPoint.post.fullUrl)
+                    }
+                    
+                } else {
+                    print("invalid book")
                 }
             } else {
                 print("currently uploading")
@@ -63,20 +92,19 @@ class UploadBookViewController: UIViewController {
         }
     }
     
-    private func upload(bookToUpload book: Book) {
-        let urlString = "http://milenabooks.azurewebsites.net/api/books"
-        
+    private func post(bookToPost book: Book, to urlString: String) {
         Alamofire.request(urlString,
-                          method: .post,
+                          method: self.editVerb ?? .post,
                           parameters: book.toJSON(),
                           encoding: JSONEncoding.default)
             .responseObject { (response: DataResponse<Book>) in
                 switch response.result {
                 case .success:
                     (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
-                    self.receivedBook = response.result.value
-                    self.performSegue(withIdentifier: "UploadToDetailsSegue", sender: self.uploadBookView.uploadButton)
+                    self.book = response.result.value
+                    self.performSegue(withIdentifier: "EditUploadToDetailsSegue", sender: self.uploadBookView.uploadButton)
                 case .failure(let error):
+                    (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
                     print(error)
                 }
         }
@@ -84,10 +112,9 @@ class UploadBookViewController: UIViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "UploadToDetailsSegue" {
+        if segue.identifier == "EditUploadToDetailsSegue" {
             if let destination = segue.destination as? BookDetailsViewController {
-                destination.book = receivedBook
-                destination.bookId = receivedBook?.id!
+                destination.book = book
             }
         }
     }

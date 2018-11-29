@@ -52,7 +52,6 @@ class AllBooksTableViewController: UITableViewController {
                 //self.tableView.deselectRow(at: indexPath, animated: true)
                 if let destination = segue.destination as? BookDetailsViewController {
                     destination.book = selectedBook
-                    destination.bookId = selectedBook.id
                 }
             }
         }

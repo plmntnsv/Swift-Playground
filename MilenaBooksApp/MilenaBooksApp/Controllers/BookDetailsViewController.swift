@@ -11,8 +11,8 @@ import Alamofire
 import AlamofireObjectMapper
 
 class BookDetailsViewController: UIViewController {
+    private lazy var url = ApiEndPoints.BookEndPoint.get(book: book!).fullUrl
     var book: Book?
-    var bookId: Int?
     
     @IBOutlet weak var bookDetailsView: BookDetailsView!
     
@@ -27,8 +27,6 @@ class BookDetailsViewController: UIViewController {
     }
     
     private func displayBookDetails() {
-        let url = "http://milenabooks.azurewebsites.net/api/books/\(Int((book?.id)!))"
-        
         self.bookDetailsView.titleLabel.text = book?.title ?? "No title."
         self.bookDetailsView.authorNameLabel.text = book?.author ?? "No author."
         self.bookDetailsView.priceLabel.text = "Price: $\(Double((book?.price ?? 0.0)!))"
@@ -46,62 +44,23 @@ class BookDetailsViewController: UIViewController {
         
         if let coverImage = self.book?.coverImage {
             self.bookDetailsView.bookCoverImageView.image = UIImage(data: Data(coverImage))
+            self.bookDetailsView.bookCoverImageIndicator.isHidden = true
         } else {
             DispatchQueue.global(qos: .background).async {
-                if let url = URL(string: url), let urlContents = try? Data(contentsOf: url) {
+                if let urlOfImg = URL(string: self.url), let urlContents = try? Data(contentsOf: urlOfImg) {
+                    print
                     DispatchQueue.main.async {
                         self.bookDetailsView.bookCoverImageView.image = UIImage(data: urlContents)
+                        self.bookDetailsView.bookCoverImageIndicator.isHidden = true
                     }
                 } else {
                     DispatchQueue.main.async {
                         self.bookDetailsView.bookCoverImageView.image = UIImage(named: "noimage")
-                        self.bookDetailsView.bookCoverImageIndicator.isHidden = true
                     }
                 }
+                
+                
             }
-        }
-    }
-    
-    private func getBookDetailsById() {
-        let url = "http://milenabooks.azurewebsites.net/api/books/\(bookId!)"
-        
-        Alamofire.request(url)
-            .responseObject {(response: DataResponse<Book>) in
-                let bookResponse = response.result.value
-                
-                self.bookDetailsView.titleLabel.text = bookResponse?.title
-                self.bookDetailsView.authorNameLabel.text = bookResponse?.author
-                self.bookDetailsView.priceLabel.text = "Price: $\(Double((bookResponse?.price)!))"
-                self.bookDetailsView.ratingLabel.text = "Rating: \(Int((bookResponse?.rating)!))"
-                self.bookDetailsView.descriptionTextView.text = bookResponse?.description ?? "No description."
-                
-                DispatchQueue.global(qos: .background).async {
-                    if let url = bookResponse?.coverImageUrl {
-                        
-                        let urlContents: Data?
-                        
-                        if url.isEmpty {
-                            urlContents = UIImage(named: "noimage")?.pngData()
-                        } else {
-                            urlContents = try? Data(contentsOf: (URL(string: url))!)
-                        }
-                        
-                        DispatchQueue.main.async {
-                            if let imgData = urlContents {
-                                self.bookDetailsView.bookCoverImageView.image = UIImage(data: imgData)
-                            } else {
-                                self.bookDetailsView.bookCoverImageView.image = UIImage(named: "noimage")
-                            }
-                            
-                            self.bookDetailsView.bookCoverImageIndicator.isHidden = true
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.bookDetailsView.bookCoverImageView.image = UIImage(named: "noimage")
-                            self.bookDetailsView.bookCoverImageIndicator.isHidden = true
-                        }
-                    }
-                }
         }
     }
     
@@ -109,9 +68,9 @@ class BookDetailsViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EditBookDetailsSegue" {
-            if let destination = segue.destination as? EditBookViewController {
-                destination.bookToEdit = book
+        if segue.identifier == "DetailsToEditUploadSegue" {
+            if let destination = segue.destination as? UploadBookViewController {
+                destination.book = book
             }
         }
     }
