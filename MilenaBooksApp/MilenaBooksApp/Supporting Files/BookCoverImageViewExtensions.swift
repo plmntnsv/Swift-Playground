@@ -14,19 +14,21 @@ extension BookCoverImageView {
         self.showLoading()
         
         DispatchQueue.global(qos: .background).async {
+            var resultData: Data?
+            
             if let url = URL(string: urlString), let urlContents = try? Data(contentsOf: url) {
-                DispatchQueue.main.async {
-                    completion(urlContents)
-                    self.image = UIImage(data: urlContents)
-                    self.hideLoading()
-                    
-                }
+                resultData = urlContents
             } else {
-                DispatchQueue.main.async {
-                    completion(UIImage(named: "noimage")?.pngData())
-                    self.image = UIImage(named: "noimage")
-                    self.hideLoading()
+                resultData = UIImage(named: "noimage")?.pngData()
+            }
+            
+            DispatchQueue.main.async {
+                if let resultData = resultData {
+                    completion(resultData)
+                    self.image = UIImage(data: resultData)
                 }
+                
+                self.hideLoading()
             }
         }
     }

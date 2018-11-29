@@ -77,7 +77,6 @@ extension AllBooksTableViewController {
                         bookCell.bookCoverImageView.downloadImageFromUrl(urlString: url) { data in
                             self.allBooks[indexPath.row].coverImage = data
                         }
-                        
                     }
                 }
             }
