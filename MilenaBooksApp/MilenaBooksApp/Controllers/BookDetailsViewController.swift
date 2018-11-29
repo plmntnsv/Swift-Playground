@@ -23,7 +23,10 @@ class BookDetailsViewController: UIViewController {
     }
     
     @IBAction func deleteButtonClicked(_ sender: UIButton) {
-        
+        if let activityButton = sender as? ActivityButtonView {
+            activityButton.showLoading()
+            delete(url: ApiEndPoints.BookEndPoint.delete(book: book!).fullUrl, sender: activityButton)
+        }
     }
     
     private func displayBookDetails() {
@@ -35,12 +38,7 @@ class BookDetailsViewController: UIViewController {
         if book?.description != nil {
             self.bookDetailsView.descriptionTextView.text = book?.description
         } else {
-            Alamofire.request(url)
-                .responseObject {(response: DataResponse<Book>) in
-                    let bookResponse = response.result.value
-                    self.bookDetailsView.descriptionTextView.text = bookResponse?.description ?? "No description."
-                    self.book?.description = bookResponse?.description
-            }
+            get(from: url)
         }
         
         if let coverImage = self.book?.coverImage {
@@ -63,4 +61,23 @@ class BookDetailsViewController: UIViewController {
         }
     }
 
+}
+
+extension BookDetailsViewController {
+    private func get(from bookUrl: String) {
+        Alamofire.request(bookUrl)
+            .responseObject {(response: DataResponse<Book>) in
+                let bookResponse = response.result.value
+                self.bookDetailsView.descriptionTextView.text = bookResponse?.description ?? "No description."
+                self.book?.description = bookResponse?.description
+        }
+    }
+    
+    private func delete(url: String, sender: ActivityButtonView) {
+        Alamofire.request(url, method: .delete).responseObject { (response: DataResponse<Book>) in
+            print(response)
+            sender.hideLoading()
+            self.performSegue(withIdentifier: "BookDetailsToAllBooksAfterDeleteSegue", sender: sender)
+        }
+    }
 }

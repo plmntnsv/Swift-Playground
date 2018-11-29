@@ -23,6 +23,7 @@ struct ApiEndPoints {
         case get(book: Book)
         case post
         case edit(book: Book)
+        case delete(book: Book)
         
         var fullUrl: String {
             switch self {
@@ -33,6 +34,8 @@ struct ApiEndPoints {
             case .post:
                 return "\(url)\(EndPoint.books.rawValue)/"
             case .edit(let book):
+                return "\(url)\(EndPoint.books.rawValue)/\(book.id!)"
+            case .delete(let book):
                 return "\(url)\(EndPoint.books.rawValue)/\(book.id!)"
             }
         }

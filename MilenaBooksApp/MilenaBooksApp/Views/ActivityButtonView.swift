@@ -16,6 +16,7 @@ class ActivityButtonView: UIButton {
     
     func showLoading() {
         originalButtonText = self.titleLabel?.text
+        self.isEnabled = false
         self.setTitle("", for: .normal)
         
         isUploading = true
@@ -30,6 +31,7 @@ class ActivityButtonView: UIButton {
     func hideLoading() {
         self.setTitle(originalButtonText, for: .normal)
         isUploading = false
+        self.isEnabled = true
         activityIndicator.stopAnimating()
     }
     

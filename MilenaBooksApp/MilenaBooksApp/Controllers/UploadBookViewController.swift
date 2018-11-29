@@ -91,6 +91,17 @@ class UploadBookViewController: UIViewController {
         }
     }
     
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditUploadToDetailsSegue" {
+            if let destination = segue.destination as? BookDetailsViewController {
+                destination.book = book
+            }
+        }
+    }
+}
+
+extension UploadBookViewController {
     private func post(_ book: Book, to urlString: String, with verb: HTTPMethod) {
         Alamofire.request(urlString,
                           method: verb,
@@ -106,15 +117,6 @@ class UploadBookViewController: UIViewController {
                     (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
                     print(error)
                 }
-        }
-    }
-
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EditUploadToDetailsSegue" {
-            if let destination = segue.destination as? BookDetailsViewController {
-                destination.book = book
-            }
         }
     }
 }
