@@ -47,7 +47,7 @@ class BookDetailsViewController: UIViewController {
             self.bookDetailsView.bookCoverImageView.image = UIImage(data: Data(coverImage))
         } else {
             if let url = self.book?.coverImageUrl {
-                self.bookDetailsView.bookCoverImageView.downloadImageFromUrl(urlString: url)
+                self.bookDetailsView.bookCoverImageView.downloadImageFromUrl(urlString: url) { _ in print("successfully fetched image")}
             }
         }
     }

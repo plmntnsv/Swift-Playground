@@ -9,8 +9,6 @@
 import UIKit
 
 class BookTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     @IBOutlet weak var bookCoverImageView: BookCoverImageView!
     @IBOutlet weak var bookTitleLabel: UILabel!
     @IBOutlet weak var bookAuthorLabel: UILabel!
@@ -26,5 +24,10 @@ class BookTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        bookCoverImageView.image = nil
+    }
 }

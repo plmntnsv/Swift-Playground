@@ -9,7 +9,6 @@
 import UIKit
 
 class UploadBookView: UIView {
-    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!

@@ -11,7 +11,6 @@
 		3209B96321A8367D00DD5D84 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */; };
 		3210E63E21AFD90600012C18 /* ApiEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3210E63D21AFD90600012C18 /* ApiEndPoints.swift */; };
 		3210E64021B00C8E00012C18 /* BookCoverImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3210E63F21B00C8E00012C18 /* BookCoverImageViewExtensions.swift */; };
-		3210E64421B01CEF00012C18 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3210E64321B01CEF00012C18 /* Utilities.swift */; };
 		3210E64621B01E6800012C18 /* BookCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3210E64521B01E6800012C18 /* BookCoverImageView.swift */; };
 		321160C921AD402500A7D25A /* UploadBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321160C821AD402500A7D25A /* UploadBookViewController.swift */; };
 		321160CD21AD714400A7D25A /* UploadBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321160CC21AD714400A7D25A /* UploadBookView.swift */; };
@@ -34,7 +33,6 @@
 		3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		3210E63D21AFD90600012C18 /* ApiEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndPoints.swift; sourceTree = "<group>"; };
 		3210E63F21B00C8E00012C18 /* BookCoverImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoverImageViewExtensions.swift; sourceTree = "<group>"; };
-		3210E64321B01CEF00012C18 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = "../../../ImageGallery/ImageGallery/Supporting Items/Utilities.swift"; sourceTree = "<group>"; };
 		3210E64521B01E6800012C18 /* BookCoverImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoverImageView.swift; sourceTree = "<group>"; };
 		321160C821AD402500A7D25A /* UploadBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadBookViewController.swift; sourceTree = "<group>"; };
 		321160CC21AD714400A7D25A /* UploadBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadBookView.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 		32A009A221A81D8B0077F007 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3210E64321B01CEF00012C18 /* Utilities.swift */,
 				32A0099021A81D780077F007 /* AppDelegate.swift */,
 				32A0099721A81D790077F007 /* Assets.xcassets */,
 				32A0099921A81D790077F007 /* LaunchScreen.storyboard */,
@@ -289,7 +286,6 @@
 				32A009A921A81EDD0077F007 /* AllBooksTableViewController.swift in Sources */,
 				321160CD21AD714400A7D25A /* UploadBookView.swift in Sources */,
 				321FF37021AC2BE600407C54 /* BookDetailsViewController.swift in Sources */,
-				3210E64421B01CEF00012C18 /* Utilities.swift in Sources */,
 				32A0099121A81D780077F007 /* AppDelegate.swift in Sources */,
 				327DD2B921A86074002F68A6 /* BookMockData.swift in Sources */,
 				321FF37221AC380900407C54 /* BookDetailsView.swift in Sources */,

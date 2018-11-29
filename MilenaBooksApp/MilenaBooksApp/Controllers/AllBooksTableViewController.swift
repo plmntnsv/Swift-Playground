@@ -63,6 +63,7 @@ extension AllBooksTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         if booksFetched {
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "BookTableCell", for: indexPath)
             
             if let bookCell = cell as? BookTableViewCell {
@@ -73,7 +74,10 @@ extension AllBooksTableViewController {
                     bookCell.bookCoverImageView.image = UIImage(data: img)
                 } else {
                     if let url = self.allBooks[indexPath.row].coverImageUrl {
-                        bookCell.bookCoverImageView.downloadImageFromUrl(urlString: url)
+                        bookCell.bookCoverImageView.downloadImageFromUrl(urlString: url) { data in
+                            self.allBooks[indexPath.row].coverImage = data
+                        }
+                        
                     }
                 }
             }
