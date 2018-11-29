@@ -25,19 +25,14 @@ class AllBooksTableViewController: UITableViewController {
     }
 
     private func getData() {
-        let url = "http://milenabooks.azurewebsites.net/api/books"
-        
-        Alamofire.request(url)
+        Alamofire.request(ApiEndPoints.BookEndPoint.getAll.fullUrl)
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseArray { (response: DataResponse<[Book]>) in
                 let booksArray = response.result.value
                 
                 if let booksArray = booksArray {
-                    for book in booksArray {
-                        // arr += arr
-                        self.allBooks.append(book)
-                    }
+                    self.allBooks = booksArray
                 }
                 
                 self.booksFetched = true;
@@ -46,13 +41,10 @@ class AllBooksTableViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if booksFetched || allBooks.count > 0 {
-            if segue.identifier == "BookSelectSegue", let indexPath = self.tableView.indexPathForSelectedRow {
-                let selectedBook = allBooks[indexPath.row]
-                //self.tableView.deselectRow(at: indexPath, animated: true)
-                if let destination = segue.destination as? BookDetailsViewController {
-                    destination.book = selectedBook
-                }
+        if segue.identifier == "BookSelectSegue", let indexPath = self.tableView.indexPathForSelectedRow {
+            let selectedBook = allBooks[indexPath.row]
+            if let destination = segue.destination as? BookDetailsViewController {
+                destination.book = selectedBook
             }
         }
     }
@@ -80,34 +72,22 @@ extension AllBooksTableViewController {
                 if let img = allBooks[indexPath.row].coverImage {
                     bookCell.bookCoverImageView.image = UIImage(data: img)
                 } else {
+                    bookCell.bookCoverImageView.showLoading()
                     DispatchQueue.global(qos: .background).async {
-                        if let url = self.allBooks[indexPath.row].coverImageUrl {
-                            
-                            let urlContents: Data?
-                            
-                            if url.isEmpty {
-                                urlContents = UIImage(named: "noimage")?.pngData()
-                            } else {
-                                urlContents = try? Data(contentsOf: (URL(string: url))!)
-                            }
-                            
+                        
+                        if let urlString = self.allBooks[indexPath.row].coverImageUrl, let url =  URL(string: urlString), let urlContents = try? Data(contentsOf: url) {
                             DispatchQueue.main.async {
-                                if let imgData = urlContents {
-                                    bookCell.bookCoverImageView.image = UIImage(data: imgData)
-                                    self.allBooks[indexPath.row].coverImage = imgData
-                                } else {
-                                    bookCell.bookCoverImageView.image = UIImage(named: "noimage")
-                                    self.allBooks[indexPath.row].coverImage = UIImage(named: "noimage")?.pngData()
-                                    print("failed to load cover image")
-                                }
-                                bookCell.activitySpinner.isHidden = true
+                                bookCell.bookCoverImageView.hideLoading()
+                                bookCell.bookCoverImageView.image = UIImage(data: urlContents)
+                                self.allBooks[indexPath.row].coverImage = urlContents
+                                bookCell.bookCoverImageView.hideLoading()
                             }
                         } else {
                             DispatchQueue.main.async {
                                 bookCell.bookCoverImageView.image = UIImage(named: "noimage")
                                 self.allBooks[indexPath.row].coverImage = UIImage(named: "noimage")?.pngData()
                                 print("failed to parse cover image url")
-                                bookCell.activitySpinner.isHidden = true
+                                bookCell.bookCoverImageView.hideLoading()
                             }
                         }
                     }
@@ -121,7 +101,9 @@ extension AllBooksTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        performSegue(withIdentifier: "BookSelectSegue", sender: cell)
+        if booksFetched || allBooks.count > 0 {
+            let cell = tableView.cellForRow(at: indexPath)
+            performSegue(withIdentifier: "BookSelectSegue", sender: cell)
+        }
     }
 }

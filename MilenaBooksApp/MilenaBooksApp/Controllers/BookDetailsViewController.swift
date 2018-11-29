@@ -39,27 +39,26 @@ class BookDetailsViewController: UIViewController {
                 .responseObject {(response: DataResponse<Book>) in
                     let bookResponse = response.result.value
                     self.bookDetailsView.descriptionTextView.text = bookResponse?.description ?? "No description."
+                    self.book?.description = bookResponse?.description
             }
         }
         
         if let coverImage = self.book?.coverImage {
             self.bookDetailsView.bookCoverImageView.image = UIImage(data: Data(coverImage))
-            self.bookDetailsView.bookCoverImageIndicator.isHidden = true
         } else {
+            self.bookDetailsView.bookCoverImageView.showLoading()
             DispatchQueue.global(qos: .background).async {
-                if let urlOfImg = URL(string: self.url), let urlContents = try? Data(contentsOf: urlOfImg) {
-                    print
+                if let url = self.book?.coverImageUrl, let urlOfImg = URL(string: url), let urlContents = try? Data(contentsOf: urlOfImg) {
                     DispatchQueue.main.async {
                         self.bookDetailsView.bookCoverImageView.image = UIImage(data: urlContents)
-                        self.bookDetailsView.bookCoverImageIndicator.isHidden = true
+                        self.bookDetailsView.bookCoverImageView.hideLoading()
                     }
                 } else {
                     DispatchQueue.main.async {
                         self.bookDetailsView.bookCoverImageView.image = UIImage(named: "noimage")
+                        self.bookDetailsView.bookCoverImageView.hideLoading()
                     }
                 }
-                
-                
             }
         }
     }

@@ -11,7 +11,7 @@ import UIKit
 class BookTableViewCell: UITableViewCell {
 
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
-    @IBOutlet weak var bookCoverImageView: UIImageView!
+    @IBOutlet weak var bookCoverImageView: BookCoverImageView!
     @IBOutlet weak var bookTitleLabel: UILabel!
     @IBOutlet weak var bookAuthorLabel: UILabel!
     
