@@ -72,24 +72,8 @@ extension AllBooksTableViewController {
                 if let img = allBooks[indexPath.row].coverImage {
                     bookCell.bookCoverImageView.image = UIImage(data: img)
                 } else {
-                    bookCell.bookCoverImageView.showLoading()
-                    DispatchQueue.global(qos: .background).async {
-                        
-                        if let urlString = self.allBooks[indexPath.row].coverImageUrl, let url =  URL(string: urlString), let urlContents = try? Data(contentsOf: url) {
-                            DispatchQueue.main.async {
-                                bookCell.bookCoverImageView.hideLoading()
-                                bookCell.bookCoverImageView.image = UIImage(data: urlContents)
-                                self.allBooks[indexPath.row].coverImage = urlContents
-                                bookCell.bookCoverImageView.hideLoading()
-                            }
-                        } else {
-                            DispatchQueue.main.async {
-                                bookCell.bookCoverImageView.image = UIImage(named: "noimage")
-                                self.allBooks[indexPath.row].coverImage = UIImage(named: "noimage")?.pngData()
-                                print("failed to parse cover image url")
-                                bookCell.bookCoverImageView.hideLoading()
-                            }
-                        }
+                    if let url = self.allBooks[indexPath.row].coverImageUrl {
+                        bookCell.bookCoverImageView.downloadImageFromUrl(urlString: url)
                     }
                 }
             }

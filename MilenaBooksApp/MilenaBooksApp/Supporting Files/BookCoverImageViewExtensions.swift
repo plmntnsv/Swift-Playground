@@ -9,19 +9,19 @@
 import Foundation
 import UIKit
 
-extension UIImageView {
+extension BookCoverImageView {
     func downloadImageFromUrl(urlString: String) {
-        (self as? BookCoverImageView)?.showLoading()
+        self.showLoading()
         DispatchQueue.global(qos: .background).async {
             if let url = URL(string: urlString), let urlContents = try? Data(contentsOf: url) {
                 DispatchQueue.main.async {
                     self.image = UIImage(data: urlContents)
-                    (self as? BookCoverImageView)?.hideLoading()
+                    self.hideLoading()
                 }
             } else {
                 DispatchQueue.main.async {
                     self.image = UIImage(named: "noimage")
-                    (self as? BookCoverImageView)?.hideLoading()
+                    self.hideLoading()
                 }
             }
         }

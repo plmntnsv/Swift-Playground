@@ -46,19 +46,8 @@ class BookDetailsViewController: UIViewController {
         if let coverImage = self.book?.coverImage {
             self.bookDetailsView.bookCoverImageView.image = UIImage(data: Data(coverImage))
         } else {
-            self.bookDetailsView.bookCoverImageView.showLoading()
-            DispatchQueue.global(qos: .background).async {
-                if let url = self.book?.coverImageUrl, let urlOfImg = URL(string: url), let urlContents = try? Data(contentsOf: urlOfImg) {
-                    DispatchQueue.main.async {
-                        self.bookDetailsView.bookCoverImageView.image = UIImage(data: urlContents)
-                        self.bookDetailsView.bookCoverImageView.hideLoading()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.bookDetailsView.bookCoverImageView.image = UIImage(named: "noimage")
-                        self.bookDetailsView.bookCoverImageView.hideLoading()
-                    }
-                }
+            if let url = self.book?.coverImageUrl {
+                self.bookDetailsView.bookCoverImageView.downloadImageFromUrl(urlString: url)
             }
         }
     }
