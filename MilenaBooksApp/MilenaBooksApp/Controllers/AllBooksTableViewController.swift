@@ -12,10 +12,13 @@ import AlamofireObjectMapper
 
 class AllBooksTableViewController: UITableViewController {
     private var allBooks = [Book]()
+    var bookToRemove: Book?
     private var booksFetched = false
+    var shouldReloadData = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -23,12 +26,30 @@ class AllBooksTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         getData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if shouldReloadData {
+            if let bookToRemove = bookToRemove {
+                allBooks.remove(at: allBooks.firstIndex { $0.id == bookToRemove.id
+                }!)
+                
+                self.bookToRemove = nil
+                self.tableView.reloadData()
+            }
+            
+//            let position = (self.navigationController?.viewControllers.endIndex)! - 2
+//            self.navigationController?.viewControllers.remove(at: position)
+        }
+    }
 
     private func getData() {
         Alamofire.request(ApiEndPoints.BookEndPoint.getAll.fullUrl)
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseArray { (response: DataResponse<[Book]>) in
+                print("FETCHED ALL")
                 let booksArray = response.result.value
                 
                 if let booksArray = booksArray {
@@ -57,7 +78,6 @@ extension AllBooksTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return booksFetched ? allBooks.count : 20
-        //return BookMockData.books.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

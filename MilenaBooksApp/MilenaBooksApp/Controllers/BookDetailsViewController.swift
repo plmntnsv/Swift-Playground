@@ -13,13 +13,51 @@ import AlamofireObjectMapper
 class BookDetailsViewController: UIViewController {
     private lazy var url = ApiEndPoints.BookEndPoint.get(book: book!).fullUrl
     var book: Book?
+    private var deleteBtnPressed = false
     
     @IBOutlet weak var bookDetailsView: BookDetailsView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         displayBookDetails()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("will disappear")
+        
+        if self.isMovingFromParent {
+            moveBack(deleteBtnPressed)
+        }
+    }
+    
+    // the back button is pressed or book is being deleted
+    private func moveBack(_ deleteBtnPressed: Bool){
+        print("moving from parent")
+        if let navController = self.navigationController {
+            if deleteBtnPressed {
+                
+                let positionOfPreviousVC = navController.viewControllers.endIndex - 1
+                
+                if let allBooksVC = (self.navigationController?.viewControllers[positionOfPreviousVC] as? AllBooksTableViewController) {
+                    print("prev view controller is allbooks")
+                    allBooksVC.shouldReloadData = true
+                    allBooksVC.bookToRemove = self.book
+                }
+            }
+            
+            if let returnViewController = navController.viewControllers[1] as? AllBooksTableViewController {
+                print("returning to all books vc")
+                navController.popToViewController(returnViewController, animated: false)
+            } else {
+                print("returning to home")
+                navController.popToRootViewController(animated: false)
+            }
+        }
     }
     
     @IBAction func deleteButtonClicked(_ sender: UIButton) {
@@ -60,7 +98,6 @@ class BookDetailsViewController: UIViewController {
             }
         }
     }
-
 }
 
 extension BookDetailsViewController {
@@ -74,10 +111,19 @@ extension BookDetailsViewController {
     }
     
     private func delete(url: String, sender: ActivityButtonView) {
-        Alamofire.request(url, method: .delete).responseObject { (response: DataResponse<Book>) in
-            print(response)
-            sender.hideLoading()
-            self.performSegue(withIdentifier: "BookDetailsToAllBooksAfterDeleteSegue", sender: sender)
+        Alamofire.request(url, method: .delete)
+            .responseObject { (response: DataResponse<Book>) in
+                
+                sender.hideLoading()
+                
+                if response.error == nil {
+                    if let navController = self.navigationController {
+                        self.deleteBtnPressed = true
+                        navController.viewControllers.removeLast()
+                    }
+                } else {
+                    print(response.error!)
+                }
         }
     }
 }

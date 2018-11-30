@@ -15,7 +15,7 @@ class UploadBookViewController: UIViewController {
     @IBOutlet var uploadBookView: UploadBookView!
     
     var book: Book?
-    private var isEdit = false
+    private var isAnEdit = false
     
     // TODO: use SwiftValidator lib
     private var validBook: Bool {
@@ -48,9 +48,9 @@ class UploadBookViewController: UIViewController {
         super.viewDidLoad()
         
         if let bookToEdit = book {
-            isEdit = true
+            isAnEdit = true
             
-            uploadBookView.uploadButton.setTitle("Edit", for: .normal)
+            uploadBookView.uploadButton.setTitle("Save", for: .normal)
             uploadBookView.uploadButton.backgroundColor = #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1)
             uploadBookView.titleTextField.text = bookToEdit.title ?? "No title"
             uploadBookView.authorTextField.text = bookToEdit.author ?? "No author"
@@ -76,13 +76,14 @@ class UploadBookViewController: UIViewController {
                     
                     book = Book(id: id, title: title, price: price, author: author, rating: rating, coverImageUrl: url, description: desc)
                     
-                    if isEdit {
-                        post(book!, to: ApiEndPoints.BookEndPoint.edit(book: book!).fullUrl, with: .put)
+                    if isAnEdit {
+                        addOrUpdate(book!, to: ApiEndPoints.BookEndPoint.edit(book: book!).fullUrl, with: .put)
                     } else {
-                        post(book!, to: ApiEndPoints.BookEndPoint.post.fullUrl, with: .post)
+                        addOrUpdate(book!, to: ApiEndPoints.BookEndPoint.post.fullUrl, with: .post)
                     }
                     
                 } else {
+                    addOrUpdate(BookMockData.book, to: ApiEndPoints.BookEndPoint.post.fullUrl, with: .post)
                     print("invalid book")
                 }
             } else {
@@ -102,9 +103,9 @@ class UploadBookViewController: UIViewController {
 }
 
 extension UploadBookViewController {
-    private func post(_ book: Book, to urlString: String, with verb: HTTPMethod) {
+    private func addOrUpdate(_ book: Book, to urlString: String, with method: HTTPMethod) {
         Alamofire.request(urlString,
-                          method: verb,
+                          method: method,
                           parameters: book.toJSON(),
                           encoding: JSONEncoding.default)
             .responseObject { (response: DataResponse<Book>) in
