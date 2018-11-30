@@ -97,6 +97,7 @@ class UploadBookViewController: UIViewController {
         if segue.identifier == "EditUploadToDetailsSegue" {
             if let destination = segue.destination as? BookDetailsViewController {
                 destination.book = book
+                destination.shouldDeletePrevViewController = true
             }
         }
     }
@@ -113,6 +114,7 @@ extension UploadBookViewController {
                 case .success:
                     (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
                     self.book = response.result.value
+                    
                     self.performSegue(withIdentifier: "EditUploadToDetailsSegue", sender: self.uploadBookView.uploadButton)
                 case .failure(let error):
                     (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()

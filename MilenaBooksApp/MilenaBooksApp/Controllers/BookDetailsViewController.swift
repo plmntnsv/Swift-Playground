@@ -14,6 +14,7 @@ class BookDetailsViewController: UIViewController {
     private lazy var url = ApiEndPoints.BookEndPoint.get(book: book!).fullUrl
     var book: Book?
     private var deleteBtnPressed = false
+    var shouldDeletePrevViewController = false
     
     @IBOutlet weak var bookDetailsView: BookDetailsView!
     
@@ -24,6 +25,15 @@ class BookDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if shouldDeletePrevViewController {
+            if let navController = self.navigationController {
+                let positionOfPreviousVC = navController.viewControllers.endIndex - 2
+                print(navController.viewControllers[positionOfPreviousVC])
+                navController.viewControllers[positionOfPreviousVC].removeFromParent()
+                shouldDeletePrevViewController = false
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -31,7 +41,7 @@ class BookDetailsViewController: UIViewController {
         print("will disappear")
         
         if self.isMovingFromParent {
-            moveBack(deleteBtnPressed)
+            //moveBack(deleteBtnPressed)
         }
     }
     
@@ -118,8 +128,17 @@ extension BookDetailsViewController {
                 
                 if response.error == nil {
                     if let navController = self.navigationController {
-                        self.deleteBtnPressed = true
-                        navController.viewControllers.removeLast()
+//                        self.deleteBtnPressed = true
+//                        navController.viewControllers.removeLast()
+                        if let returnViewController = navController.viewControllers[1] as? AllBooksTableViewController {
+                            print("returning to all books vc")
+                            returnViewController.shouldReloadData = true
+                            returnViewController.bookToRemove = self.book
+                            navController.popToViewController(returnViewController, animated: false)
+                        } else {
+                            print("returning to home")
+                            navController.popToRootViewController(animated: false)
+                        }
                     }
                 } else {
                     print(response.error!)
