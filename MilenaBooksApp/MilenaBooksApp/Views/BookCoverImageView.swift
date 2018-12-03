@@ -9,7 +9,7 @@
 import UIKit
 
 class BookCoverImageView: UIImageView {
-
+    var imageUrl: String?
     var activityIndicator: UIActivityIndicatorView!
     private(set) var isFetching = false
     
@@ -59,4 +59,33 @@ class BookCoverImageView: UIImageView {
         self.addConstraint(yCenterConstraint)
     }
 
+}
+
+extension BookCoverImageView {
+    func downloadImageFromUrl(urlString: String, completion: @escaping (_ data: Data?) -> ()) {
+        self.showLoading()
+        self.imageUrl = urlString
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            var resultData: Data?
+            
+            if let url = URL(string: urlString), let urlContents = try? Data(contentsOf: url) {
+                resultData = urlContents
+            } else {
+                resultData = UIImage(named: "noimage")?.pngData()
+            }
+            
+            DispatchQueue.main.async {
+                if self.imageUrl == urlString {
+                    if let resultData = resultData {
+                        completion(resultData)
+                        //self.image = UIImage(data: resultData)
+                    }
+                }
+                
+                self.hideLoading()
+            }
+        }
+    }
 }

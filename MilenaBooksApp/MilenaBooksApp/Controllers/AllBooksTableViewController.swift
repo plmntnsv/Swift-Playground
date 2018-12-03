@@ -92,12 +92,16 @@ extension AllBooksTableViewController {
                 bookCell.bookTitleLabel.text = allBooks[indexPath.row].title ?? "No title."
                 bookCell.bookAuthorLabel.text = allBooks[indexPath.row].author ?? "No author."
                 
-                if let img = allBooks[indexPath.row].coverImage {
-                    bookCell.bookCoverImageView.image = UIImage(data: img)
+                if let imgData = allBooks[indexPath.row].coverImage {
+                    bookCell.bookCoverImageView.image = UIImage(data: imgData)
                 } else {
                     if let url = self.allBooks[indexPath.row].coverImageUrl {
+                        bookCell.bookCoverImageView.imageUrl = url
                         bookCell.bookCoverImageView.downloadImageFromUrl(urlString: url) { data in
                             self.allBooks[indexPath.row].coverImage = data
+                            if let bookCell = tableView.cellForRow(at: indexPath) as? BookTableViewCell{
+                                bookCell.bookCoverImageView.image = UIImage(data: data!)
+                            }
                         }
                     }
                 }

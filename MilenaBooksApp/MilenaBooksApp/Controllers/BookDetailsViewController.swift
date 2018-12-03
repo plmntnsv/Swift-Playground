@@ -50,6 +50,7 @@ class BookDetailsViewController: UIViewController {
                     navController.viewControllers[indexOfPrevVC].removeFromParent()
                 }
             }
+            
             shouldRemovePreviousVC = false
         }
     }
@@ -82,7 +83,9 @@ class BookDetailsViewController: UIViewController {
             self.bookDetailsView.bookCoverImageView.image = UIImage(data: Data(coverImage))
         } else {
             if let url = self.book?.coverImageUrl {
-                self.bookDetailsView.bookCoverImageView.downloadImageFromUrl(urlString: url) { _ in ()}
+                self.bookDetailsView.bookCoverImageView.downloadImageFromUrl(urlString: url) { data in
+                    self.bookDetailsView.bookCoverImageView.image = UIImage(data: data!)
+                }
             }
         }
     }
@@ -121,7 +124,7 @@ extension BookDetailsViewController {
                             self.isEditted = false
                             returnViewController.bookToManipulate = self.book
                             navController.popToViewController(returnViewController, animated: false)
-                        } else { // we are comming from home
+                        } else { // we are comming from 
                             navController.popToRootViewController(animated: false)
                         }
                 } else {

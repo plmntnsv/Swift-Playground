@@ -12,7 +12,7 @@ class BookTableViewCell: UITableViewCell {
     @IBOutlet weak var bookCoverImageView: BookCoverImageView!
     @IBOutlet weak var bookTitleLabel: UILabel!
     @IBOutlet weak var bookAuthorLabel: UILabel!
-    
+    var cellImageUrl: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +28,6 @@ class BookTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        bookCoverImageView.image = nil
+        bookCoverImageView.image = UIImage(named: "noimage")
     }
 }
