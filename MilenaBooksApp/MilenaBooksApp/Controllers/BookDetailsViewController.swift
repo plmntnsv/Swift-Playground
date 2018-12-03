@@ -13,8 +13,11 @@ import AlamofireObjectMapper
 class BookDetailsViewController: UIViewController {
     private lazy var url = ApiEndPoints.BookEndPoint.get(book: book!).fullUrl
     var book: Book?
+    var isEditted = false
+    var shouldRemovePreviousVC = false
     private var deleteBtnPressed = false
-    var shouldDeletePrevViewController = false
+    
+    //var shouldDeletePrevViewController = false
     
     @IBOutlet weak var bookDetailsView: BookDetailsView!
     
@@ -23,51 +26,37 @@ class BookDetailsViewController: UIViewController {
         displayBookDetails()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.isMovingFromParent {
+            if isEditted, let navController = self.navigationController {
+                if let returnViewController = navController.viewControllers[1] as? AllBooksTableViewController {
+                    returnViewController.bookToManipulate = self.book
+                    returnViewController.isAnEdit = isEditted
+                }
+            }
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if shouldDeletePrevViewController {
+        if shouldRemovePreviousVC {
             if let navController = self.navigationController {
-                let positionOfPreviousVC = navController.viewControllers.endIndex - 2
-                print(navController.viewControllers[positionOfPreviousVC])
-                navController.viewControllers[positionOfPreviousVC].removeFromParent()
-                shouldDeletePrevViewController = false
-            }
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("will disappear")
-        
-        if self.isMovingFromParent {
-            //moveBack(deleteBtnPressed)
-        }
-    }
-    
-    // the back button is pressed or book is being deleted
-    private func moveBack(_ deleteBtnPressed: Bool){
-        print("moving from parent")
-        if let navController = self.navigationController {
-            if deleteBtnPressed {
+                let indexOfPrevVC = navController.viewControllers.endIndex - 2
                 
-                let positionOfPreviousVC = navController.viewControllers.endIndex - 1
-                
-                if let allBooksVC = (self.navigationController?.viewControllers[positionOfPreviousVC] as? AllBooksTableViewController) {
-                    print("prev view controller is allbooks")
-                    allBooksVC.shouldReloadData = true
-                    allBooksVC.bookToRemove = self.book
+                if navController.viewControllers[indexOfPrevVC] is UploadBookViewController {
+                    navController.viewControllers[indexOfPrevVC].removeFromParent()
                 }
             }
-            
-            if let returnViewController = navController.viewControllers[1] as? AllBooksTableViewController {
-                print("returning to all books vc")
-                navController.popToViewController(returnViewController, animated: false)
-            } else {
-                print("returning to home")
-                navController.popToRootViewController(animated: false)
-            }
+            shouldRemovePreviousVC = false
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        displayBookDetails()
     }
     
     @IBAction func deleteButtonClicked(_ sender: UIButton) {
@@ -93,7 +82,7 @@ class BookDetailsViewController: UIViewController {
             self.bookDetailsView.bookCoverImageView.image = UIImage(data: Data(coverImage))
         } else {
             if let url = self.book?.coverImageUrl {
-                self.bookDetailsView.bookCoverImageView.downloadImageFromUrl(urlString: url) { _ in print("successfully fetched image")}
+                self.bookDetailsView.bookCoverImageView.downloadImageFromUrl(urlString: url) { _ in ()}
             }
         }
     }
@@ -126,20 +115,15 @@ extension BookDetailsViewController {
                 
                 sender.hideLoading()
                 
-                if response.error == nil {
-                    if let navController = self.navigationController {
-//                        self.deleteBtnPressed = true
-//                        navController.viewControllers.removeLast()
+                if response.error == nil, let navController = self.navigationController {
+                        // we are coming from AllBooksViewController
                         if let returnViewController = navController.viewControllers[1] as? AllBooksTableViewController {
-                            print("returning to all books vc")
-                            returnViewController.shouldReloadData = true
-                            returnViewController.bookToRemove = self.book
+                            self.isEditted = false
+                            returnViewController.bookToManipulate = self.book
                             navController.popToViewController(returnViewController, animated: false)
-                        } else {
-                            print("returning to home")
+                        } else { // we are comming from home
                             navController.popToRootViewController(animated: false)
                         }
-                    }
                 } else {
                     print(response.error!)
                 }

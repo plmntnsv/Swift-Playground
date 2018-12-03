@@ -62,9 +62,9 @@ class UploadBookViewController: UIViewController {
     }
     
     @IBAction func uploadBookBtnClicked(_ sender: Any) {
-        if let btn = sender as? ActivityButtonView {
-            if !btn.isUploading {
+        if let btn = sender as? ActivityButtonView, !btn.isUploading {
                 btn.showLoading()
+                
                 if validBook {
                     let id = book?.id
                     let title = uploadBookView.titleTextField.text!
@@ -90,14 +90,12 @@ class UploadBookViewController: UIViewController {
                 print("currently uploading")
             }
         }
-    }
     
-    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditUploadToDetailsSegue" {
             if let destination = segue.destination as? BookDetailsViewController {
-                destination.book = book
-                destination.shouldDeletePrevViewController = true
+                destination.book = self.book
+                destination.shouldRemovePreviousVC = true
             }
         }
     }
@@ -115,7 +113,18 @@ extension UploadBookViewController {
                     (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
                     self.book = response.result.value
                     
-                    self.performSegue(withIdentifier: "EditUploadToDetailsSegue", sender: self.uploadBookView.uploadButton)
+                    if self.isAnEdit, let navController = self.navigationController {
+                        let indexOfPrevBookDetailsVC = navController.viewControllers.endIndex - 2
+                        
+                        if let bookDetailsVC = navController.viewControllers[indexOfPrevBookDetailsVC] as? BookDetailsViewController {
+                            bookDetailsVC.book = self.book
+                            bookDetailsVC.isEditted = self.isAnEdit
+                        }
+                        
+                        let _ = navController.viewControllers.popLast()
+                    } else {
+                        self.performSegue(withIdentifier: "EditUploadToDetailsSegue", sender: self.uploadBookView.uploadButton)
+                    }
                 case .failure(let error):
                     (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
                     print(error)

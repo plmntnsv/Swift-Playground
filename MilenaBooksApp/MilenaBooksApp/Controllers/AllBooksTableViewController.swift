@@ -12,9 +12,9 @@ import AlamofireObjectMapper
 
 class AllBooksTableViewController: UITableViewController {
     private var allBooks = [Book]()
-    var bookToRemove: Book?
+    var bookToManipulate: Book?
+    var isAnEdit = false
     private var booksFetched = false
-    var shouldReloadData = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +30,21 @@ class AllBooksTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if shouldReloadData {
-            if let bookToRemove = bookToRemove {
-                allBooks.remove(at: allBooks.firstIndex { $0.id == bookToRemove.id
-                }!)
-                
-                self.bookToRemove = nil
-                self.tableView.reloadData()
+        if let bookToManipulate = bookToManipulate, let indexOfBook = allBooks.firstIndex(where: { $0.id == bookToManipulate.id }) {
+            allBooks.remove(at: indexOfBook)
+            
+            if isAnEdit {
+                allBooks.insert(bookToManipulate, at: indexOfBook)
             }
             
-//            let position = (self.navigationController?.viewControllers.endIndex)! - 2
-//            self.navigationController?.viewControllers.remove(at: position)
+            self.bookToManipulate = nil
+            
+            self.tableView.reloadData()
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     private func getData() {
@@ -49,7 +52,6 @@ class AllBooksTableViewController: UITableViewController {
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseArray { (response: DataResponse<[Book]>) in
-                print("FETCHED ALL")
                 let booksArray = response.result.value
                 
                 if let booksArray = booksArray {
