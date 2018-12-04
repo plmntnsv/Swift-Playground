@@ -84,6 +84,9 @@
                                         <constraint firstItem="eZ5-uN-aoB" firstAttribute="centerY" secondItem="ZXo-8w-enB" secondAttribute="centerY" id="R4L-AE-mU9"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="3UC-3O-HfH" kind="show" identifier="AllBooksTableViewToUploadBook" id="YpJ-ct-Kkr"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -98,7 +101,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVH-ca-nhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1929" y="5"/>
+            <point key="canvasLocation" x="1907" y="174"/>
         </scene>
         <!--Book Details View Controller-->
         <scene sceneID="qrZ-Ne-DH2">
@@ -484,7 +487,7 @@
         <image name="noimage" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Icg-hZ-Kfh"/>
+        <segue reference="YpJ-ct-Kkr"/>
         <segue reference="NUI-tP-ULk"/>
         <segue reference="xQD-VV-JNe"/>
     </inferredMetricsTieBreakers>

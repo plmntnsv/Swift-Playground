@@ -18,12 +18,8 @@ class AllBooksTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadBookBtnClicked))
+        self.navigationItem.rightBarButtonItem = addBtn
         getData()
     }
     
@@ -62,7 +58,13 @@ class AllBooksTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
     }
+}
 
+extension AllBooksTableViewController {
+    @objc private func uploadBookBtnClicked(){
+        performSegue(withIdentifier: "AllBooksTableViewToUploadBook", sender: self.navigationItem.rightBarButtonItem)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "BookSelectSegue", let indexPath = self.tableView.indexPathForSelectedRow {
             let selectedBook = allBooks[indexPath.row]
