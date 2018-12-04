@@ -16,6 +16,7 @@
 		321160CF21AD786300A7D25A /* ActivityButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321160CE21AD786300A7D25A /* ActivityButtonView.swift */; };
 		321FF37021AC2BE600407C54 /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321FF36F21AC2BE600407C54 /* BookDetailsViewController.swift */; };
 		321FF37221AC380900407C54 /* BookDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321FF37121AC380900407C54 /* BookDetailsView.swift */; };
+		3273BA4C21B67C11001EBE74 /* BookValidationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3273BA4B21B67C11001EBE74 /* BookValidationRules.swift */; };
 		327DD2B921A86074002F68A6 /* BookMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DD2B821A86074002F68A6 /* BookMockData.swift */; };
 		32A0099121A81D780077F007 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A0099021A81D780077F007 /* AppDelegate.swift */; };
 		32A0099621A81D780077F007 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A0099421A81D780077F007 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		321160CE21AD786300A7D25A /* ActivityButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityButtonView.swift; sourceTree = "<group>"; };
 		321FF36F21AC2BE600407C54 /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
 		321FF37121AC380900407C54 /* BookDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsView.swift; sourceTree = "<group>"; };
+		3273BA4B21B67C11001EBE74 /* BookValidationRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookValidationRules.swift; sourceTree = "<group>"; };
 		327DD2B821A86074002F68A6 /* BookMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMockData.swift; sourceTree = "<group>"; };
 		32A0098D21A81D780077F007 /* MilenaBooksApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilenaBooksApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A0099021A81D780077F007 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				32A0099921A81D790077F007 /* LaunchScreen.storyboard */,
 				327DD2B821A86074002F68A6 /* BookMockData.swift */,
 				3210E63D21AFD90600012C18 /* ApiEndPoints.swift */,
+				3273BA4B21B67C11001EBE74 /* BookValidationRules.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -264,6 +268,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -279,6 +284,7 @@
 			files = (
 				32A009A921A81EDD0077F007 /* AllBooksTableViewController.swift in Sources */,
 				321160CD21AD714400A7D25A /* UploadBookView.swift in Sources */,
+				3273BA4C21B67C11001EBE74 /* BookValidationRules.swift in Sources */,
 				321FF37021AC2BE600407C54 /* BookDetailsViewController.swift in Sources */,
 				32A0099121A81D780077F007 /* AppDelegate.swift in Sources */,
 				327DD2B921A86074002F68A6 /* BookMockData.swift in Sources */,

@@ -9,43 +9,42 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import SwiftValidator
 
-class UploadBookViewController: UIViewController {
-    
+class UploadBookViewController: UIViewController, ValidationDelegate {
     @IBOutlet var uploadBookView: UploadBookView!
-    
     var book: Book?
     private var isAnEdit = false
-    
-    // TODO: use SwiftValidator lib
-    private var validBook: Bool {
-        get {
-            if (uploadBookView.titleTextField.text?.isEmpty)! {
-                (uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
-                return false
-            }
-            
-            if (uploadBookView.authorTextField.text?.isEmpty)! {
-                (uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
-                return false
-            }
-            
-            if (uploadBookView.priceTextField.text?.isEmpty)! || Double((uploadBookView.priceTextField.text)!) == nil {
-                (uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
-                return false
-            }
-            
-            if (uploadBookView.ratingTextField.text?.isEmpty)! || Int((uploadBookView.ratingTextField.text)!) == nil {
-                (uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
-                return false
-            }
-            
-            return true
-        }
-    }
+    private let validator = Validator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Title validation
+        validator.registerField(uploadBookView.titleTextField, rules: [
+            RequiredRule(),
+            MinLengthRule(length: 1),
+            BookValidationRules.OnlyEmptySpacesValidation(),
+            BookValidationRules.StartAndEndEmptySpacesValidation()
+            ])
+        // Author validation
+        validator.registerField(uploadBookView.authorTextField, rules: [
+            RequiredRule(),
+            MinLengthRule(length: 1),
+            BookValidationRules.OnlyEmptySpacesValidation(),
+            BookValidationRules.StartAndEndEmptySpacesValidation()
+            ])
+        // Price validation
+        validator.registerField(uploadBookView.priceTextField, rules: [
+            RequiredRule(), MinLengthRule(length: 1),
+            FloatRule(),BookValidationRules.OnlyEmptySpacesValidation()
+            ])
+        // Rating validation
+        validator.registerField(uploadBookView.ratingTextField, rules: [
+            RequiredRule(),
+            MinLengthRule(length: 1),
+            BookValidationRules.NumberValidation()
+            ])
         
         if let bookToEdit = book {
             isAnEdit = true
@@ -63,40 +62,59 @@ class UploadBookViewController: UIViewController {
     
     @IBAction func uploadBookBtnClicked(_ sender: Any) {
         if let btn = sender as? ActivityButtonView, !btn.isUploading {
-                btn.showLoading()
-                
-                if validBook {
-                    let id = book?.id
-                    let title = uploadBookView.titleTextField.text!
-                    let author = uploadBookView.authorTextField.text!
-                    let price = Double(uploadBookView.priceTextField.text!)!
-                    let rating = Int(uploadBookView.ratingTextField.text!)!
-                    let url = uploadBookView.coverImageUrlTextField.text
-                    let desc = uploadBookView.descriptionTextView.text
-                    
-                    book = Book(id: id, title: title, price: price, author: author, rating: rating, coverImageUrl: url, description: desc)
-                    
-                    if isAnEdit {
-                        addOrUpdate(book!, to: ApiEndPoints.BookEndPoint.edit(book: book!).fullUrl, with: .put)
-                    } else {
-                        addOrUpdate(book!, to: ApiEndPoints.BookEndPoint.post.fullUrl, with: .post)
-                    }
-                    
-                } else {
-                    addOrUpdate(BookMockData.book, to: ApiEndPoints.BookEndPoint.post.fullUrl, with: .post)
-                    print("invalid book")
-                }
-            } else {
-                print("currently uploading")
-            }
+            btn.showLoading()
+            validator.validate(self)
+            btn.hideLoading()
+        } else {
+            print("currently uploading...")
         }
-    
+}
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditUploadToDetailsSegue" {
             if let destination = segue.destination as? BookDetailsViewController {
                 destination.book = self.book
                 destination.shouldRemovePreviousVC = true
             }
+        }
+    }
+}
+
+extension UploadBookViewController {
+    func validationSuccessful() {
+        let id = book?.id
+        let title = uploadBookView.titleTextField.text!
+        let author = uploadBookView.authorTextField.text!
+        let price = Double(uploadBookView.priceTextField.text!)!
+        let rating = Int(uploadBookView.ratingTextField.text!)!
+        let url = uploadBookView.coverImageUrlTextField.text
+        let desc = uploadBookView.descriptionTextView.text
+        
+        book = Book(id: id, title: title, price: price, author: author, rating: rating, coverImageUrl: url, description: desc)
+        
+        if isAnEdit {
+            addOrUpdate(book!, to: ApiEndPoints.BookEndPoint.edit(book: book!).fullUrl, with: .put)
+        } else {
+            addOrUpdate(book!, to: ApiEndPoints.BookEndPoint.post.fullUrl, with: .post)
+        }
+        
+        //        if validBook {
+        //        } else {
+        //            //addOrUpdate(BookMockData.book, to: ApiEndPoints.BookEndPoint.post.fullUrl, with: .post)
+        //            print("invalid book")
+        //        }
+    }
+    
+    
+    func validationFailed(_ errors: [(Validatable, ValidationError)]) {
+        
+        for (field, error) in errors {
+            if let field = field as? UITextField {
+                field.layer.borderColor = UIColor.red.cgColor
+                field.layer.borderWidth = 1.0
+            }
+            //            error.errorLabel?.text = error.errorMessage // works if you added labels
+            //            error.errorLabel?.isHidden = false
+            print(error.errorMessage)
         }
     }
 }
