@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3209B95F21A833C600DD5D84 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209B95E21A833C600DD5D84 /* HomeViewController.swift */; };
 		3209B96321A8367D00DD5D84 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */; };
 		3210E63E21AFD90600012C18 /* ApiEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3210E63D21AFD90600012C18 /* ApiEndPoints.swift */; };
 		3210E64621B01E6800012C18 /* BookCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3210E64521B01E6800012C18 /* BookCoverImageView.swift */; };
@@ -28,7 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3209B95E21A833C600DD5D84 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		3210E63D21AFD90600012C18 /* ApiEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndPoints.swift; sourceTree = "<group>"; };
 		3210E64521B01E6800012C18 /* BookCoverImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoverImageView.swift; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 		32A009A521A81E650077F007 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3209B95E21A833C600DD5D84 /* HomeViewController.swift */,
 				32A009A821A81EDD0077F007 /* AllBooksTableViewController.swift */,
 				321160C821AD402500A7D25A /* UploadBookViewController.swift */,
 				321FF36F21AC2BE600407C54 /* BookDetailsViewController.swift */,
@@ -294,7 +291,6 @@
 				3210E64621B01E6800012C18 /* BookCoverImageView.swift in Sources */,
 				3210E63E21AFD90600012C18 /* ApiEndPoints.swift in Sources */,
 				3209B96321A8367D00DD5D84 /* BookTableViewCell.swift in Sources */,
-				3209B95F21A833C600DD5D84 /* HomeViewController.swift in Sources */,
 				321160CF21AD786300A7D25A /* ActivityButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

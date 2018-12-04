@@ -14,15 +14,16 @@ class BookDetailsViewController: UIViewController {
     private lazy var url = ApiEndPoints.BookEndPoint.get(book: book!).fullUrl
     var book: Book?
     var isEditted = false
-    var shouldRemovePreviousVC = false
-    private var deleteBtnPressed = false
-    
-    //var shouldDeletePrevViewController = false
+    private var deleteBook = false
     
     @IBOutlet weak var bookDetailsView: BookDetailsView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         displayBookDetails()
     }
     
@@ -30,34 +31,11 @@ class BookDetailsViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         if self.isMovingFromParent {
-            if isEditted, let navController = self.navigationController {
-                if let returnViewController = navController.viewControllers[1] as? AllBooksTableViewController {
-                    returnViewController.bookToManipulate = self.book
-                    returnViewController.isAnEdit = isEditted
-                }
+            if let navController = self.navigationController, let allBooksVC = navController.viewControllers[0] as? AllBooksTableViewController {
+                allBooksVC.newBook = self.book
+                allBooksVC.isAnEdit = isEditted
             }
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if shouldRemovePreviousVC {
-            if let navController = self.navigationController {
-                let indexOfPrevVC = navController.viewControllers.endIndex - 2
-                
-                if navController.viewControllers[indexOfPrevVC] is UploadBookViewController {
-                    navController.viewControllers[indexOfPrevVC].removeFromParent()
-                }
-            }
-            
-            shouldRemovePreviousVC = false
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        displayBookDetails()
     }
     
     @IBAction func deleteButtonClicked(_ sender: UIButton) {
@@ -73,8 +51,8 @@ class BookDetailsViewController: UIViewController {
         self.bookDetailsView.priceLabel.text = "Price: $\(Double((book?.price ?? 0.0)!))"
         self.bookDetailsView.ratingLabel.text = "Rating: \(Int((book?.rating ?? 0)!))"
         
-        if book?.description != nil {
-            self.bookDetailsView.descriptionTextView.text = book?.description
+        if let desc = book?.description {
+            self.bookDetailsView.descriptionTextView.text = desc.isEmpty ? "No Description." : desc
         } else {
             get(from: url)
         }
@@ -90,9 +68,6 @@ class BookDetailsViewController: UIViewController {
         }
     }
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailsToEditUploadSegue" {
             if let destination = segue.destination as? UploadBookViewController {
@@ -102,13 +77,15 @@ class BookDetailsViewController: UIViewController {
     }
 }
 
+// API calls
 extension BookDetailsViewController {
     private func get(from bookUrl: String) {
         Alamofire.request(bookUrl)
             .responseObject {(response: DataResponse<Book>) in
                 let bookResponse = response.result.value
-                self.bookDetailsView.descriptionTextView.text = bookResponse?.description ?? "No description."
+                //self.bookDetailsView.descriptionTextView.text = bookResponse?.description ?? "No description."
                 self.book?.description = bookResponse?.description
+                self.displayBookDetails()
         }
     }
     
@@ -119,14 +96,15 @@ extension BookDetailsViewController {
                 sender.hideLoading()
                 
                 if response.error == nil, let navController = self.navigationController {
-                        // we are coming from AllBooksViewController
-                        if let returnViewController = navController.viewControllers[1] as? AllBooksTableViewController {
-                            self.isEditted = false
-                            returnViewController.bookToManipulate = self.book
-                            navController.popToViewController(returnViewController, animated: false)
-                        } else { // we are comming from 
-                            navController.popToRootViewController(animated: false)
-                        }
+                    self.isEditted = false
+                    if let allBooksVC = navController.viewControllers[0] as? AllBooksTableViewController {
+                        allBooksVC.
+                    }
+//                    if self.deleteBook {
+//                        self.book = nil
+//                    }
+                    
+                    navController.viewControllers.removeLast()
                 } else {
                     print(response.error!)
                 }

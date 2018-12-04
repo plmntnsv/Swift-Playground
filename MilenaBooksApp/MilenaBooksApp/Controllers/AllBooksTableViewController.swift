@@ -12,38 +12,50 @@ import AlamofireObjectMapper
 
 class AllBooksTableViewController: UITableViewController {
     private var allBooks = [Book]()
-    var bookToManipulate: Book?
+    var newBook: Book?
     var isAnEdit = false
+    private var shouldReloadData = false
     private var booksFetched = false
+    private var shouldScrollToTop = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadBookBtnClicked))
-        self.navigationItem.rightBarButtonItem = addBtn
+        addNavBtn()
+        addRefreshControl()
         getData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let bookToManipulate = bookToManipulate, let indexOfBook = allBooks.firstIndex(where: { $0.id == bookToManipulate.id }) {
+        if let bookToEditOrRemove = newBook, let indexOfBook = allBooks.firstIndex(where: { $0.id == bookToEditOrRemove.id }) {
             allBooks.remove(at: indexOfBook)
             
             if isAnEdit {
-                allBooks.insert(bookToManipulate, at: indexOfBook)
+                allBooks.insert(bookToEditOrRemove, at: indexOfBook)
             }
-            
-            self.bookToManipulate = nil
-            
-            self.tableView.reloadData()
+        } else if let bookToAdd = newBook {
+            self.allBooks.insert(bookToAdd, at: 0)
+            shouldScrollToTop = true
         }
+        
+        shouldReloadData = true
+        self.newBook = nil
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if shouldReloadData {
+            self.tableView.reloadData()
+            
+            if shouldScrollToTop {
+                self.tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                shouldScrollToTop = false
+            }
+        }
     }
 
-    private func getData() {
+    @objc private func getData() {
         Alamofire.request(ApiEndPoints.BookEndPoint.getAll.fullUrl)
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
@@ -55,11 +67,39 @@ class AllBooksTableViewController: UITableViewController {
                 }
                 
                 self.booksFetched = true;
+                self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
             }
     }
 }
 
+// Additional setup of views
+extension AllBooksTableViewController {
+    private func addNavBtn(){
+        let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadBookBtnClicked))
+        self.navigationItem.rightBarButtonItem = addBtn
+    }
+    
+    private func addRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor : UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        ]
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Getting books...", attributes: attributes)
+        refreshControl.addTarget(self, action: #selector(getData), for: .valueChanged)
+        
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+    }
+}
+
+// Navigation stuff
 extension AllBooksTableViewController {
     @objc private func uploadBookBtnClicked(){
         performSegue(withIdentifier: "AllBooksTableViewToUploadBook", sender: self.navigationItem.rightBarButtonItem)
@@ -75,6 +115,7 @@ extension AllBooksTableViewController {
     }
 }
 
+// TableView stuff
 extension AllBooksTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

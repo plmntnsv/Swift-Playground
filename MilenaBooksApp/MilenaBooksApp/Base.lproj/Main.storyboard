@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--All Books Table View Controller-->
+        <!--Milena Books-->
         <scene sceneID="cJL-31-Ovh">
             <objects>
                 <tableViewController id="bC9-4w-PIL" customClass="AllBooksTableViewController" customModule="MilenaBooksApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -94,7 +94,7 @@
                             <outlet property="delegate" destination="bC9-4w-PIL" id="KN7-eW-faC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="8EE-zp-OwU"/>
+                    <navigationItem key="navigationItem" title="Milena Books" id="8EE-zp-OwU"/>
                     <connections>
                         <segue destination="jcJ-s8-QWv" kind="show" identifier="BookSelectSegue" id="NUI-tP-ULk"/>
                     </connections>
@@ -224,62 +224,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t4v-tM-56e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2961" y="28"/>
-        </scene>
-        <!--Milena Books-->
-        <scene sceneID="6BT-rR-PWH">
-            <objects>
-                <viewController id="Hr2-1G-6iI" customClass="HomeViewController" customModule="MilenaBooksApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lxg-nc-NlV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tS-zF-luK">
-                                <rect key="frame" x="82" y="291" width="156" height="42"/>
-                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Upload a book">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="3UC-3O-HfH" kind="show" id="Icg-hZ-Kfh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ol-Gm-yA6">
-                                <rect key="frame" x="88" y="241" width="144" height="42"/>
-                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Get All Books">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="bC9-4w-PIL" kind="show" id="xQD-VV-JNe"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Milena Books" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXZ-wo-fOf">
-                                <rect key="frame" x="74" y="103" width="172" height="36"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="eXZ-wo-fOf" firstAttribute="leading" secondItem="ytL-y0-IM2" secondAttribute="leading" constant="74" id="1ke-7R-Uz5"/>
-                            <constraint firstItem="8tS-zF-luK" firstAttribute="top" secondItem="6Ol-Gm-yA6" secondAttribute="bottom" constant="8" id="1z4-sx-PCm"/>
-                            <constraint firstItem="6Ol-Gm-yA6" firstAttribute="centerY" secondItem="ytL-y0-IM2" secondAttribute="centerY" constant="-10" id="Aq6-dw-K7H"/>
-                            <constraint firstItem="6Ol-Gm-yA6" firstAttribute="centerX" secondItem="ytL-y0-IM2" secondAttribute="centerX" id="EfP-0j-Zz9"/>
-                            <constraint firstItem="6Ol-Gm-yA6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eXZ-wo-fOf" secondAttribute="bottom" constant="8" id="Nyu-Il-VDh"/>
-                            <constraint firstItem="8tS-zF-luK" firstAttribute="centerX" secondItem="ytL-y0-IM2" secondAttribute="centerX" id="WiE-Z2-r4C"/>
-                            <constraint firstItem="ytL-y0-IM2" firstAttribute="trailing" secondItem="eXZ-wo-fOf" secondAttribute="trailing" constant="74" id="Z9U-7S-ly1"/>
-                            <constraint firstItem="eXZ-wo-fOf" firstAttribute="top" secondItem="ytL-y0-IM2" secondAttribute="top" constant="39" id="wOr-fX-McS"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="ytL-y0-IM2"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Milena Books" id="2zt-cD-d9u"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5v5-ma-prh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="978.75" y="5"/>
         </scene>
         <!--Upload Book View Controller-->
         <scene sceneID="7UR-zo-QUE">
@@ -475,12 +419,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Hr2-1G-6iI" kind="relationship" relationship="rootViewController" id="ZcE-zX-K6e"/>
+                        <segue destination="bC9-4w-PIL" kind="relationship" relationship="rootViewController" id="D5r-So-u7w"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gd8-MR-2Po" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="167" y="6"/>
+            <point key="canvasLocation" x="949" y="174"/>
         </scene>
     </scenes>
     <resources>
@@ -488,7 +432,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YpJ-ct-Kkr"/>
-        <segue reference="uM4-9y-Cpc"/>
-        <segue reference="xQD-VV-JNe"/>
+        <segue reference="NUI-tP-ULk"/>
+        <segue reference="D5r-So-u7w"/>
     </inferredMetricsTieBreakers>
 </document>
