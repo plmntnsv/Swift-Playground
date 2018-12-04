@@ -24,25 +24,28 @@ class UploadBookViewController: UIViewController, ValidationDelegate {
         validator.registerField(uploadBookView.titleTextField, rules: [
             RequiredRule(),
             MinLengthRule(length: 1),
-            BookValidationRules.OnlyEmptySpacesValidation(),
-            BookValidationRules.StartAndEndEmptySpacesValidation()
+            BookValidationRules.EmptySpacesValidation()
             ])
+        
         // Author validation
         validator.registerField(uploadBookView.authorTextField, rules: [
             RequiredRule(),
             MinLengthRule(length: 1),
-            BookValidationRules.OnlyEmptySpacesValidation(),
-            BookValidationRules.StartAndEndEmptySpacesValidation()
+            BookValidationRules.EmptySpacesValidation()
             ])
+        
         // Price validation
         validator.registerField(uploadBookView.priceTextField, rules: [
             RequiredRule(), MinLengthRule(length: 1),
-            FloatRule(),BookValidationRules.OnlyEmptySpacesValidation()
+            FloatRule(),
+            BookValidationRules.EmptySpacesValidation()
             ])
+        
         // Rating validation
         validator.registerField(uploadBookView.ratingTextField, rules: [
             RequiredRule(),
             MinLengthRule(length: 1),
+            BookValidationRules.EmptySpacesValidation(),
             BookValidationRules.NumberValidation()
             ])
         
@@ -62,6 +65,13 @@ class UploadBookViewController: UIViewController, ValidationDelegate {
     
     @IBAction func uploadBookBtnClicked(_ sender: Any) {
         if let btn = sender as? ActivityButtonView, !btn.isUploading {
+            uploadBookView.authorTextField.layer.borderColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+            uploadBookView.titleTextField.layer.borderColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+            uploadBookView.priceTextField.layer.borderColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+            uploadBookView.ratingTextField.layer.borderColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+            uploadBookView.coverImageUrlTextField.layer.borderColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+            uploadBookView.descriptionTextView.layer.borderColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+            
             btn.showLoading()
             validator.validate(self)
             btn.hideLoading()
