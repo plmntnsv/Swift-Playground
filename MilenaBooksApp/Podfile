@@ -7,4 +7,5 @@ target 'MilenaBooksApp' do
     pod 'AlamofireObjectMapper', '~> 5.2'
     pod 'ObjectMapper', '~> 3.4'
     pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
+    pod 'YNDropDownMenu'
 end

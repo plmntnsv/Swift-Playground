@@ -9,7 +9,7 @@
 import Foundation
 
 struct ApiEndPoints {
-    private static let url = "http://milenabooks.azurewebsites.net/api"
+    private static let baseUrl = "http://milenabooks.azurewebsites.net/api"
     
     enum EndPoint: String {
         case books = "/books"
@@ -18,7 +18,7 @@ struct ApiEndPoints {
         case upload = "/upload"
     }
     
-    enum BookEndPoint {
+    enum Books {
         case getAll
         case get(book: Book)
         case post
@@ -28,15 +28,15 @@ struct ApiEndPoints {
         var fullUrl: String {
             switch self {
             case .getAll:
-                return "\(url)\(EndPoint.books.rawValue)"
+                return "\(baseUrl)\(EndPoint.books.rawValue)"
             case .get(let book):
-                return "\(url)\(EndPoint.books.rawValue)/\(book.id!)"
+                return "\(baseUrl)\(EndPoint.books.rawValue)/\(book.id!)"
             case .post:
-                return "\(url)\(EndPoint.books.rawValue)/"
+                return "\(baseUrl)\(EndPoint.books.rawValue)/"
             case .edit(let book):
-                return "\(url)\(EndPoint.books.rawValue)/\(book.id!)"
+                return "\(baseUrl)\(EndPoint.books.rawValue)/\(book.id!)"
             case .delete(let book):
-                return "\(url)\(EndPoint.books.rawValue)/\(book.id!)"
+                return "\(baseUrl)\(EndPoint.books.rawValue)/\(book.id!)"
             }
         }
     }

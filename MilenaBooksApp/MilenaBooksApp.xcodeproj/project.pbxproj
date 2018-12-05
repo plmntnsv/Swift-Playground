@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3209B96321A8367D00DD5D84 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */; };
+		321089A921B7DD6F0039D70C /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321089A821B7DD6F0039D70C /* WebClient.swift */; };
+		321089AC21B7F7060039D70C /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321089AB21B7F7060039D70C /* BookService.swift */; };
 		3210E63E21AFD90600012C18 /* ApiEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3210E63D21AFD90600012C18 /* ApiEndPoints.swift */; };
 		3210E64621B01E6800012C18 /* BookCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3210E64521B01E6800012C18 /* BookCoverImageView.swift */; };
 		321160C921AD402500A7D25A /* UploadBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321160C821AD402500A7D25A /* UploadBookViewController.swift */; };
@@ -23,11 +25,14 @@
 		32A0099B21A81D790077F007 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A0099921A81D790077F007 /* LaunchScreen.storyboard */; };
 		32A009A921A81EDD0077F007 /* AllBooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A009A821A81EDD0077F007 /* AllBooksTableViewController.swift */; };
 		32A009AB21A824F50077F007 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A009AA21A824F50077F007 /* Book.swift */; };
+		32A9184D21B8167B006AFDB6 /* BookRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A9184C21B8167B006AFDB6 /* BookRefreshControl.swift */; };
 		8991B56A59498CCD9114C9B7 /* Pods_MilenaBooksApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3579FB3CF998FD5991437F9D /* Pods_MilenaBooksApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3209B96221A8367D00DD5D84 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		321089A821B7DD6F0039D70C /* WebClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
+		321089AB21B7F7060039D70C /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		3210E63D21AFD90600012C18 /* ApiEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndPoints.swift; sourceTree = "<group>"; };
 		3210E64521B01E6800012C18 /* BookCoverImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoverImageView.swift; sourceTree = "<group>"; };
 		321160C821AD402500A7D25A /* UploadBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadBookViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +50,7 @@
 		32A0099C21A81D790077F007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32A009A821A81EDD0077F007 /* AllBooksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBooksTableViewController.swift; sourceTree = "<group>"; };
 		32A009AA21A824F50077F007 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		32A9184C21B8167B006AFDB6 /* BookRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRefreshControl.swift; sourceTree = "<group>"; };
 		3579FB3CF998FD5991437F9D /* Pods_MilenaBooksApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MilenaBooksApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87045D3D75E72CBA8DF7C845 /* Pods-MilenaBooksApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilenaBooksApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MilenaBooksApp/Pods-MilenaBooksApp.release.xcconfig"; sourceTree = "<group>"; };
 		D6FC5F35123409E65E83F1DA /* Pods-MilenaBooksApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilenaBooksApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MilenaBooksApp/Pods-MilenaBooksApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -62,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		321089AA21B7F6E90039D70C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				321089AB21B7F7060039D70C /* BookService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		32A0098421A81D780077F007 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +102,7 @@
 				32A009A621A81E8C0077F007 /* Views */,
 				32A009A521A81E650077F007 /* Controllers */,
 				32A009A221A81D8B0077F007 /* Supporting Files */,
+				321089AA21B7F6E90039D70C /* Services */,
 				32A0099C21A81D790077F007 /* Info.plist */,
 			);
 			path = MilenaBooksApp;
@@ -102,6 +117,7 @@
 				327DD2B821A86074002F68A6 /* BookMockData.swift */,
 				3210E63D21AFD90600012C18 /* ApiEndPoints.swift */,
 				3273BA4B21B67C11001EBE74 /* BookValidationRules.swift */,
+				321089A821B7DD6F0039D70C /* WebClient.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -124,6 +140,7 @@
 				321FF37121AC380900407C54 /* BookDetailsView.swift */,
 				321160CC21AD714400A7D25A /* UploadBookView.swift */,
 				321160CE21AD786300A7D25A /* ActivityButtonView.swift */,
+				32A9184C21B8167B006AFDB6 /* BookRefreshControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -257,6 +274,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
+				"${BUILT_PRODUCTS_DIR}/YNDropDownMenu/YNDropDownMenu.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -266,6 +284,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YNDropDownMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -280,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32A009A921A81EDD0077F007 /* AllBooksTableViewController.swift in Sources */,
+				321089A921B7DD6F0039D70C /* WebClient.swift in Sources */,
 				321160CD21AD714400A7D25A /* UploadBookView.swift in Sources */,
 				3273BA4C21B67C11001EBE74 /* BookValidationRules.swift in Sources */,
 				321FF37021AC2BE600407C54 /* BookDetailsViewController.swift in Sources */,
@@ -289,8 +309,10 @@
 				321160C921AD402500A7D25A /* UploadBookViewController.swift in Sources */,
 				32A009AB21A824F50077F007 /* Book.swift in Sources */,
 				3210E64621B01E6800012C18 /* BookCoverImageView.swift in Sources */,
+				321089AC21B7F7060039D70C /* BookService.swift in Sources */,
 				3210E63E21AFD90600012C18 /* ApiEndPoints.swift in Sources */,
 				3209B96321A8367D00DD5D84 /* BookTableViewCell.swift in Sources */,
+				32A9184D21B8167B006AFDB6 /* BookRefreshControl.swift in Sources */,
 				321160CF21AD786300A7D25A /* ActivityButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

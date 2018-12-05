@@ -16,6 +16,7 @@ class UploadBookViewController: UIViewController, ValidationDelegate {
     var book: Book?
     private var isAnEdit = false
     private let validator = Validator()
+    private let webClient = WebClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,29 +69,29 @@ extension UploadBookViewController {
         validator.registerField(uploadBookView.titleTextField, rules: [
             RequiredRule(),
             MinLengthRule(length: 1),
-            BookValidationRules.EmptySpacesValidation()
+            BookValidationRules.EmptySpacesRule()
             ])
         
         // Author validation
         validator.registerField(uploadBookView.authorTextField, rules: [
             RequiredRule(),
             MinLengthRule(length: 1),
-            BookValidationRules.EmptySpacesValidation()
+            BookValidationRules.EmptySpacesRule()
             ])
         
         // Price validation
         validator.registerField(uploadBookView.priceTextField, rules: [
             RequiredRule(), MinLengthRule(length: 1),
             FloatRule(),
-            BookValidationRules.EmptySpacesValidation()
+            BookValidationRules.EmptySpacesRule()
             ])
         
         // Rating validation
         validator.registerField(uploadBookView.ratingTextField, rules: [
             RequiredRule(),
             MinLengthRule(length: 1),
-            BookValidationRules.EmptySpacesValidation(),
-            BookValidationRules.NumberValidation()
+            BookValidationRules.EmptySpacesRule(),
+            BookValidationRules.NumberRule()
             ])
     }
     
@@ -106,9 +107,9 @@ extension UploadBookViewController {
         book = Book(id: id, title: title, price: price, author: author, rating: rating, coverImageUrl: url, description: desc)
         
         if isAnEdit {
-            addOrUpdate(book!, to: ApiEndPoints.BookEndPoint.edit(book: book!).fullUrl, with: .put)
+            addOrUpdate(book!, to: ApiEndPoints.Books.edit(book: book!).fullUrl, with: .put)
         } else {
-            addOrUpdate(book!, to: ApiEndPoints.BookEndPoint.post.fullUrl, with: .post)
+            addOrUpdate(book!, to: ApiEndPoints.Books.post.fullUrl, with: .post)
         }
     }
     
@@ -132,37 +133,31 @@ extension UploadBookViewController {
 // Calls to APIs
 extension UploadBookViewController {
     private func addOrUpdate(_ book: Book, to urlString: String, with method: HTTPMethod) {
-        Alamofire.request(urlString,
-                          method: method,
-                          parameters: book.toJSON(),
-                          encoding: JSONEncoding.default)
-            .responseObject { (response: DataResponse<Book>) in
-                switch response.result {
-                case .success:
-                    (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
-                    let resultBook = response.result.value
-                    
-                    if self.isAnEdit, let navController = self.navigationController {
-                        let indexOfPrevBookDetailsVC = navController.viewControllers.endIndex - 2
-                        
-                        if let bookDetailsVC = navController.viewControllers[indexOfPrevBookDetailsVC] as? BookDetailsViewController {
-                            bookDetailsVC.book = resultBook
-                            bookDetailsVC.isEditted = self.isAnEdit
-                        }
-                        
-                        let _ = navController.viewControllers.popLast()
-                    } else { 
-                        self.book = resultBook
-                        self.performSegue(withIdentifier: "EditUploadToDetailsSegue", sender: self.uploadBookView.uploadButton)
-                        
-                        //remove self from navigation controller after segued to book details view
-                        let selfIndex = (self.navigationController!.viewControllers.endIndex - 2)
-                        self.navigationController?.viewControllers.remove(at: selfIndex)
-                    }
-                case .failure(let error):
-                    (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
-                    print(error)
+        webClient.addOrUpdateBook(book, to: urlString, with: method) { book, error in
+            
+            (self.uploadBookView.uploadButton as? ActivityButtonView)?.hideLoading()
+            
+            if let book = book, self.isAnEdit, let navController = self.navigationController {
+                let indexOfPrevBookDetailsVC = navController.viewControllers.endIndex - 2
+                
+                if let bookDetailsVC = navController.viewControllers[indexOfPrevBookDetailsVC] as? BookDetailsViewController {
+                    bookDetailsVC.book = book
+                    bookDetailsVC.isEditted = self.isAnEdit
                 }
+                
+                let _ = navController.viewControllers.popLast()
+            } else if let book = book {
+                self.book = book
+                self.performSegue(withIdentifier: "EditUploadToDetailsSegue", sender: self.uploadBookView.uploadButton)
+                
+                //remove self from navigation controller after segued to book details view
+                let selfIndex = (self.navigationController!.viewControllers.endIndex - 2)
+                self.navigationController?.viewControllers.remove(at: selfIndex)
+            }
+            
+            if let error = error {
+                print(error)
+            }
         }
     }
 }

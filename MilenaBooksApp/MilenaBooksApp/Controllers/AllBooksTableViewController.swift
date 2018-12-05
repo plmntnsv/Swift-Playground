@@ -17,10 +17,11 @@ class AllBooksTableViewController: UITableViewController {
     private var booksFetched = false
     private var shouldScrollToTop = false
     var deleteBook = false
+    private let webClient = WebClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addNavBtn()
+        addBookNavBtn()
         addRefreshControl()
         getData()
     }
@@ -57,39 +58,27 @@ class AllBooksTableViewController: UITableViewController {
     }
 
     @objc private func getData() {
-        Alamofire.request(ApiEndPoints.BookEndPoint.getAll.fullUrl)
-            .validate(statusCode: 200..<300)
-            .validate(contentType: ["application/json"])
-            .responseArray { (response: DataResponse<[Book]>) in
-                let booksArray = response.result.value
-                
-                if let booksArray = booksArray {
-                    self.allBooks = booksArray
-                }
-                
-                self.booksFetched = true;
-                self.refreshControl?.endRefreshing()
-                self.tableView.reloadData()
+        webClient.getAllBooks { result in
+            if let booksArray = result {
+                self.allBooks = booksArray
             }
+            
+            self.booksFetched = true;
+            self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+        }
     }
 }
 
 // Additional setup of views
 extension AllBooksTableViewController {
-    private func addNavBtn(){
+    private func addBookNavBtn(){
         let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadBookBtnClicked))
         self.navigationItem.rightBarButtonItem = addBtn
     }
     
     private func addRefreshControl() {
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor : UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
-        ]
-        
-        refreshControl.attributedTitle = NSAttributedString(string: "Getting books...", attributes: attributes)
+        let refreshControl = BookRefreshControl()
         refreshControl.addTarget(self, action: #selector(getData), for: .valueChanged)
         
         if #available(iOS 10.0, *) {
@@ -129,7 +118,6 @@ extension AllBooksTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         if booksFetched {
-            
             cell = tableView.dequeueReusableCell(withIdentifier: "BookTableCell", for: indexPath)
             
             if let bookCell = cell as? BookTableViewCell {
@@ -161,6 +149,26 @@ extension AllBooksTableViewController {
         if booksFetched || allBooks.count > 0 {
             let cell = tableView.cellForRow(at: indexPath)
             performSegue(withIdentifier: "BookSelectSegue", sender: cell)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0, editingStyle == .delete {
+                let bookToDelete = allBooks[indexPath.row]
+                webClient.deleteBook(url: ApiEndPoints.Books.delete(book: bookToDelete).fullUrl, completion: { error in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        self.allBooks.remove(at: indexPath.row)
+                        tableView.performBatchUpdates({
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    })
+                }
+            })
         }
     }
 }

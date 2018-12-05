@@ -11,10 +11,11 @@ import Alamofire
 import AlamofireObjectMapper
 
 class BookDetailsViewController: UIViewController {
-    private lazy var url = ApiEndPoints.BookEndPoint.get(book: book!).fullUrl
+    private lazy var url = ApiEndPoints.Books.get(book: book!).fullUrl
     var book: Book?
     var isEditted = false
     private var deleteBook = false
+    private let webClient = WebClient()
     
     @IBOutlet weak var bookDetailsView: BookDetailsView!
     
@@ -41,7 +42,7 @@ class BookDetailsViewController: UIViewController {
     @IBAction func deleteButtonClicked(_ sender: UIButton) {
         if let activityButton = sender as? ActivityButtonView {
             activityButton.showLoading()
-            delete(url: ApiEndPoints.BookEndPoint.delete(book: book!).fullUrl, sender: activityButton)
+            delete(url: ApiEndPoints.Books.delete(book: book!).fullUrl, sender: activityButton)
         }
     }
     
@@ -80,34 +81,27 @@ class BookDetailsViewController: UIViewController {
 // API calls
 extension BookDetailsViewController {
     private func get(from bookUrl: String) {
-        Alamofire.request(bookUrl)
-            .responseObject {(response: DataResponse<Book>) in
-                let bookResponse = response.result.value
-                //self.bookDetailsView.descriptionTextView.text = bookResponse?.description ?? "No description."
-                self.book?.description = bookResponse?.description
-                self.displayBookDetails()
+        webClient.getBook(url: bookUrl) { book in
+            self.book?.description = book?.description
+            self.displayBookDetails()
         }
     }
     
     private func delete(url: String, sender: ActivityButtonView) {
-        Alamofire.request(url, method: .delete)
-            .responseObject { (response: DataResponse<Book>) in
-                
-                sender.hideLoading()
-                
-                if response.error == nil, let navController = self.navigationController {
-                    self.isEditted = false
-                    if let allBooksVC = navController.viewControllers[0] as? AllBooksTableViewController {
-                        allBooksVC.deleteBook = true
-                    }
-//                    if self.deleteBook {
-//                        self.book = nil
-//                    }
-                    
-                    navController.viewControllers.removeLast()
-                } else {
-                    print(response.error!)
+        webClient.deleteBook(url: url) { error in
+            sender.hideLoading()
+            
+            if let error = error {
+                print(error)
+            }
+            else if let navController = self.navigationController {
+                self.isEditted = false
+                if let allBooksVC = navController.viewControllers[0] as? AllBooksTableViewController {
+                    allBooksVC.deleteBook = true
                 }
+                
+                navController.viewControllers.removeLast()
+            }
         }
     }
 }

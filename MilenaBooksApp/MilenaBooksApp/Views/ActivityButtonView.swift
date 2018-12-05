@@ -9,7 +9,6 @@
 import UIKit
 
 class ActivityButtonView: UIButton {
-
     var originalButtonText: String?
     var activityIndicator: UIActivityIndicatorView!
     private(set) var isUploading = false

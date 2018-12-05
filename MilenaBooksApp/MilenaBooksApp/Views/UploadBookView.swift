@@ -23,4 +23,10 @@ class UploadBookView: UIView {
             descriptionTextView.layer.borderWidth = 1
         }
     }
+    @IBOutlet weak var displayCoverImageView: BookCoverImageView! {
+        didSet {
+            displayCoverImageView.isHidden = true
+        }
+    }
+    @IBOutlet weak var selectPhotoButton: ActivityButtonView!
 }
