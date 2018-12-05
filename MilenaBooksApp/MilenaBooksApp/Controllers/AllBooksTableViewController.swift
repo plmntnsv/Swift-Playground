@@ -14,9 +14,9 @@ class AllBooksTableViewController: UITableViewController {
     private var allBooks = [Book]()
     var newBook: Book?
     var isAnEdit = false
-    private var shouldReloadData = false
     private var booksFetched = false
     private var shouldScrollToTop = false
+    var deleteBook = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,29 +29,30 @@ class AllBooksTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if let bookToEditOrRemove = newBook, let indexOfBook = allBooks.firstIndex(where: { $0.id == bookToEditOrRemove.id }) {
-            allBooks.remove(at: indexOfBook)
+            if deleteBook {
+                allBooks.remove(at: indexOfBook)
+            }
             
             if isAnEdit {
+                allBooks.remove(at: indexOfBook)
                 allBooks.insert(bookToEditOrRemove, at: indexOfBook)
             }
-        } else if let bookToAdd = newBook {
+        } else if let bookToAdd = newBook, !deleteBook {
             self.allBooks.insert(bookToAdd, at: 0)
             shouldScrollToTop = true
         }
         
-        shouldReloadData = true
+        self.deleteBook = false
         self.newBook = nil
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if shouldReloadData {
-            self.tableView.reloadData()
-            
-            if shouldScrollToTop {
-                self.tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-                shouldScrollToTop = false
-            }
+        self.tableView.reloadData()
+        
+        if shouldScrollToTop {
+            self.tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+            shouldScrollToTop = false
         }
     }
 

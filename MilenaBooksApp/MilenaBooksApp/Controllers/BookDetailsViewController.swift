@@ -98,7 +98,7 @@ extension BookDetailsViewController {
                 if response.error == nil, let navController = self.navigationController {
                     self.isEditted = false
                     if let allBooksVC = navController.viewControllers[0] as? AllBooksTableViewController {
-                        allBooksVC.
+                        allBooksVC.deleteBook = true
                     }
 //                    if self.deleteBook {
 //                        self.book = nil
