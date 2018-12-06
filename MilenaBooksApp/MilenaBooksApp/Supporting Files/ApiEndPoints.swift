@@ -9,13 +9,13 @@
 import Foundation
 
 struct ApiEndPoints {
-    private static let baseUrl = "http://milenabooks.azurewebsites.net/api"
+    private static let milenBooksBaseURL = "http://milenabooks.azurewebsites.net/api"
+    private static let imgurBaseURL = "https://api.imgur.com/3"
+    private static let imgurAccessToken = "4becd99646668cba54a50dd249ff6304e7a2440b"
     
-    enum EndPoint: String {
+    private enum EndPoint: String {
         case books = "/books"
-        case account = "/account"
-        case store = "/store"
-        case upload = "/upload"
+        case image = "/image"
     }
     
     enum Books {
@@ -24,20 +24,24 @@ struct ApiEndPoints {
         case post
         case edit(book: Book)
         case delete(book: Book)
+        case postBookCover
         
         var fullUrl: String {
             switch self {
             case .getAll:
-                return "\(baseUrl)\(EndPoint.books.rawValue)"
+                return "\(milenBooksBaseURL)\(EndPoint.books.rawValue)"
             case .get(let book):
-                return "\(baseUrl)\(EndPoint.books.rawValue)/\(book.id!)"
+                return "\(milenBooksBaseURL)\(EndPoint.books.rawValue)/\(book.id!)"
             case .post:
-                return "\(baseUrl)\(EndPoint.books.rawValue)/"
+                return "\(milenBooksBaseURL)\(EndPoint.books.rawValue)/"
             case .edit(let book):
-                return "\(baseUrl)\(EndPoint.books.rawValue)/\(book.id!)"
+                return "\(milenBooksBaseURL)\(EndPoint.books.rawValue)/\(book.id!)"
             case .delete(let book):
-                return "\(baseUrl)\(EndPoint.books.rawValue)/\(book.id!)"
+                return "\(milenBooksBaseURL)\(EndPoint.books.rawValue)/\(book.id!)"
+            case .postBookCover:
+                return "\(imgurBaseURL)\(EndPoint.image.rawValue)"
             }
+            
         }
     }
 }

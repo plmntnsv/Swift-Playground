@@ -83,10 +83,10 @@ extension UploadBookViewController {
         } else if let originalImage = info[.originalImage] as? UIImage {
             image = originalImage
         }
-        uploadBookView.displayCoverImageView.removeBorder()
-        uploadBookView.displayCoverImageView.image = image
-        
+        uploadBookView.displayCoverImageView.showLoading()
         picker.dismiss(animated: true, completion: nil)
+        
+        uploadCoverImage(image: image!, to: ApiEndPoints.Books.postBookCover.fullUrl)
     }
 }
 
@@ -186,6 +186,21 @@ extension UploadBookViewController {
             if let error = error {
                 print(error)
             }
+        }
+    }
+    
+    private func uploadCoverImage(image: UIImage, to url: String){
+        webClient.uploadCoverImage(image, to: url) { result, error in
+            if error == nil {
+                self.uploadBookView.displayCoverImageView.removeBorder()
+                self.uploadBookView.displayCoverImageView.image = image
+                self.uploadBookView.coverImageUrlTextField.text = result!
+                self.uploadBookView.coverImageUrlTextField.isEnabled = false
+            } else {
+                print(error!)
+            }
+            
+            self.uploadBookView.displayCoverImageView.hideLoading()
         }
     }
 }

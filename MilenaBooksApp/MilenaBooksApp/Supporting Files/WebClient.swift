@@ -65,4 +65,25 @@ final class WebClient {
                 }
         }
     }
+    
+    func uploadCoverImage(_ image: UIImage, to url: String, completion: @escaping(_ url: String?, _ error: Error?) -> ()) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer 4becd99646668cba54a50dd249ff6304e7a2440b"
+        ]
+        
+        // Client-ID 8b4ba36502b847a
+        
+        Alamofire.upload(multipartFormData: { multipart in
+            multipart.append(image.pngData()!, withName: "image")
+        }, to: url, method: .post, headers: headers) { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseObject(keyPath: "data") { (response: DataResponse<ImgurCoverImage>) in
+                    print(response.result.value?.link)
+                }
+            case .failure(let encodingError):
+                print("multipart upload encodingError: \(encodingError)")
+            }
+        }
+    }
 }
