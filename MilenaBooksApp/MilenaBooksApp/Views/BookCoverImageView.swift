@@ -9,6 +9,7 @@
 import UIKit
 
 class BookCoverImageView: UIImageView {
+    private let shapeLayer:CAShapeLayer = CAShapeLayer()
     var imageUrl: String?
     var activityIndicator: UIActivityIndicatorView!
     private(set) var isFetching = false
@@ -87,5 +88,30 @@ extension BookCoverImageView {
                 self.hideLoading()
             }
         }
+    }
+}
+
+extension BookCoverImageView {
+    func addDashedBorder() {
+        let color = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1).cgColor
+        let frameSize = self.frame.size
+        let shapeRect = CGRect(x: 0, y: 0, width: frameSize.width, height: frameSize.height)
+        
+        self.shapeLayer.bounds = shapeRect
+        self.shapeLayer.position = CGPoint(x: frameSize.width/2, y: frameSize.height/2)
+        self.shapeLayer.fillColor = UIColor.clear.cgColor
+        self.shapeLayer.strokeColor = color
+        self.shapeLayer.lineWidth = 2
+        self.shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+        self.shapeLayer.lineDashPattern = [6,3]
+        self.shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 5).cgPath
+        
+        self.layer.addSublayer(shapeLayer)
+    }
+    
+    func removeBorder(){
+        self.shapeLayer.removeFromSuperlayer()
+        self.layer.borderWidth = 1
+        self.layer.borderColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
     }
 }

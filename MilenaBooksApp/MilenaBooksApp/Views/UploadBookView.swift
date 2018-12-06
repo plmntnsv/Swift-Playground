@@ -9,6 +9,7 @@
 import UIKit
 
 class UploadBookView: UIView {
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
@@ -25,7 +26,8 @@ class UploadBookView: UIView {
     }
     @IBOutlet weak var displayCoverImageView: BookCoverImageView! {
         didSet {
-            displayCoverImageView.isHidden = true
+            displayCoverImageView.image = UIImage(named: "noimageselected")
+            displayCoverImageView.addDashedBorder()
         }
     }
     @IBOutlet weak var selectPhotoButton: ActivityButtonView!

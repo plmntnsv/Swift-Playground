@@ -258,13 +258,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ru-58-cGB">
-                                <rect key="frame" x="104" y="320.5" width="208" height="30"/>
+                                <rect key="frame" x="104" y="365" width="208" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cover URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqi-k8-9AG">
-                                <rect key="frame" x="8" y="325" width="88" height="21"/>
+                                <rect key="frame" x="8" y="369.5" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -282,7 +282,7 @@
                                 </connections>
                             </button>
                             <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="igj-kh-yOy">
-                                <rect key="frame" x="104" y="359" width="208" height="63"/>
+                                <rect key="frame" x="104" y="403.5" width="208" height="18.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="250" constant="500" id="Wgi-H7-Kee"/>
@@ -291,13 +291,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CM7-R2-rMn" customClass="BookCoverImageView" customModule="MilenaBooksApp" customModuleProvider="target">
-                                <rect key="frame" x="121" y="186" width="79" height="126.5"/>
+                                <rect key="frame" x="133" y="186" width="107" height="171"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CM7-R2-rMn" secondAttribute="height" multiplier="5:8" id="a5N-Hg-kSy"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ziF-S1-4Fu">
-                                <rect key="frame" x="8" y="380" width="88" height="21"/>
+                                <rect key="frame" x="8" y="402.5" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -330,12 +330,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNX-Te-C2D" customClass="ActivityButtonView" customModule="MilenaBooksApp" customModuleProvider="target">
-                                <rect key="frame" x="68" y="231.5" width="35" height="35"/>
+                                <rect key="frame" x="80" y="254" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="0iy-ZL-EJM"/>
                                     <constraint firstAttribute="width" constant="35" id="AMS-fH-NTc"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="camera"/>
+                                <connections>
+                                    <action selector="selectImageButtonClicked:" destination="3UC-3O-HfH" eventType="touchUpInside" id="9gz-3D-ovv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -343,17 +346,16 @@
                             <constraint firstItem="cSP-Vo-Ft1" firstAttribute="centerY" secondItem="aAi-OP-ZLk" secondAttribute="centerY" id="1e0-rV-MMO"/>
                             <constraint firstItem="cSP-Vo-Ft1" firstAttribute="trailing" secondItem="KgB-Zi-geg" secondAttribute="trailing" id="2MQ-1D-lRM"/>
                             <constraint firstItem="7ru-58-cGB" firstAttribute="trailing" secondItem="KgB-Zi-geg" secondAttribute="trailing" id="2j0-6O-Bh6"/>
-                            <constraint firstItem="hNX-Te-C2D" firstAttribute="leading" secondItem="kmR-AM-dcD" secondAttribute="leading" constant="68" id="35W-R6-Dj8"/>
+                            <constraint firstItem="hNX-Te-C2D" firstAttribute="leading" secondItem="kmR-AM-dcD" secondAttribute="leading" constant="80" id="35W-R6-Dj8"/>
                             <constraint firstItem="Cqi-k8-9AG" firstAttribute="leading" secondItem="DtZ-Pc-2Ro" secondAttribute="leading" id="6F2-Yd-VQi"/>
                             <constraint firstItem="igj-kh-yOy" firstAttribute="leading" secondItem="KgB-Zi-geg" secondAttribute="leading" id="81t-JI-SYE"/>
                             <constraint firstItem="Zx1-QA-VWx" firstAttribute="centerY" secondItem="1T0-pO-Whg" secondAttribute="centerY" id="8wT-WW-D8j"/>
-                            <constraint firstItem="kmR-AM-dcD" firstAttribute="trailing" secondItem="CM7-R2-rMn" secondAttribute="trailing" constant="120" id="9mc-6S-6fN"/>
+                            <constraint firstItem="kmR-AM-dcD" firstAttribute="trailing" secondItem="CM7-R2-rMn" secondAttribute="trailing" constant="80" id="9mc-6S-6fN"/>
                             <constraint firstItem="igj-kh-yOy" firstAttribute="centerY" secondItem="ziF-S1-4Fu" secondAttribute="centerY" id="CUW-ab-LnH"/>
                             <constraint firstItem="23d-nV-u7q" firstAttribute="centerX" secondItem="kmR-AM-dcD" secondAttribute="centerX" id="ChT-nP-O9t"/>
                             <constraint firstItem="igj-kh-yOy" firstAttribute="leading" secondItem="ziF-S1-4Fu" secondAttribute="trailing" constant="8" symbolic="YES" id="Esc-kz-6D7"/>
                             <constraint firstItem="Zx1-QA-VWx" firstAttribute="leading" secondItem="69C-XS-R67" secondAttribute="trailing" constant="8" id="IM5-zT-qgk"/>
                             <constraint firstItem="69C-XS-R67" firstAttribute="width" secondItem="1T0-pO-Whg" secondAttribute="width" id="Jlw-bj-l2r"/>
-                            <constraint firstItem="CM7-R2-rMn" firstAttribute="leading" secondItem="kmR-AM-dcD" secondAttribute="leading" constant="121" id="KaQ-rX-eba"/>
                             <constraint firstItem="aAi-OP-ZLk" firstAttribute="leading" secondItem="DtZ-Pc-2Ro" secondAttribute="leading" id="LRG-lE-dAA"/>
                             <constraint firstItem="CM7-R2-rMn" firstAttribute="centerY" secondItem="hNX-Te-C2D" secondAttribute="centerY" id="Nhn-en-AAU"/>
                             <constraint firstItem="cSP-Vo-Ft1" firstAttribute="leading" secondItem="KgB-Zi-geg" secondAttribute="leading" id="O11-J9-mvh"/>

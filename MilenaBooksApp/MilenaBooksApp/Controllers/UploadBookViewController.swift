@@ -10,13 +10,15 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 import SwiftValidator
+import MobileCoreServices
 
-class UploadBookViewController: UIViewController, ValidationDelegate {
+class UploadBookViewController: UIViewController, ValidationDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet var uploadBookView: UploadBookView!
     var book: Book?
     private var isAnEdit = false
     private let validator = Validator()
     private let webClient = WebClient()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,32 @@ class UploadBookViewController: UIViewController, ValidationDelegate {
                 destination.book = self.book
             }
         }
+    }
+}
+
+extension UploadBookViewController {
+    @IBAction func selectImageButtonClicked(_ sender: ActivityButtonView) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary;
+            imagePicker.allowsEditing = false
+            
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        var image: UIImage?
+        if let editedImage = info[.editedImage] as? UIImage {
+            image = editedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            image = originalImage
+        }
+        uploadBookView.displayCoverImageView.removeBorder()
+        uploadBookView.displayCoverImageView.image = image
+        
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 
