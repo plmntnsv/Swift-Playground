@@ -79,7 +79,12 @@ final class WebClient {
             switch encodingResult {
             case .success(let upload, _, _):
                 upload.responseObject(keyPath: "data") { (response: DataResponse<ImgurCoverImage>) in
-                    print(response.result.value?.link)
+                    switch response.result {
+                    case .success:
+                        completion(response.result.value?.link!, nil)
+                    case .failure(let error):
+                        completion(nil, error)
+                    }
                 }
             case .failure(let encodingError):
                 print("multipart upload encodingError: \(encodingError)")
