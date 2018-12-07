@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageFetcher
+class ImageFetcher2
 {
     // Public API
     
