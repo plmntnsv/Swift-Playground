@@ -32,19 +32,35 @@ class LoginViewController: UIViewController {
         }
         
     }
-
-//    @available(iOS 13.0, *)
-//    @IBAction func loginButtonTapped(_ sender: Any) {
-//        let appleIDProvider = ASAuthorizationAppleIDProvider()
-//        let request = appleIDProvider.createRequest()
-//        request.requestedScopes = [.fullName, .email]
-//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-//        authorizationController.delegate = self
-//        authorizationController.performRequests()
-//    }
     
+    private func setupSignInButton() {
+        if #available(iOS 13.0, *) {
+            let signInButton = ASAuthorizationAppleIDButton()
+            
+            signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchDown)
+            
+            signInButton.translatesAutoresizingMaskIntoConstraints = false
+            signInWithAppleButtonHolder.addSubview(signInButton)
+            
+            NSLayoutConstraint.activate([
+                signInButton.centerXAnchor.constraint(equalTo: signInWithAppleButtonHolder.centerXAnchor),
+                signInButton.centerYAnchor.constraint(equalTo: signInWithAppleButtonHolder.centerYAnchor),
+                signInButton.heightAnchor.constraint(equalTo: signInWithAppleButtonHolder.heightAnchor),
+                signInButton.widthAnchor.constraint(equalTo: signInWithAppleButtonHolder.widthAnchor)
+            ])
+        }
+    }
+    
+    @available(iOS 13.0, *)
     @objc private func signInButtonTapped() {
-        print("asd")
+        let authorizationProvider = ASAuthorizationAppleIDProvider()
+        let request = authorizationProvider.createRequest()
+        request.requestedScopes = [.email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
     }
 }
 
@@ -55,11 +71,25 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
-            print("User id is \(userIdentifier) \n Full Name is \(String(describing: fullName)) \n Email id is \(String(describing: email))") }
+            print("User id is \(userIdentifier)")
+            print("Full Name is \(fullName?.givenName ?? "N/A") \(fullName?.familyName ?? "N/A")")
+            print("Email id is \(email ?? "N/A")")
+            
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let profileVC = storyBoard.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController
+            navigationController?.pushViewController(profileVC ?? UIViewController(), animated: true)
+        }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("AppleID Credential failed with error: \(error.localizedDescription)")
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    @available(iOS 13.0, *)
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
 
