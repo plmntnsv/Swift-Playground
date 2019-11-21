@@ -32,7 +32,7 @@ struct ContentView_Previews: PreviewProvider {
 struct AnimalCell: View {
     let animal: Animal
     var body: some View {
-        NavigationLink(destination: Text(animal.name)) {
+        NavigationLink(destination: AnimalDetails(animal: animal)) {
             Image(animal.imageName)
                 .resizable()
                 .frame(width: 50.0, height: 50.0)
