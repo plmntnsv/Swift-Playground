@@ -8,7 +8,8 @@
 
 import SwiftUI
 
-let testData = AnimalType.allCases.map { Animal(type: $0) }.shuffled()
+let allAnimals = AnimalType.allCases.map { Animal(type: $0) }
+let testData = (allAnimals + allAnimals).shuffled()
 
 struct ContentView: View {
     var animals: [Animal] = []
@@ -42,6 +43,9 @@ struct ContentView_Previews: PreviewProvider {
 
 struct AnimalCell: View {
     let animal: Animal
+    @State private var didTap: Bool = false
+    @State private var presentInfo: Bool = false
+    
     var body: some View {
         HStack {
             Image(animal.imageName)
@@ -56,14 +60,25 @@ struct AnimalCell: View {
                     .foregroundColor(Color.gray)
             }
             Spacer()
-            Image(systemName: "chevron.right")
+            Image(systemName: "arrow.up.circle")
                 .foregroundColor(.gray)
                 .padding(.trailing, 20)
                 
         }
         .contentShape(Rectangle())
         .onTapGesture {
-            print("tapped")
+            self.didTap = true
+            self.presentInfo = true
         }
+        .sheet(isPresented: self.$presentInfo, onDismiss: updateUI) {
+            AnimalDetails(animal: self.animal)
+        }
+        .background(didTap ? Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)) : Color.clear)
+        
+    }
+    
+    private func updateUI() {
+        didTap = false
+        presentInfo = false
     }
 }

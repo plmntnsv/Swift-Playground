@@ -20,9 +20,9 @@ struct AnimalDetails: View {
                 .shadow(radius: 10)
             Text(animal.name)
                 .font(.title)
+            Spacer()
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .top)
-        .padding([.top], 25)
+        .padding(.top, 20)
     }
 }
 
