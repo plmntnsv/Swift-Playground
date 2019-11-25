@@ -14,11 +14,22 @@ struct ContentView: View {
     var animals: [Animal] = []
     
     var body: some View {
-        NavigationView {
-            List(testData) { animal in
-                AnimalCell(animal: animal)
+        TabView {
+            NavigationView {
+                List(testData) { animal in
+                    AnimalCell(animal: animal)
+                }
+                .navigationBarTitle("Animals")
             }
-            .navigationBarTitle("Animals")
+            .tabItem {
+                Image(systemName: "1.circle")
+                Text("List")
+            }.tag(0)
+            Text("Second View")
+                .tabItem {
+                    Image(systemName: "2.circle")
+                    Text("Second")
+            }.tag(1)
         }
     }
 }
@@ -32,7 +43,7 @@ struct ContentView_Previews: PreviewProvider {
 struct AnimalCell: View {
     let animal: Animal
     var body: some View {
-        NavigationLink(destination: AnimalDetails(animal: animal)) {
+        HStack {
             Image(animal.imageName)
                 .resizable()
                 .frame(width: 50.0, height: 50.0)
@@ -44,6 +55,11 @@ struct AnimalCell: View {
                     .font(.subheadline)
                     .foregroundColor(Color.gray)
             }
+            Spacer()
+            Image(systemName: "chevron.right")
+                .foregroundColor(.gray)
+                .padding(.trailing, 20)
         }
+        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
     }
 }

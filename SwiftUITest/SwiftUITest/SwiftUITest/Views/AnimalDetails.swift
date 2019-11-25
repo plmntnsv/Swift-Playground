@@ -11,7 +11,7 @@ import SwiftUI
 struct AnimalDetails: View {
     let animal: Animal
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             Image(animal.imageName)
                  .clipShape(Circle())
                 .overlay(
@@ -21,6 +21,8 @@ struct AnimalDetails: View {
             Text(animal.name)
                 .font(.title)
         }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .top)
+        .padding([.top], 25)
     }
 }
 
