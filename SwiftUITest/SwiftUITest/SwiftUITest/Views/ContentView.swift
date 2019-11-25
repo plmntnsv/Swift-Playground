@@ -59,7 +59,11 @@ struct AnimalCell: View {
             Image(systemName: "chevron.right")
                 .foregroundColor(.gray)
                 .padding(.trailing, 20)
+                
         }
-        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            print("tapped")
+        }
     }
 }
