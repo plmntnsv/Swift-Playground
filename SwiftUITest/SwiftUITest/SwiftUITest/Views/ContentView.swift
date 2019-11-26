@@ -43,7 +43,6 @@ struct ContentView_Previews: PreviewProvider {
 
 struct AnimalCell: View {
     let animal: Animal
-    @State private var didTap: Bool = false
     @State private var presentInfo: Bool = false
     
     var body: some View {
@@ -67,18 +66,16 @@ struct AnimalCell: View {
         }
         .contentShape(Rectangle())
         .onTapGesture {
-            self.didTap = true
             self.presentInfo = true
         }
         .sheet(isPresented: self.$presentInfo, onDismiss: updateUI) {
-            AnimalDetails(animal: self.animal)
+            AnimalDetails(showModal: self.$presentInfo, animal: self.animal)
         }
-        .background(didTap ? Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)) : Color.clear)
+        .background(presentInfo ? Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)) : Color.clear)
         
     }
     
     private func updateUI() {
-        didTap = false
         presentInfo = false
     }
 }

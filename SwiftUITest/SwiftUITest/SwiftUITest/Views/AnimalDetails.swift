@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AnimalDetails: View {
+    @Binding var showModal: Bool
     let animal: Animal
     var body: some View {
         VStack(alignment: .center) {
@@ -21,6 +22,9 @@ struct AnimalDetails: View {
             Text(animal.name)
                 .font(.title)
             Spacer()
+            Button("Dismiss") {
+                self.showModal = false }
+            .padding()
         }
         .padding(.top, 20)
     }
@@ -28,6 +32,6 @@ struct AnimalDetails: View {
 
 struct AnimalDetails_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalDetails(animal: testData[1])
+        AnimalDetails(showModal: .constant(true)            , animal: testData[1])
     }
 }
