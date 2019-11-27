@@ -32,6 +32,6 @@ struct AnimalDetails: View {
 
 struct AnimalDetails_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalDetails(showModal: .constant(true)            , animal: testData[1])
+        AnimalDetails(showModal: .constant(true)            , animal: allAnimals[1])
     }
 }

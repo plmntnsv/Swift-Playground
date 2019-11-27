@@ -9,18 +9,33 @@
 import SwiftUI
 
 let allAnimals = AnimalType.allCases.map { Animal(type: $0) }
-let testData = (allAnimals + allAnimals).shuffled()
 
 struct ContentView: View {
     var animals: [Animal] = []
+    @State var animalData = allAnimals
+    
+    init(animals: [Animal]) {
+        self.animals = animals
+        // To remove only extra separators below the list:
+        UITableView.appearance().tableFooterView = UIView()
+        UINavigationBar.appearance().barTintColor = .white
+
+        // To remove all separators including the actual ones:
+        //UITableView.appearance().separatorStyle = .none
+    }
     
     var body: some View {
         TabView {
             NavigationView {
-                List(testData) { animal in
-                    AnimalCell(animal: animal)
+                List {
+                    ForEach(animalData, id: \.id) { animal in
+                        AnimalCell(animal: animal)
+                    }
+                    .onMove(perform: move)
+                    .onDelete(perform: delete)
                 }
                 .navigationBarTitle("Animals")
+                .navigationBarItems(trailing: EditButton())
             }
             .tabItem {
                 Image(systemName: "1.circle")
@@ -33,11 +48,19 @@ struct ContentView: View {
             }.tag(1)
         }
     }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        animalData.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    func delete(at offsets: IndexSet) {
+        animalData.remove(atOffsets: offsets)
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(animals: testData)
+        ContentView(animals: allAnimals)
     }
 }
 
@@ -62,7 +85,7 @@ struct AnimalCell: View {
             Image(systemName: "arrow.up.circle")
                 .foregroundColor(.gray)
                 .padding(.trailing, 20)
-                
+            
         }
         .contentShape(Rectangle())
         .onTapGesture {
@@ -72,7 +95,6 @@ struct AnimalCell: View {
             AnimalDetails(showModal: self.$presentInfo, animal: self.animal)
         }
         .background(presentInfo ? Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)) : Color.clear)
-        
     }
     
     private func updateUI() {
