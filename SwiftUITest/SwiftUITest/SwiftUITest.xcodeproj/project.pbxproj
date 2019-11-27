@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		322559022386BC81001F69E6 /* AnimalDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322559012386BC81001F69E6 /* AnimalDetails.swift */; };
 		3245B1A6238EA332008CFC8B /* AnimalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245B1A5238EA332008CFC8B /* AnimalCell.swift */; };
+		3245B1A8238EA656008CFC8B /* SegmentControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245B1A7238EA656008CFC8B /* SegmentControlView.swift */; };
+		3245B1AA238EC500008CFC8B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245B1A9238EC500008CFC8B /* CustomButton.swift */; };
 		324E566C23869D000083D621 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E566B23869D000083D621 /* AppDelegate.swift */; };
 		324E566E23869D000083D621 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E566D23869D000083D621 /* SceneDelegate.swift */; };
 		324E567023869D000083D621 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E566F23869D000083D621 /* ContentView.swift */; };
@@ -21,6 +23,8 @@
 /* Begin PBXFileReference section */
 		322559012386BC81001F69E6 /* AnimalDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetails.swift; sourceTree = "<group>"; };
 		3245B1A5238EA332008CFC8B /* AnimalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalCell.swift; sourceTree = "<group>"; };
+		3245B1A7238EA656008CFC8B /* SegmentControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControlView.swift; sourceTree = "<group>"; };
+		3245B1A9238EC500008CFC8B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		324E566823869D000083D621 /* SwiftUITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		324E566B23869D000083D621 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		324E566D23869D000083D621 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 				324E566F23869D000083D621 /* ContentView.swift */,
 				3245B1A5238EA332008CFC8B /* AnimalCell.swift */,
 				322559012386BC81001F69E6 /* AnimalDetails.swift */,
+				3245B1A7238EA656008CFC8B /* SegmentControlView.swift */,
+				3245B1A9238EC500008CFC8B /* CustomButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,6 +181,8 @@
 				3245B1A6238EA332008CFC8B /* AnimalCell.swift in Sources */,
 				324E568023869D4E0083D621 /* Animal.swift in Sources */,
 				324E566E23869D000083D621 /* SceneDelegate.swift in Sources */,
+				3245B1AA238EC500008CFC8B /* CustomButton.swift in Sources */,
+				3245B1A8238EA656008CFC8B /* SegmentControlView.swift in Sources */,
 				322559022386BC81001F69E6 /* AnimalDetails.swift in Sources */,
 				324E567023869D000083D621 /* ContentView.swift in Sources */,
 			);

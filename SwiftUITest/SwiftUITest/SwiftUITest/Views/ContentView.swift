@@ -38,13 +38,14 @@ struct ContentView: View {
                 .navigationBarItems(trailing: EditButton())
             }
             .tabItem {
-                Image(systemName: "1.circle")
+                Image(systemName: "tortoise.fill")
                 Text("List")
             }.tag(0)
-            Text("Second View")
-                .tabItem {
-                    Image(systemName: "2.circle")
-                    Text("Second")
+            
+            SegmentControlView()
+            .tabItem {
+                    Image(systemName: "tornado")
+                    Text("Stuff")
             }.tag(1)
         }
     }
