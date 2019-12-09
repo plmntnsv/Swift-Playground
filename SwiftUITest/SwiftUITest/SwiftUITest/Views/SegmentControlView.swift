@@ -11,12 +11,10 @@ import SwiftUI
 struct SegmentControlView: View {
     @State private var selectorIndex = 0
     @State private var numbers = ["One","Two","Three"]
+    @State private var buttonTapped = UUID()
     
-    private var buttons = [
-            CustomButton(title: "Button1"),
-            CustomButton(title: "Button2"),
-            CustomButton(title: "Button3")
-        ]
+    private var buttonsData = ["Button 1", "Button 2", "Button 3"]
+    private var buttons: [CustomButton] = []
     
     var body: some View {
         VStack {
@@ -28,30 +26,18 @@ struct SegmentControlView: View {
             .pickerStyle(SegmentedPickerStyle())
             
             Text("Selected value is: \(numbers[selectorIndex])").padding()
+            
             Divider()
+            
             HStack(spacing: 1) {
-                ForEach(buttons, id: \.id) { btn in
-                    Button(action: {
-                        self.buttons.forEach {
-                            $0.isTapped = false
-                        }
-                        
-                        btn.action()
-                    }) {
-                        Spacer()
-                        Text(btn.title)
-                            .foregroundColor(.black)
-                        Spacer()
-                    }.background(btn.isTapped ? Color.white : Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
+                ForEach(0..<buttonsData.count) { index in
+                    CustomButton(title: self.buttonsData[index],
+                        buttonTapped: self.$buttonTapped)
                 }
             }
             .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
             Spacer()
         }.padding()
-    }
-    
-    private func button1Action() {
-        
     }
 }
 

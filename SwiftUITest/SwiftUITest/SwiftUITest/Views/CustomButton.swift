@@ -8,17 +8,21 @@
 
 import SwiftUI
 
-class CustomButton {
+struct CustomButton: View {
     let id = UUID()
     let title: String
-    @State var isTapped = false
+    @Binding var buttonTapped: UUID
     
-    init(title: String) {
-        self.title = title
+    var body: some View {
+        Button(action: action) {
+            Spacer()
+            Text(title).foregroundColor(.black)
+            Spacer()
+        }
+         .background(buttonTapped == id ? Color.white : Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
     }
     
     func action() {
-        isTapped.toggle()
-        print("\(title) tapped!")
+        buttonTapped = id
     }
 }
