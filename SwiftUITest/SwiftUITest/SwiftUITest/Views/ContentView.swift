@@ -38,15 +38,30 @@ struct ContentView: View {
                 .navigationBarItems(trailing: EditButton())
             }
             .tabItem {
-                Image(systemName: "tortoise.fill")
+                Image(systemName: "ant.fill")
                 Text("List")
             }.tag(0)
             
             SegmentControlView()
             .tabItem {
-                    Image(systemName: "tornado")
+                    Image(systemName: "bandage.fill")
                     Text("Stuff")
             }.tag(1)
+            
+            NavigationView {
+                List {
+                    NavigationLink(destination: ActivityIndicator()) {
+                        Text("Activity Indicator")
+                    }
+                    NavigationLink(destination: HomeViewRepresentable()) {
+                        Text("TableView From Storyboard")
+                    }
+                }
+            }
+            .tabItem {
+                Image(systemName: "wand.and.rays")
+                Text("UIKit+SwiftUI")
+            }.tag(2)
         }
     }
     
