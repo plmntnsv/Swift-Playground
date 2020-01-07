@@ -18,7 +18,7 @@
 		324E567523869D020083D621 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 324E567423869D020083D621 /* Preview Assets.xcassets */; };
 		324E567823869D020083D621 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 324E567623869D020083D621 /* LaunchScreen.storyboard */; };
 		324E568023869D4E0083D621 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E567F23869D4E0083D621 /* Animal.swift */; };
-		327A6D4123BE1007009EC7E1 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A6D4023BE1007009EC7E1 /* ActivityIndicator.swift */; };
+		327A6D4123BE1007009EC7E1 /* ActivityIndicatorRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A6D4023BE1007009EC7E1 /* ActivityIndicatorRepresentable.swift */; };
 		32ED8BA723C36519000CB1EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32ED8BA623C36519000CB1EA /* Main.storyboard */; };
 		32ED8BAA23C366E8000CB1EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ED8BA923C366E8000CB1EA /* HomeViewController.swift */; };
 		32ED8BAD23C3907C000CB1EA /* TableViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ED8BAC23C3907C000CB1EA /* TableViewRepresentable.swift */; };
@@ -38,7 +38,7 @@
 		324E567723869D020083D621 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		324E567923869D020083D621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		324E567F23869D4E0083D621 /* Animal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
-		327A6D4023BE1007009EC7E1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		327A6D4023BE1007009EC7E1 /* ActivityIndicatorRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorRepresentable.swift; sourceTree = "<group>"; };
 		32ED8BA623C36519000CB1EA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		32ED8BA923C366E8000CB1EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		32ED8BAC23C3907C000CB1EA /* TableViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRepresentable.swift; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		322559032386BE95001F69E6 /* Views */ = {
+		322559032386BE95001F69E6 /* SwiftUI Views */ = {
 			isa = PBXGroup;
 			children = (
 				324E566F23869D000083D621 /* ContentView.swift */,
@@ -64,7 +64,7 @@
 				3245B1A7238EA656008CFC8B /* SegmentControlView.swift */,
 				3245B1A9238EC500008CFC8B /* CustomButton.swift */,
 			);
-			path = Views;
+			path = "SwiftUI Views";
 			sourceTree = "<group>";
 		};
 		324E565F23869D000083D621 = {
@@ -88,7 +88,7 @@
 			children = (
 				32ED8BAB23C3904E000CB1EA /* Representables */,
 				32ED8BA823C366BE000CB1EA /* View Controllers */,
-				322559032386BE95001F69E6 /* Views */,
+				322559032386BE95001F69E6 /* SwiftUI Views */,
 				324E56812386A5690083D621 /* Models */,
 				324E566B23869D000083D621 /* AppDelegate.swift */,
 				324E566D23869D000083D621 /* SceneDelegate.swift */,
@@ -128,7 +128,7 @@
 		32ED8BAB23C3904E000CB1EA /* Representables */ = {
 			isa = PBXGroup;
 			children = (
-				327A6D4023BE1007009EC7E1 /* ActivityIndicator.swift */,
+				327A6D4023BE1007009EC7E1 /* ActivityIndicatorRepresentable.swift */,
 				32ED8BAC23C3907C000CB1EA /* TableViewRepresentable.swift */,
 			);
 			path = Representables;
@@ -215,7 +215,7 @@
 				32ED8BAA23C366E8000CB1EA /* HomeViewController.swift in Sources */,
 				3245B1A8238EA656008CFC8B /* SegmentControlView.swift in Sources */,
 				322559022386BC81001F69E6 /* AnimalDetails.swift in Sources */,
-				327A6D4123BE1007009EC7E1 /* ActivityIndicator.swift in Sources */,
+				327A6D4123BE1007009EC7E1 /* ActivityIndicatorRepresentable.swift in Sources */,
 				324E567023869D000083D621 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

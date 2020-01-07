@@ -1,5 +1,5 @@
 //
-//  ActivityIndicator.swift
+//  ActivityIndicatorRepresentable.swift
 //  SwiftUITest
 //
 //  Created by Plamen Atanasov on 2.01.20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ActivityIndicator: UIViewRepresentable {
+struct ActivityIndicatorRepresentable: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UIActivityIndicatorView {
         let v = UIActivityIndicatorView()

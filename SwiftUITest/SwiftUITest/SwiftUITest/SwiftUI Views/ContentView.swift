@@ -50,7 +50,7 @@ struct ContentView: View {
             
             NavigationView {
                 List {
-                    NavigationLink(destination: ActivityIndicator()) {
+                    NavigationLink(destination: ActivityIndicatorRepresentable()) {
                         Text("Activity Indicator")
                     }
                     NavigationLink(destination: HomeViewRepresentable()) {
