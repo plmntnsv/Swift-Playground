@@ -8,14 +8,24 @@
 
 import SwiftUI
 
-struct HomeViewRepresentable: UIViewRepresentable {
-    private let cells: [String] = ["Cell 1", "Cell 2", "Cell 3", "Cell 4", "Cell 5"]
-    
+struct TableViewRepresentable: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         return UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()!.view
     }
     
     func updateUIView(_ view: UIView, context: Context) {
         //do your logic here
+    }
+}
+
+struct TableVCRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<TableVCRepresentable>) -> UIViewController {
+        let tableVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()!
+        
+        return tableVC
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<TableVCRepresentable>) {
+        
     }
 }

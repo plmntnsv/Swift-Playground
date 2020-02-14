@@ -53,7 +53,7 @@ struct ContentView: View {
                     NavigationLink(destination: ActivityIndicatorRepresentable()) {
                         Text("Activity Indicator")
                     }
-                    NavigationLink(destination: HomeViewRepresentable()) {
+                    NavigationLink(destination: TableVCRepresentable()) {
                         Text("TableView From Storyboard")
                     }
                 }

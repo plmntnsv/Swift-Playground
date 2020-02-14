@@ -95,8 +95,8 @@
 				324E567123869D020083D621 /* Assets.xcassets */,
 				324E567623869D020083D621 /* LaunchScreen.storyboard */,
 				324E567923869D020083D621 /* Info.plist */,
-				324E567323869D020083D621 /* Preview Content */,
 				32ED8BA623C36519000CB1EA /* Main.storyboard */,
+				324E567323869D020083D621 /* Preview Content */,
 			);
 			path = SwiftUITest;
 			sourceTree = "<group>";
