@@ -8,16 +8,6 @@
 
 import SwiftUI
 
-struct TableViewRepresentable: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIView {
-        return UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()!.view
-    }
-    
-    func updateUIView(_ view: UIView, context: Context) {
-        //do your logic here
-    }
-}
-
 struct TableVCRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<TableVCRepresentable>) -> UIViewController {
         let tableVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()!
@@ -26,6 +16,5 @@ struct TableVCRepresentable: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<TableVCRepresentable>) {
-        
     }
 }

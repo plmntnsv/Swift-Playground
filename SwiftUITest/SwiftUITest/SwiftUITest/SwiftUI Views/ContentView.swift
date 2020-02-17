@@ -13,6 +13,7 @@ let allAnimals = AnimalType.allCases.map { Animal(type: $0) }
 struct ContentView: View {
     var animals: [Animal] = []
     @State var animalData = allAnimals
+    @State private var currentPage = 0
     
     init(animals: [Animal]) {
         self.animals = animals
@@ -55,6 +56,9 @@ struct ContentView: View {
                     }
                     NavigationLink(destination: TableVCRepresentable()) {
                         Text("TableView From Storyboard")
+                    }
+                    NavigationLink(destination: PageViewRepresentable(numberOfPages: 5, currentPage: $currentPage)) {
+                        Text("PageView")
                     }
                 }
             }

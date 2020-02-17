@@ -19,6 +19,7 @@
 		324E567823869D020083D621 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 324E567623869D020083D621 /* LaunchScreen.storyboard */; };
 		324E568023869D4E0083D621 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E567F23869D4E0083D621 /* Animal.swift */; };
 		327A6D4123BE1007009EC7E1 /* ActivityIndicatorRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A6D4023BE1007009EC7E1 /* ActivityIndicatorRepresentable.swift */; };
+		32C5BD6F23FAC4D700433C98 /* PageViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C5BD6E23FAC4D700433C98 /* PageViewRepresentable.swift */; };
 		32ED8BA723C36519000CB1EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32ED8BA623C36519000CB1EA /* Main.storyboard */; };
 		32ED8BAA23C366E8000CB1EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ED8BA923C366E8000CB1EA /* HomeViewController.swift */; };
 		32ED8BAD23C3907C000CB1EA /* TableViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ED8BAC23C3907C000CB1EA /* TableViewRepresentable.swift */; };
@@ -39,6 +40,7 @@
 		324E567923869D020083D621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		324E567F23869D4E0083D621 /* Animal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		327A6D4023BE1007009EC7E1 /* ActivityIndicatorRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorRepresentable.swift; sourceTree = "<group>"; };
+		32C5BD6E23FAC4D700433C98 /* PageViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewRepresentable.swift; sourceTree = "<group>"; };
 		32ED8BA623C36519000CB1EA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		32ED8BA923C366E8000CB1EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		32ED8BAC23C3907C000CB1EA /* TableViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRepresentable.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				327A6D4023BE1007009EC7E1 /* ActivityIndicatorRepresentable.swift */,
 				32ED8BAC23C3907C000CB1EA /* TableViewRepresentable.swift */,
+				32C5BD6E23FAC4D700433C98 /* PageViewRepresentable.swift */,
 			);
 			path = Representables;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			files = (
 				324E566C23869D000083D621 /* AppDelegate.swift in Sources */,
 				3245B1A6238EA332008CFC8B /* AnimalCell.swift in Sources */,
+				32C5BD6F23FAC4D700433C98 /* PageViewRepresentable.swift in Sources */,
 				324E568023869D4E0083D621 /* Animal.swift in Sources */,
 				32ED8BAD23C3907C000CB1EA /* TableViewRepresentable.swift in Sources */,
 				324E566E23869D000083D621 /* SceneDelegate.swift in Sources */,
